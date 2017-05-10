@@ -52,7 +52,33 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+    public function beforeFilter(\Cake\Event\Event $event) {
+    	if(0){//$this->Auth->loggedIn()
+    		echo 'under dev';
+    		die();
     
+    	}else{
+    		$session = $this->request->session();
+    		 
+    		if ($session->check('cart_id')){
+    			$cart_id= $session->read('cart_id');
+    			$cart_products=CartProductsTable::getCart($cart_id, 1);
+    			$cart_size=sizeof($cart_products);
+    			$total=( new CartController)->__getTotal ( $cart_id );
+    		}else {
+    			$cart_size=0;
+    			$cart_products=[];
+    		}
+    		
+    		/* if($this->Session->check('fbid')){
+    		 $cart_products=$this->Notification->getNotificationCount($this->Auth->user('id'));
+    		 $cart_size=$this->Notification->getNotificationCount($this->Auth->user('id'));
+    		} */
+    	}
+    	$this->set('cart_size', $cart_size);
+    	$this->set('cart_products', $cart_products);
+    	$this->set('total', $total);
+    }
     /**
      * Before render callback.
      *
