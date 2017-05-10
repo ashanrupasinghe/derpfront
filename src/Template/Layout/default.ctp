@@ -685,7 +685,7 @@
 					//alert($product_id+" "+$qty);
                     jQuery.ajax({
                         type: 'post',
-                        url: '/d2dfront/cart/addproduct',
+                        url: '<?php echo $this->Url->build('/',true);?>cart/addproduct',
                         dataType: 'json',
                         data: {
                             product_id: $product_id,
