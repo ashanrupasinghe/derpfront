@@ -32,6 +32,7 @@ use Cake\View\Helper\PaginatorHelper;
  * @link http://book.cakephp.org/3.0/en/controllers/pages-controller.html
  */
 class ProductsController extends AppController {
+	
 
     public $paginate = [
         'limit' => 20,
@@ -44,7 +45,12 @@ class ProductsController extends AppController {
         parent::initialize();
         $this->loadComponent('Paginator');
     }
-
+	
+	public function beforeFilter(\Cake\Event\Event $event) {
+		// allow all action
+		parent::beforeFilter($event);
+		$this->Auth->allow ();
+	}
     public function view($slug) {
         $product = $this->Products->find('all', [
                     'conditions' => [

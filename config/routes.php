@@ -60,6 +60,9 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/product/:slug', ['controller' => 'Products', 'action' => 'view'],array('pass' => array('slug')));
     
     $routes->connect('/category/:slug', array('controller' => 'Category','action'=>'index'),array('pass' => array('slug')));
+    $routes->connect('/cart', ['controller' => 'Cart','action'=>'getCart']);
+    
+    $routes->connect('/user/login', ['controller' => 'Users', 'action' => 'login']);
     /**
      * Connect catchall routes for all controllers.
      *

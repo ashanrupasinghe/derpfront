@@ -25,6 +25,12 @@ use App\Model\Table\CartProductsTable;
 use App\Model\Table\CartTable;
 
 class CartController extends AppController {
+	
+	public function beforeFilter(\Cake\Event\Event $event) {
+		// allow all action
+		parent::beforeFilter($event);
+		$this->Auth->allow ();
+	}
 
     public function addproduct() {
     	
@@ -169,6 +175,48 @@ class CartController extends AppController {
     	$total ['counpon_value'] = $counpon_value;
     	$total ['grand_total'] = $grand_total;
     	return $total;
+    }
+    
+    public function getcart() {
+    	$this->request->allowMethod ( [
+    			'post'
+    	] );
+    	header ( 'Content-type: application/json' );
+    
+    	$token = $this->request->data ( 'token' );
+    	$chck = $this->__checkToken ( $token );
+    	if ($chck ['boolean']) {
+    			
+    		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
+    			
+    		if ($cart_id) {
+    
+    			$total = $this->__getTotal ( $cart_id );
+    			$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+    			// $cart_products = $this->__getProductList ( $cart_id, 1 );
+    
+    			if (sizeof ( $cart_products ) > 0) {
+    				$return ['status'] = 0;
+    				$return ['message'] = 'success';
+    				$return ['result'] ['product_list'] = $cart_products;
+    				$return ['result'] ['total'] = $total;
+    			} else {
+    				$return ['status'] = 0;
+    				$return ['message'] = 'your cart is empty';
+    				$return ['result'] ['product_list'] = $cart_products;
+    				$return ['result'] ['total'] = $total;
+    			}
+    		} else {
+    			$return ['status'] = 444;
+    			$return ['message'] = "you haven't create a cart";
+    		}
+    	} else {
+    		$return ['status'] = 100;
+    		$return ['message'] = $chck ['message'];
+    	}
+    
+    	echo json_encode ( $return );
+    	die ();
     }
 
 }

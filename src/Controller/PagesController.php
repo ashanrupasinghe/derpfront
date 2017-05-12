@@ -29,6 +29,12 @@ use Cake\View\Helper\SessionHelper;
  */
 class PagesController extends AppController
 {
+	
+	public function beforeFilter(\Cake\Event\Event $event) {
+		// allow all action
+		parent::beforeFilter ( $event );
+		$this->Auth->allow ();
+	}
 
     /**
      * Displays a view

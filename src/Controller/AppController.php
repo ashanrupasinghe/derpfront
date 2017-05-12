@@ -43,8 +43,9 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-        
+        $this->loadComponent('Flash');        
+		//$this->loadComponent('Auth');
+        $this->loadComponent('Auth',['authorize' => ['Controller']]);
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -52,7 +53,10 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+    
     public function beforeFilter(\Cake\Event\Event $event) {
+    	
+    	
     	if(0){//$this->Auth->loggedIn()
     		echo 'under dev';
     		die();
@@ -68,6 +72,7 @@ class AppController extends Controller
     		}else {
     			$cart_size=0;
     			$cart_products=[];
+    			$total=0;
     		}
     		
     		/* if($this->Session->check('fbid')){
@@ -75,6 +80,7 @@ class AppController extends Controller
     		 $cart_size=$this->Notification->getNotificationCount($this->Auth->user('id'));
     		} */
     	}
+    	
     	$this->set('cart_size', $cart_size);
     	$this->set('cart_products', $cart_products);
     	$this->set('total', $total);
