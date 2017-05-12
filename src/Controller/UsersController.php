@@ -28,6 +28,15 @@ class UsersController extends AppController
 		return parent::isAuthorized($user);
 	}
 	
+	public function beforeFilter(Event $event)
+	{
+		parent::beforeFilter($event);
+		// Allow users to register and logout.
+		// You should not add the "login" action to allow list. Doing so would
+		// cause problems with normal functioning of AuthComponent.
+		$this->Auth->allow(['logout','register']);
+	}
+	
 	
 	/*
 	public function beforeFilter(Event $event)
@@ -137,14 +146,7 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 	
-	public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        // Allow users to register and logout.
-        // You should not add the "login" action to allow list. Doing so would
-        // cause problems with normal functioning of AuthComponent.
-        $this->Auth->allow(['logout']);
-    }
+
 
     public function login()
     {
@@ -260,6 +262,83 @@ class UsersController extends AppController
     	$session->write('cart_id', $cart_id);
     	
     	
+    }
+    
+
+    
+    public function register() {    	
+    	$user = $this->Users->newEntity ();
+    	if ($this->request->is ( 'post' )) {
+    		$data = $this->request->data;
+    		
+    		$user_data = [
+    				'username' => $data ['username'],
+    				'user_type' => 5,
+    				'password' => $data ['password'],
+    				'confirm_password' => $data ['confirm_password'],
+    				'status' => 1,
+    				'formType' => $data ['formType']
+    		];
+    		
+    		// $customer_data[];
+    		$data ['status'] = 1;
+    		$user = $this->Users->patchEntity ( $user, $user_data );
+    		// print_r($user);
+    		// die($user->id);
+    		if ($this->Users->save ( $user )) {
+    			$data ['user_id'] = $user->id;
+    			$customer_model = $this->loadModel ( 'customers' );
+    			$customer = $customer_model->newEntity ();
+    			$customer = $customer_model->patchEntity ( $customer, $data );
+    
+    			if ($customer_model->save ( $customer )) {
+    				// $this->Flash->success(__('The user has been saved.'));
+    				// Retrieve user from DB
+    				$authUser = $this->Users->get ( $user->id )->toArray ();
+    					
+    				// Log user in using Auth
+    				$this->Auth->setUser ( $authUser );
+    					
+    				$mobtoken = $this->__getMobToken ();
+    				$query = $this->Users->query ();
+    				$query->update ()->set ( [
+    						'mobtoken' => $mobtoken,
+    						'mobtoken_created_at' => date ( 'Y-m-d H:i:s' )
+    				] )->where ( [
+    						'id' => $user ['id']
+    				] )->execute ();
+    					
+    				// create cart
+    				$cart_model = $this->loadModel ( 'Cart' );
+    				$cart_entity = $cart_model->newEntity ( [
+    						'user_id' => $user->id
+    				] );
+    				// $cart_entity->patchEntity($cart_entity,['user_id'=>$user->id]);
+    				$cart_model->save ( $cart_entity );
+    				
+    				$this->__updateCart();
+    				// Redirect user
+    				$this->Flash->success(__('Registered succesfully'));
+    				return $this->redirect($this->Auth->redirectUrl());
+    				
+    			} else {
+    				 $this->Flash->error(__('Ops, Something went wrong'));
+    				/* $return->status = 901;
+    				$return->message = "Unable to save customer. Try again.";
+    				echo json_encode ( $return );
+    				die (); */
+    			}
+    
+    			 return $this->redirect(['action' => 'register']);
+    		} else {
+    			$this->Flash->error(__('The user could not be saved. Please, try again.'));
+    			/* $return ['status'] = 902;
+    			$return ['message'] = "Unable to save user. Try again.";
+    			echo json_encode ( $return );
+    			die (); */
+    		}
+    	} 
+    
     }
     
 }

@@ -1,66 +1,177 @@
-    <div>
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <?= $this->Flash->render('auth') ?>
-<?php echo $this->Form->create('User'); ?>
-	<?= $this->Form->create() ?>
-              <h1>Login Form</h1>
-			  <div>
-                <input type="text" class="form-control" placeholder="First Name" required="" name="firstName" />
-              </div>
-			  <div>
-                <input type="text" class="form-control" placeholder="Last Name" required="" name="lastName" />
-              </div>
-<!--		  
-			  <div>
-                <input type="text" class="form-control" placeholder="address" required="" name="address" />
-              </div>
--->              
-<!--		  
-			  <div>                
-                <?php echo $this->Form->input('city',['label' => false,'options'=>$cities,'empty'=>'select city','class'=>'form-control']);?>                
-              </div>
--->
-              <div>
-                <input type="email" class="form-control" placeholder="email" required="" name="email" />
-              </div>
-<!--		                
-              <div>
-                <input type="text" class="form-control" placeholder="mobile No" required="" name="mobileNo" />
-              </div>
--->              			  
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" />
-              </div>			  
-			  <div>
-                <input type="password" class="form-control" placeholder="Confirm Password" required="" name="confirm_password" />
-              </div>
-              <div>
-              <input type="hidden" name="newsLetter" value="0" />
-			  <input type="checkbox" name="newsLetter" value="1" /> signup for newsletter
-              <div>
-              <input type="hidden" class="form-control" placeholder="form type" value="login-customer" name="formType" />
-              <div> 
-              <br>               
-                <?= $this->Form->button(__('Signup'),['class'=>'btn btn-default submit']); ?>
-                <a class="reset_pass" href="#">Lost your password?</a>
-                <a class="reset_pass" href="/users/login">Already have account?</a>
-              </div>
 
-              <div class="clearfix"></div>	
-              <div class="separator">
-                <div class="clearfix"></div>
-                <br />
+<div class="page-heading">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="page-title">
+					<h2>Login or Create an Account</h2>
+				</div>
+			</div>
+			<!--col-xs-12-->
+		</div>
+		<!--row-->
+	</div>
+	<!--container-->
+</div>
 
-                <div>
-                  <h1><i class="fa fa-paw"></i> Direct2Door.ERP</h1>
-                  <p>©2016 All Rights Reserved. Direct2Door.ERP!</p>
-                </div>
-              </div>
-           <?= $this->Form->end() ?>
-          </section>
-        </div>
 
-      </div>
-    </div>
+<!-- BEGIN Main Container -->
+
+<div class="main-container col1-layout wow bounceInUp animated animated"
+	style="visibility: visible;">
+
+	<div class="main">
+		<div class="account-login container">
+			<!--page-title-->
+
+			<!-- <form action="" method="post" id="login-form"> -->
+        <?= $this->Form->create()?>        
+        <?= $this->Flash->render() ?>
+			<fieldset class="col2-set">
+				<div class="col-1 new-users">
+					<strong>Registered Customers</strong>
+					<div class="content">
+
+						<p>If you have an account with us, please log in.</p>
+						<div class="buttons-set">
+							<button type="button" title="Login to Account"
+								class="button create-account" onClick="location.href = 'login'">
+								<span><span>Login To The Account</span></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-2 registered-users">
+					<strong>New Customers</strong>
+					<div class="content">
+
+						<p>By creating an account with our store, you will be able to move
+							through the checkout process faster, store multiple shipping
+							addresses, view and track your orders in your account and more.</p>
+						<ul class="form-list">
+							<li><label for="firstName">First Name<em class="required">*</em></label>
+								<div class="input-box">
+									<input type="text" name="firstName" value="" id="firstName"
+										class="input-text required-entry validate-email"
+										title="First Name">
+								</div></li>
+							<li><label for="lastName">Last Name<em class="required">*</em></label>
+								<div class="input-box">
+									<input type="text" name="lastName" value="" id="lastName"
+										class="input-text required-entry validate-email"
+										title="Last Name">
+								</div></li>
+							<li><label for="username">Email Address<em class="required">*</em></label>
+								<div class="input-box">
+									<input type="text" name="username" value="" id="username"
+										class="input-text required-entry validate-email"
+										title="Email Address">
+								</div></li>
+								<li><label for="password">Password<em class="required">*</em></label>
+								<div class="input-box">
+									<input type="password" name="password"
+										class="input-text required-entry validate-password"
+										id="password" title="Password">
+								</div></li>
+								<li><label for="confirm_password">Confirm Password<em class="required">*</em></label>
+								<div class="input-box">
+									<input type="password" name="confirm_password"
+										class="input-text required-entry validate-password"
+										id="confirm_password" title="Confirm Password">
+								</div></li>
+								
+								<li>
+								<input type="hidden" name="newsLetter" value="0" />
+			 					<input type="checkbox" name="newsLetter" value="1" /> &nbsp;signup for newsletter
+								</li>
+						</ul>
+						<input type="hidden" name="login_type"
+										class="input-text required-entry"
+										id="login_type"  value="0">
+						<input type="hidden" name="formType"
+										class="input-text required-entry"
+										id="formType"  value="login-customer">			
+										
+						<div class="remember-me-popup">
+							<div class="remember-me-popup-head" style="display: none">
+								<h3 id="text2">What's this?</h3>
+								<a href="#" class="remember-me-popup-close" onClick="showDiv()"
+									title="Close">Close</a>
+							</div>
+							<div class="remember-me-popup-body" style="display: none">
+								<p id="text1">Checking "Remember Me" will let you access your
+									shopping cart on this computer when you are logged out</p>
+								<div class="remember-me-popup-close-button a-right">
+									<a href="#" class="remember-me-popup-close button"
+										title="Close" onClick="
+            showDiv()"><span>Close</span></a>
+								</div>
+							</div>
+						</div>
+
+						<p class="required">* Required Fields</p>
+
+
+
+						<div class="buttons-set">
+
+							<button type="submit" class="button login" title="Register"
+								 id="send2">
+								<span>Register</span>
+							</button>
+
+
+						</div>
+						<!--buttons-set-->
+					</div>
+					<!--content-->
+				</div>
+				<!--col-2 registered-users-->
+			</fieldset>
+			<!--col2-set-->
+    <?= $this->Form->end()?>
+   
+</div>
+		<!--account-login-->
+
+	</div>
+	<!--main-container-->
+
+</div>
+<!--col1-layout-->
+
+
+
+
+<div class="our-features-box wow bounceInUp animated animated">
+	<div class="container">
+		<ul>
+			<li>
+				<div class="feature-box free-shipping">
+					<div class="icon-truck"></div>
+					<div class="content">FREE SHIPPING on order over $99</div>
+				</div>
+			</li>
+			<li>
+				<div class="feature-box need-help">
+					<div class="icon-support"></div>
+					<div class="content">Need Help +1 800 123 1234</div>
+				</div>
+			</li>
+			<li>
+				<div class="feature-box money-back">
+					<div class="icon-money"></div>
+					<div class="content">Money Back Guarantee</div>
+				</div>
+			</li>
+			<li class="last">
+				<div class="feature-box return-policy">
+					<div class="icon-return"></div>
+					<div class="content">30 days return Service</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- For version 1,2,3,4,6 -->
+

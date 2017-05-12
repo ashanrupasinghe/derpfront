@@ -63,6 +63,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/cart', ['controller' => 'Cart','action'=>'getCart']);
     
     $routes->connect('/user/login', ['controller' => 'Users', 'action' => 'login']);
+    $routes->connect('/user/register', ['controller' => 'Users', 'action' => 'register']);
+    $routes->connect('/user/logout', ['controller' => 'Users', 'action' => 'logout']);
     /**
      * Connect catchall routes for all controllers.
      *
