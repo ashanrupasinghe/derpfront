@@ -52,6 +52,7 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+        $this->set('authUser', $this->Auth->user());//set a variable for view, for check userloged in or not
     }
     
     public function beforeFilter(\Cake\Event\Event $event) {

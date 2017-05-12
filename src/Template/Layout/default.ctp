@@ -98,11 +98,15 @@
                                                                                              END For version 1,2,3,4,6 
                                                                                         </div>-->
 										<ul class="links">
-											<li><a href="dashboard.html" title="My Account">My Account</a></li>
+										<?php if ($authUser):?>
+											<li><a href="#" title="My Account">My Account</a></li>
+										<?php endif;?>	
 											<li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
 											<li><a href="checkout.html" title="Checkout">Checkout</a></li>
 											<li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
-											<li class="last"><a href="login.html" title="Login"><span>Login</span></a></li>
+										<?php if (!$authUser):?>	
+											<li class="last"><a href="<?php echo $this->Url->build('/user/login');?>" title="Login"><span>Login</span></a></li>
+										<?php endif;?>	
 										</ul>
 									</div>
 								</div>
