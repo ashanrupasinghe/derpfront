@@ -178,17 +178,12 @@ class CartController extends AppController {
     }
     
     public function getcart() {
-    	$this->request->allowMethod ( [
-    			'post'
-    	] );
-    	header ( 'Content-type: application/json' );
-    
-    	$token = $this->request->data ( 'token' );
-    	$chck = $this->__checkToken ( $token );
+    	$user_id=$this->Auth->user('id');
+    	$um=$this->loadModel('Users');
+    	$u=$um->get($user_id);//current logedin user     	
+    	$chck = $this->__checkToken ( $u->mobtoken );
     	if ($chck ['boolean']) {
-    			
     		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
-    			
     		if ($cart_id) {
     
     			$total = $this->__getTotal ( $cart_id );
@@ -199,24 +194,106 @@ class CartController extends AppController {
     				$return ['status'] = 0;
     				$return ['message'] = 'success';
     				$return ['result'] ['product_list'] = $cart_products;
-    				$return ['result'] ['total'] = $total;
+    				$return ['result'] ['total'] = $total; 
+    				$this->set(['return'=>$return]);
     			} else {
     				$return ['status'] = 0;
     				$return ['message'] = 'your cart is empty';
     				$return ['result'] ['product_list'] = $cart_products;
     				$return ['result'] ['total'] = $total;
+    				$this->set(['return'=>$return]);
     			}
     		} else {
-    			$return ['status'] = 444;
-    			$return ['message'] = "you haven't create a cart";
+    			/* $return ['status'] = 444;
+    			$return ['message'] = "you haven't create a cart"; */
+    			$this->Flash->error(__('you have not create a cart'));
     		}
     	} else {
-    		$return ['status'] = 100;
-    		$return ['message'] = $chck ['message'];
+    		/* $return ['status'] = 100;
+    		$return ['message'] = $chck ['message']; */
+    		$this->Flash->error(__('Token miss match'));
     	}
     
-    	echo json_encode ( $return );
-    	die ();
+    	
+    }
+    
+    
+    /**
+     *
+     * @param unknown $token
+     * @return multitype:boolean string
+     */
+    function __checkToken($token) {
+    	
+    	$user_model = $this->loadModel ( 'users' );
+    	$user = $user_model->find ( 'all', [
+    			'conditions' => [
+    					'mobtoken' => $token
+    			]
+    	] )->first ();
+    			
+    			
+    			if (sizeof ( $user ) <= 0) {
+    				return [
+    						'boolean' => false,
+    						'message' => 'token not found'
+    				];
+    			} else {
+    				/*
+    				 * $mobtoken_created_at = $user->mobtoken_created_at;
+    				 * $mobtoken_created_at = new Time ( $mobtoken_created_at );
+    				 */
+    					
+    				/*
+    				 * echo $mobtoken_created_at;
+    				 * die ();
+    				 */
+    					
+    				/*
+    				 * if ($mobtoken_created_at->wasWithinLast ( 1 )) {
+    				 * $user->mobtoken_created_at = date ( 'Y-m-d H:i:s' );
+    				 * $user_model->save ( $user );
+    				 *
+    				 * return [
+    				 * 'boolean' => true,
+    				 * 'message' => 'token matched',
+    				 * 'user_id' => $user->id
+    				 * ];
+    				 * } else {
+    				 * return [
+    				 * 'boolean' => false,
+    				 * 'message' => 'token expired'
+    				 * ];
+    				 * }
+    				 */
+    				$user->mobtoken_created_at = date ( 'Y-m-d H:i:s' );
+    				$user_model->save ( $user );
+    					
+    				return [
+    						'boolean' => true,
+    						'message' => 'token matched',
+    						'user_id' => $user->id
+    				];
+    			}
+    }
+    
+    public function __getCurrentCartId($user_id) {
+    	// $session_id = $this->__getSessionId ();
+    	// $user_id = $this->__getUserId ();
+    	$cart_id = $this->Cart->find ( 'all', [
+    			'fields' => [
+    					'id'
+    			]
+    	] )->where ( [
+    			'user_id' => $user_id
+    	] )->toArray ();
+    
+    	if (sizeof ( $cart_id ) > 0) {
+    		$cart_id = $cart_id [0]->id;
+    	} else {
+    		$cart_id = null;
+    	}
+    	return $cart_id;
     }
 
 }
