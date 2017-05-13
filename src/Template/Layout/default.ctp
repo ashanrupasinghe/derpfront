@@ -596,6 +596,10 @@
         <?= $this->Html->script('jquery.bxslider.min.js'); ?>
         <?= $this->Html->script('owl.carousel.min.js'); ?>
         <?= $this->Html->script('jquery.mobile-menu.min.js'); ?>
+        
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+	    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+        <?= $this->Html->script('custom.js'); ?>
 
         <script type="text/javascript">
                         jQuery(document).ready(function () {

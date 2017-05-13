@@ -33,7 +33,7 @@
                    
                     <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
                      <div class="buttons-set">
-                    <button type="button" title="Create an Account" class="button create-account" onClick="location.href = 'register'"><span><span>Create an Account</span></span></button>
+                    <button type="button" title="Create an Account" class="button create-account" onClick="location.href = '<?php echo $this->Url->build('/user/register');?>'"><span><span>Create an Account</span></span></button>
                 </div>
                 </div>
             </div>

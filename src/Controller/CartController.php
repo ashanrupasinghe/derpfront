@@ -178,10 +178,8 @@ class CartController extends AppController {
     }
     
     public function getcart() {
-    	$user_id=$this->Auth->user('id');
-    	$um=$this->loadModel('Users');
-    	$u=$um->get($user_id);//current logedin user     	
-    	$chck = $this->__checkToken ( $u->mobtoken );
+    	$token=$this->__getToken();     	
+    	$chck = $this->__checkToken ($token);
     	if ($chck ['boolean']) {
     		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
     		if ($cart_id) {
@@ -294,6 +292,70 @@ class CartController extends AppController {
     		$cart_id = null;
     	}
     	return $cart_id;
+    }
+    
+    private function __getToken(){
+    	$user_id=$this->Auth->user('id');
+    	$um=$this->loadModel('Users');
+    	$u=$um->get($user_id);//current logedin user
+    	return $u->mobtoken;
+    }
+    
+    public function getAddress() {
+    	$token = $this->__getToken();
+    	$chck = $this->__checkToken ( $token );
+    	if ($chck ['boolean']) {
+    			
+    		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
+    			
+    		if ($cart_id) {
+    			$shippingModel = $this->loadModel ( 'Shipping' );
+    			$shipping = $shippingModel->find ( 'all', [
+    					'fields' => [
+    							'id',
+    							'street_number',
+    							'street_address',
+    							'city'
+    					],
+    					'conditions' => [
+    							'cart_id' => $cart_id
+    					],
+    					'order' => [
+    							'Shipping.created_at' => 'DESC'
+    					]
+    			] )->distinct ( [
+    					'street_number',
+    					'street_address',
+    					'city'
+    			] )->formatResults ( function ($results) {
+    				return $results->combine ( '{n}', function ($row) {
+    					return [
+    							'id' => $row ['id'],
+    							'address' => $row ['street_number'] . ', ' . $row ['street_address'] . ', ' . $row ['city']
+    					];
+    				} );
+    			} )->toArray ();
+    			$return ['status'] = 0;
+    			$return ['message'] = "Success";
+    			$return ['result'] = $shipping;
+    		} else {
+    			$return ['status'] = 444;
+    			$return ['message'] = "you haven't create a cart";
+    		}
+    	} else {
+    		$return ['status'] = 100;
+    		$return ['message'] = $chck ['message'];
+    	}
+    
+    	return $return;
+    }
+    
+    public function checkout(){
+    	$address_book=$this->getAddress();    	
+    	$address_book=$address_book['result'];  
+    	//$address_book='';
+    	$address_book[]=['id'=>'','address'=>'New Address'];    	
+    	$this->set(['address_book'=>$address_book]);
     }
 
 }
