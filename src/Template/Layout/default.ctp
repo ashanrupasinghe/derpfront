@@ -102,7 +102,7 @@
 											<li><a href="#" title="My Account">My Account</a></li>
 										<?php endif;?>	
 											<li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
-											<li><a href="checkout.html" title="Checkout">Checkout</a></li>
+											<li><a href="<?php echo $this->Url->build('/order/checkout');?>" title="Checkout">Checkout</a></li>
 											<li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
 										<?php if (!$authUser):?>	
 											<li class="last"><a href="<?php echo $this->Url->build('/user/login');?>" title="Login"><span>Login</span></a></li>
@@ -160,7 +160,7 @@
 										</ul>
 										<div class="actions">
 											<button class="btn-checkout" title="Checkout" type="button"
-												onClick="window.location = checkout.html">
+												onClick="location.href = '<?php echo $this->Url->build('/order/checkout');?>'">
 												<span>Checkout</span>
 											</button>
 										</div>
