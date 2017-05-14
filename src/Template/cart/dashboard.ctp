@@ -47,46 +47,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="first odd">
-                        <td>12800000002</td>
-                        <td><span class="nobr">5/12/2015</span></td>
+                    <?php $count=1;?>
+                    <?php foreach ($orders as $order):?>
+                    <tr class="<?php if ($count==1){echo 'first';}if ($count==sizeof($orders)){echo 'last';}if ($count%2!=0){echo 'odd';}else{echo 'even';}?>first odd">
+                        <td><?php echo $order['id'];?></td>
+                        <td><span class="nobr"><?php echo $order['created'];?></span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$403.00</span></td>
-                        <td><em>Pending</em></td>
-                        <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> </span></td>
-                      </tr>
-                      <tr class="even">
-                        <td>12800000001</td>
-                        <td><span class="nobr">5/11/2015</span></td>
-                        <td>jhon doe</td>
-                        <td><span class="price">$506.50</span></td>
-                        <td><em>Pending</em></td>
+                        <td><span class="price">$<?php echo $order['total'];?></span></td>
+                        <td><em><?php echo $order['status'];?></em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
-                      <tr class="odd">
-                        <td>13100000001</td>
-                        <td><span class="nobr">5/9/2015</span></td>
-                        <td>jhon doe</td>
-                        <td><span class="price">$997.84</span></td>
-                        <td><em>Pending</em></td>
-                        <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
-                      </tr>
-                      <tr class="even">
-                        <td>12000000002</td>
-                        <td><span class="nobr">4/1/2015</span></td>
-                        <td>jhon doe</td>
-                        <td><span class="price">$60.00</span></td>
-                        <td><em>Pending</em></td>
-                        <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
-                      </tr>
-                      <tr class="last odd">
-                        <td>12000000001</td>
-                        <td><span class="nobr">4/1/2015</span></td>
-                        <td>jhon doe</td>
-                        <td><span class="price">$208.00</span></td>
-                        <td><em>Pending</em></td>
-                        <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
-                      </tr>
+                     <?php $count++;?> 
+                    <?php endforeach;?>
+                      
                     </tbody>
                   </table>
                 </div>

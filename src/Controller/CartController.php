@@ -1034,7 +1034,11 @@ public function getCheckout() {
 	public function dashboard(){
 		$user_id=$this->Auth->user('id');	
 		//$customers_model=$this->loadModel('');	
-		$user=$this->Cart->find('all',['fields'=>['customers.id','customers.user_id','customers.firstName','customers.lastName','customers.newsLetter','customers.address','customers.city','customers.email','customers.mobileNo'],'contain'=>['users','users.Customers'],'conditions'=>['users.id'=>$user_id]])->toArray();		
-		$this->set(['user'=>$user[0]->customers]);
+		$user=$this->Cart->find('all',['fields'=>['customers.id','customers.user_id','customers.firstName','customers.lastName','customers.newsLetter','customers.address','customers.city','customers.email','customers.mobileNo'],'contain'=>['users','users.Customers'],'conditions'=>['users.id'=>$user_id]])->toArray();
+		$orders=(new OrdersController())->getOrderList();
+		/* print '<pre>';
+		print_r($order['result']);
+		die();	 */	
+		$this->set(['user'=>$user[0]->customers,'orders'=>$orders['result']]);
 	}
 }
