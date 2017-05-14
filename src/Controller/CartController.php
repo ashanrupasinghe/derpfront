@@ -485,8 +485,10 @@ class CartController extends AppController {
     						$currrent_shipping->country = $data ['country'];
     						$currrent_shipping->phone_number = $data ['phone_number'];
     						if ($shippingModel->save ( $currrent_shipping )) {
+    							
     							$return ['status'] = 0;
     							$return ['message'] = "Success";
+    							$return ['result']=$this->__getAddress($cart_id);
     						} else {
     							$return ['status'] = 912;
     							$return ['message'] = "Address not saved";
@@ -496,6 +498,7 @@ class CartController extends AppController {
     						if ($shippingModel->save ( $shippingEntity )) {
     							$return ['status'] = 0;
     							$return ['message'] = "Success";
+    							$return ['result']=$this->__getAddress($cart_id);
     						} else {
     							$return ['status'] = 912;
     							$return ['message'] = "Address not saved";
@@ -996,5 +999,35 @@ public function getCheckout() {
     	
     	$this->set(['address_book'=>$address_book,'get_checkout'=>$get_checkout]);
     }
-
+	public function __getAddress($cart_id){
+		$shippingModel=$this->loadModel('Shipping');
+		
+		$shipping = $shippingModel->find ( 'all', [
+				'fields' => [
+						'id',
+						'street_number',
+						'street_address',
+						'city'
+				],
+				'conditions' => [
+						'cart_id' => $cart_id
+				],
+				'order' => [
+						'Shipping.created_at' => 'DESC'
+				]
+		] )->distinct ( [
+				'street_number',
+				'street_address',
+				'city'
+		] )->formatResults ( function ($results) {
+			return $results->combine ( '{n}', function ($row) {
+				return [
+						'id' => $row ['id'],
+						'address' => $row ['street_number'] . ', ' . $row ['street_address'] . ', ' . $row ['city']
+				];
+			} );
+		} )->toArray ();
+		
+		return  $shipping;
+	}
 }

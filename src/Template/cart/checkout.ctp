@@ -24,6 +24,7 @@
 							<span class="number">1</span>
 							<h3 class="one_page_heading">Delivery Address</h3>
 						</div>
+						<div id="err_1" class="step a-item error-div"></div>
 						<div id="checkout-step-billing" class="step a-item">
 							<form id="co-billing-form" action="">
 								<fieldset class="group-select">
@@ -379,6 +380,7 @@
 							<span class="number">2</span>
 							<h3 class="one_page_heading">Delivery Date/Time</h3>
 						</div>
+						<div id="err_2" class="step a-item error-div"></div>
 						<div id="checkout-step-shipping" class="step a-item"
 							style="display: none;">
 							<form action="" id="co-shipping-form">
@@ -438,6 +440,7 @@
 							<span class="number">3</span>
 							<h3 class="one_page_heading">Compleate Checkout</h3>
 						</div>
+						<div id="err_3" class="step a-item error-div"></div>
 						<div id="checkout-step-review" class="step a-item"
 							style="display: none;">
 							<div class="order-review" id="checkout-review-load">
@@ -450,7 +453,7 @@
 									</button>
 									<a href="#" onClick="checkout.back(); return false;"
 										class="back"><small>« </small>Back</a> <span
-										id="shipping-please-wait" class="please-wait"
+										id="review-please-wait" class="please-wait"
 										style="display: none;"> <?php echo $this->Html->image('opc-ajax-loader.gif',['alt'=>'Loading next step...','title'=>'Loading next step...','class'=>'v-middle']); ?> Loading next step... </span>
 								</div>
 								
