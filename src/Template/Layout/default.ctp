@@ -18,6 +18,8 @@
         <?= $this->Html->css('owl.theme.css')?>
         <?= $this->Html->css('jquery.bxslider.css')?>
         <?= $this->Html->css('jquery.mobile-menu.css')?>
+        <?= $this->Html->css('datepicker/datepicker3.css')?>
+        <?= $this->Html->css('timepicker/bootstrap-timepicker.min.css')?>
         <?= $this->Html->css('style.css')?>
         <?= $this->Html->css('responsive.css')?>
 
@@ -599,6 +601,8 @@
         
         <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 	    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+	    <?= $this->Html->script('datepicker/bootstrap-datepicker.js'); ?>
+	    <?= $this->Html->script('timepicker/bootstrap-timepicker.min.js'); ?>
         <?= $this->Html->script('custom.js'); ?>
 
         <script type="text/javascript">
@@ -744,6 +748,9 @@
                     });
                     });
             });
+
+
+            
         </script>
 </body>
 </html>

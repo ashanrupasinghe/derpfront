@@ -1,5 +1,17 @@
 jQuery(document).ready(function () {
 	
+	//Timepicker:::http://jdewit.github.io/bootstrap-timepicker/
+	jQuery(".delivery_time").timepicker({
+      showInputs: false,
+      showMeridian:false,
+      defaultTime:'current'
+    });
+
+  //Date picker
+	jQuery('#delivery_date').datepicker({
+      autoclose: true
+    });
+	
 	if(jQuery("#address_id").val()===""){        	
     	jQuery("#address_id").css("display", "block");
         
@@ -22,6 +34,8 @@ jQuery(document).ready(function () {
 			next_fs = jQuery('#checkout-step-shipping');
 			current_collored = jQuery("#opc-billing");
 			next_collored = jQuery("#opc-shipping");
+			
+			
 			if(jQuery("#address_id").val()!==""){
 				var address_id=jQuery("#address_id").val();
 				alert(address_id);
@@ -81,7 +95,48 @@ jQuery(document).ready(function () {
 			current_collored = jQuery("#opc-shipping");
 			next_collored = jQuery("#opc-review");
 			jQuery("#shipping-please-wait").show();
+			
+			
+			var delivery_date=jQuery("#delivery_date").val();
+			var delivery_time=jQuery("#delivery_time").val();
+			jQuery.ajax({
+				type: 'post',
+                url: 'http://localhost/d2dfront/cart/updateDeliveryTime',
+                dataType: 'json',
+                data: {
+                	delivery_date: delivery_date, 
+                	delivery_time:delivery_time
+                }, 
+		        success: function(response) { 
+		          jQuery("#billing-please-wait").hide();
+		          alert(JSON.stringify(response)); 
+		        }, 
+		        error: function (xhr, status) {  
+		        	jQuery("#billing-please-wait").hide();			          
+		          alert('Unknown error ' + JSON.stringify(xhr)); 
+		        }    
+		      }); 
 						
+		
+		}else if(jQuery('#checkout-step-review').is(":visible")){
+			current_fs = jQuery('#checkout-step-review');			
+			current_collored = jQuery("#opc-review");			
+			jQuery("#review-please-wait").show();
+			
+			jQuery.ajax({
+				type: 'post',
+                url: 'http://localhost/d2dfront/cart/completeCheckout',
+                dataType: 'json',                 
+		        success: function(response) { 
+		          jQuery("#review-please-wait").hide();
+		          alert(JSON.stringify(response)); 
+		        }, 
+		        error: function (xhr, status) {  
+		        	jQuery("#review-please-wait").hide();			          
+		          alert('Unknown error ' + JSON.stringify(xhr)); 
+		        }    
+		      }); 
+			
 		}
 		
 		next_fs.show(); 

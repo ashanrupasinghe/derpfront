@@ -390,22 +390,22 @@
 												<li class="fields">
 													<div class="customer-name">
 														<div class="input-box name-firstname">
-															<label for="shipping:firstname">Date<span
+															<label for="delivery_date">Date<span
 																class="required">*</span></label>
 															<div class="input-box1">
-																<input type="text" id="shipping:firstname"
-																	name="shipping[firstname]" value=""
-																	title="First Name" maxlength="255"
+																<input type="text" id="delivery_date"
+																	name="delivery_date" value=""
+																	title="delivery_date"
 																	class="input-text required-entry"
 																	>
 															</div>
 														</div>
-														<div class="input-box name-lastname">
-															<label for="shipping:lastname">Time<span class="required">*</span></label>
+														<div class="input-box name-lastname bootstrap-timepicker">
+															<label for="delivery_time">Time<span class="required">*</span></label>
 															<div class="input-box1">
-																<input type="text" id="shipping:lastname"
-																	name="shipping[lastname]" value="" title="Last Name"
-																	maxlength="255" class="input-text required-entry"
+																<input type="text" id="delivery_time"
+																	name="delivery_time" value="" title="delivery_time"
+																	class="input-text required-entry delivery_time"
 																	>
 															</div>
 														</div>
