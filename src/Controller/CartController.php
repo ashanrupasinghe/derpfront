@@ -1030,4 +1030,11 @@ public function getCheckout() {
 		
 		return  $shipping;
 	}
+	
+	public function dashboard(){
+		$user_id=$this->Auth->user('id');	
+		//$customers_model=$this->loadModel('');	
+		$user=$this->Cart->find('all',['fields'=>['customers.id','customers.user_id','customers.firstName','customers.lastName','customers.newsLetter','customers.address','customers.city','customers.email','customers.mobileNo'],'contain'=>['users','users.Customers'],'conditions'=>['users.id'=>$user_id]])->toArray();		
+		$this->set(['user'=>$user[0]->customers]);
+	}
 }

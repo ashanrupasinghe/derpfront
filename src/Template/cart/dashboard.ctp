@@ -21,7 +21,7 @@
             <!-- BEGIN DASHBOARD-->
             <div class="dashboard">
               <div class="welcome-msg">
-                <p class="hello"><strong>Hello, <?php echo $user['username'];?>!</strong></p>
+                <p class="hello"><strong>Hello, <?php echo $user['firstName'].' '.$user['lastName'];?>!</strong></p>
                 <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
               </div>
               <div class="recent-orders">
@@ -105,8 +105,9 @@
                         <a href="#">Edit</a> </div>
                       <!--box-title-->
                       <div class="box-content">
-                        <p> jhon doe<br>
-                          jhon.doe@gmail.com<br>
+                        <p><?php echo $user['firstName'].' '.$user['lastName']?><br>
+                          <?php echo $user['email']?><br>
+                          <?php echo $user['mobileNo']?><br>
                           <a href="#">Change Password</a> </p>
                       </div>
                       <!--box-content--> 
@@ -120,7 +121,11 @@
                         <a href="#">Edit</a> </div>
                       <!--box-title-->
                       <div class="box-content">
-                        <p> You are currently not subscribed to any newsletter. </p>
+                      <?php 
+                      $news_letter=[0=>'You are currently not subscribed to any newsletter.',
+                      				1=>'You are scbscribed to the newsletter'];
+                      ?>
+                        <p> <?php echo $news_letter[$user['newsLetter']]?> </p>
                       </div>
                       <!--box-content--> 
                     </div>
@@ -129,32 +134,26 @@
                 </div>
                 <div class="col2-set">
                   <div class="box">
-                    <div class="box-title">
-                      <h4>Address Book</h4>
-                      <a href="#">Manage Addresses</a> </div>
+                    
                     <!--box-title-->
                     <div class="box-content">
                       <div class="col-1">
-                        <h5>Default Billing Address</h5>
-                        <address>
-                        jhon doe<br>
-                        Street road<br>
-                        AL,  Alabama, 42136<br>
-                        United States<br>
-                        T: 4563 <br>
+                        <h5>Address</h5>
+                        <address>                        
+                        <?php if ($user['address']!=null):
+                        echo $user['address'].'<br>';
+                        endif;?>
+                        <?php 
+                        if($user['city']!=null):                        
+                        echo $user['city'].'<br>';
+                        endif;?>
                         <a href="#">Edit Address</a>
                         </address>
                       </div>
                       <div class="col-2">
-                        <h5>Default Shipping Address</h5>
-                        <address>
-                        jhon doe<br>
-                        Street road<br>
-                        AL,  Alabama, 42136<br>
-                        United States<br>
-                        T: 4563 <br>
-                        <a href="#">Edit Address</a>
-                        </address>
+                        <div class="box-title">
+                      <h4>Address Book</h4>
+                      <a href="#">Manage Addresses</a> </div>
                       </div>
                     </div>
                     <!--box-content--> 

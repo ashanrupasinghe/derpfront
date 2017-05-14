@@ -39,6 +39,7 @@ class CustomersTable extends Table
         $this->addBehavior('Timestamp');
         //$this->belongsTo('city',['foreignKey'=>'cityId']);
 		$this->belongsTo('city',['foreignKey'=>'city','propertyName'=>'cid']);
+		$this->belongsTo('users',['foreignKey'=>'user_id']);
     }
 
     /**

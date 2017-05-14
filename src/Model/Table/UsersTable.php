@@ -57,6 +57,9 @@ class UsersTable extends Table
         $this->hasOne('Cart', [
         		'foreignKey' => 'user_id'
         ]);
+        $this->hasOne('Customers', [
+        		'foreignKey' => 'user_id'
+        ]);
     }
 
     /**

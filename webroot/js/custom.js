@@ -165,7 +165,7 @@ jQuery(document).ready(function () {
 		          document.getElementById("total_items").value = 0;
 		          jQuery("div#err_3").append("<p style='color:green;'>Checkout compleated</p>");
 		          setTimeout(function(){// wait for 5 secs(2)
-		        	  location.href = 'http://localhost/d2dfront/user/cart';
+		        	  location.href = 'http://localhost/d2dfront/user/dashboard';
 		         }, 2000); 
 		          
 		          /*alert(JSON.stringify(response)); */
