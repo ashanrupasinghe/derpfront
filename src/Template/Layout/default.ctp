@@ -123,10 +123,10 @@
 										<a href="shopping-cart.html"><span id="total_items"> <?php echo $cart_size;?> </span></a>
 									</div>
 									<?php if (sizeof($cart_products)>0):?>
-									<?php 
-// print '<pre>';
-										      // print_r($cart_products);
-										      // die();										?>
+									<?php
+										// print '<pre>';
+										// print_r($cart_products);
+										// die();										?>
 									<div class="fl-mini-cart-content" style="display: none;">
 										<div class="block-subtitle">
 											<div class="top-subtotal" id="top-sub-total">
@@ -713,8 +713,10 @@
                             qty: $qty
                         },
                         success: function (response) {
+
+                            if(response.status==0){
                         	var list="";
-                           //alert(JSON.stringify(response));
+                          // alert(JSON.stringify(response));
                            
                            if(response.result.cart_size){
                            //document.getElementById("total_items").innerHTML = response.result.cart_size;
@@ -771,8 +773,11 @@
 								list+='</button>';								
 							list+='</div>';							
 						list+='</div>';
-						alert(list);
+						//alert(list);
 						document.getElementById("mini-cart-head").innerHTML=list;
+                        }
+                        alert(response.message);    
+						
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             alert(xhr.status);

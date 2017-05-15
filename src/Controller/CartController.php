@@ -103,7 +103,7 @@ class CartController extends AppController {
                     $return ['message'] = 'Product not added to cart';
                 }
             } else {
-                $return ['status'] = 0;
+                $return ['status'] = 888;
                 $return ['message'] = 'Product already in your cart';
             }
         } else {
