@@ -50,9 +50,9 @@ jQuery(document).ready(function () {
 			        success: function(response) { 
 			        	jQuery(".back").show();
 			          jQuery("#billing-please-wait").hide();
-			          alert(JSON.stringify(response.result));	
+			         // alert(JSON.stringify(response.result));	
 			          var address_list=addressDropdown(response.result);
-			          alert(address_list);
+			          //alert(address_list);
 			          jQuery("#address_id").empty();
 			          jQuery("#address_id").append(address_list);
 			          next_fs.show(); 
@@ -89,9 +89,9 @@ jQuery(document).ready(function () {
 			        success: function(response) { 
 			        	jQuery(".back").show();
 			          jQuery("#billing-please-wait").hide();
-			          alert(JSON.stringify(response));
+			          //alert(JSON.stringify(response));
 			          var address_list=addressDropdown(response.result);
-			          alert(address_list);
+			         // alert(address_list);
 			          jQuery("#address_id").empty();
 			          jQuery("#address_id").append(address_list)
 			          
@@ -157,7 +157,7 @@ jQuery(document).ready(function () {
 			jQuery("div#err_3").empty();
 			jQuery.ajax({
 				type: 'post',
-                url: 'http://localhost/d2dfront/cart/completeCheckout',
+                url: myBaseUrl+'cart/completeCheckout',
                 dataType: 'json',                 
 		        success: function(response) { 
 		          jQuery("#review-please-wait").hide();		     

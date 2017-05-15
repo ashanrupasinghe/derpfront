@@ -45,7 +45,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700'
 	rel='stylesheet' type='text/css'>
-<script type="text/javascript">var myBaseUrl = '<?php echo $this->Url->build('/'); ?>';</script>
+<script type="text/javascript">var myBaseUrl = '<?php echo $this->Url->build('/',true); ?>';</script>
 </head>
 <body>
 	<div id="page">
@@ -768,7 +768,7 @@
                            }
                            list+='</ul>';                           
 							list+='<div class="actions">';							
-								list+='<button class="btn-checkout" title="Checkout" type="button" onClick="">';								
+								list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
 									list+='<span>Checkout</span>';									
 								list+='</button>';								
 							list+='</div>';							
