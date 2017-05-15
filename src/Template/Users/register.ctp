@@ -35,7 +35,7 @@
 						<p>If you have an account with us, please log in.</p>
 						<div class="buttons-set">
 							<button type="button" title="Login to Account"
-								class="button create-account" onClick="location.href = '<?php echo $this->Url->build('/user/login');?>'">
+								class="button create-account" onClick="location.href = '<?php echo $this->Url->build($login_url);?>'">
 								<span><span>Login To The Account</span></span>
 							</button>
 						</div>

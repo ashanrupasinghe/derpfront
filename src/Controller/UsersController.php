@@ -199,8 +199,14 @@ class UsersController extends AppController {
 			}
 		} else {
 			
-			return $this->redirect ( '/' );
+			return $this->redirect ( '/user/dashboard' );
 		}
+		
+		$register_url="/user/register";
+		if ($this->request->getQuery('redirect')!=null){
+			$register_url="/user/register?redirect=".urlencode($this->request->getQuery('redirect'));			
+		}
+		$this->set('register_url',$register_url);
 	}
 	public function logout() {
 		if ($this->Auth->user ()) {
@@ -378,5 +384,13 @@ class UsersController extends AppController {
 				 */
 			}
 		}
+		
+		
+		$login_url="/user/login";
+		if ($this->request->getQuery('redirect')!=null){
+			$login_url="/user/login?redirect=".urlencode($this->request->getQuery('redirect'));			
+		}
+		$this->set('login_url',$login_url);
+		
 	}
 }
