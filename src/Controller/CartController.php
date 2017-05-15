@@ -26,11 +26,29 @@ use App\Model\Table\CartTable;
 use Cake\I18n\Time;
 
 class CartController extends AppController {
+	public function isAuthorized($user) {
+		if (in_array ( $this->request->action, [
+				'getcart',
+				'getAddress',
+				'updateAddress',
+				'addAddress',
+				'updateDeliveryTime',
+				'completeCheckout',
+				'getCheckout',
+				'checkout',
+				'dashboard'
+		] )) {
+			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 5) {
+				return true;
+			}
+		}
+		return parent::isAuthorized ( $user );
+	}
 	
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow ();
+		$this->Auth->allow (['addproduct']);
 	}
 
     public function addproduct() {

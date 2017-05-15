@@ -54,6 +54,22 @@ class OrdersController extends AppController {
 			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 2) {
 				return true;
 			}
+			
+			
+			
+		}
+		
+		if (in_array ( $this->request->action, [
+				'getOrderList',
+				'viewOrder'
+		] )) {
+				
+			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 5) {
+				return true;
+			}
+				
+				
+				
 		}
 		
 		return parent::isAuthorized ( $user );
