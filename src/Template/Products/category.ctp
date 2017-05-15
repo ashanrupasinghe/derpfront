@@ -1,3 +1,4 @@
+use PhpParser\Node\Expr\Print_;
 
 <div class="page-heading">
     <div class="breadcrumbs">
@@ -75,6 +76,7 @@
                         <div class="category-products">
                             <ul class="products-grid">
                                 <?php
+                                
                                 foreach ($products AS $product) {
                                    
                                     ?>
@@ -108,7 +110,9 @@
                                                             <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR <?php echo $product->price; ?>.00</span> </span> </div>
                                                         </div>
                                                         <div class="add_cart">
-                                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                                        	<input name="qty" id="qty" maxlength="12" value="1" title="Quantity" class="input-text qty" type="hidden" class="add_to_cart_product_qty">
+                                                        	<input name="product_id" id="product_id" value="<?php echo $product->id?>" type="hidden" class="add_to_cart_product_id">
+                                                            <button class="button btn-cart add-to-cart-jq-function" type="button"><span>Add to Cart</span></button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -78,6 +78,7 @@
                         <a href="#">Edit</a> </div>
                       <!--box-title-->
                       <div class="box-content">
+                      <!-- need to add user name or name -->
                         <p><?php echo $user['firstName'].' '.$user['lastName']?><br>
                           <?php echo $user['email']?><br>
                           <?php echo $user['mobileNo']?><br>
@@ -98,7 +99,10 @@
                       $news_letter=[0=>'You are currently not subscribed to any newsletter.',
                       				1=>'You are scbscribed to the newsletter'];
                       ?>
-                        <p> <?php echo $news_letter[$user['newsLetter']]?> </p>
+                        <p> <?php 
+                        if ($user['newsLetter']!=""):
+                        echo $news_letter[$user['newsLetter']];
+                        endif;?> </p>
                       </div>
                       <!--box-content--> 
                     </div>

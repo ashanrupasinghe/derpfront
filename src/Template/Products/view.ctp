@@ -84,8 +84,8 @@
                       <div class="pull-left">
                         <div class="custom pull-left">
                          <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
-                          <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                          <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id; ?>">
+                          <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty add_to_cart_product_qty">
+                          <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id; ?>" class="add_to_cart_product_qty">
                            <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                         </div>
                         <!--custom pull-left-->
