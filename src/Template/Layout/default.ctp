@@ -104,24 +104,29 @@
 											<li><a href="#" title="My Account">My Account</a></li>
 										<?php endif;?>	
 											<li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
-											<li><a href="<?php echo $this->Url->build('/order/checkout');?>" title="Checkout">Checkout</a></li>
+											<li><a
+												href="<?php echo $this->Url->build('/order/checkout');?>"
+												title="Checkout">Checkout</a></li>
 											<li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
 										<?php if (!$authUser):?>	
-											<li class="last"><a href="<?php echo $this->Url->build('/user/login');?>" title="Login"><span>Login</span></a></li>
+											<li class="last"><a
+												href="<?php echo $this->Url->build('/user/login');?>"
+												title="Login"><span>Login</span></a></li>
 										<?php endif;?>	
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="fl-cart-contain">
-								<div class="mini-cart">
+								<div class="mini-cart" id="mini-cart-head">
 									<div class="basket">
 										<a href="shopping-cart.html"><span id="total_items"> <?php echo $cart_size;?> </span></a>
 									</div>
 									<?php if (sizeof($cart_products)>0):?>
-									<?php //print '<pre>';
-									//print_r($cart_products);
-									//die();?>
+									<?php 
+// print '<pre>';
+										      // print_r($cart_products);
+										      // die();										?>
 									<div class="fl-mini-cart-content" style="display: none;">
 										<div class="block-subtitle">
 											<div class="top-subtotal" id="top-sub-total">
@@ -134,22 +139,24 @@
 										<ul class="mini-products-list" id="cart-sidebar">
 											<?php $count=0;?>
 											<?php foreach ($cart_products as $product):?>
-													<li class="item <?php if ($count==0):?>first<?php endif;?> <?php if ($count==sizeof($cart_products)-1):?>last<?php endif;?>">
+													<li
+												class="item <?php if ($count==0):?>first<?php endif;?> <?php if ($count==sizeof($cart_products)-1):?>last<?php endif;?>">
 												<div class="item-inner">
 													<a class="product-image"
-														title="<?php echo $product['name'];?>"
-														href="#l"><img
+														title="<?php echo $product['name'];?>" href="#l"><img
 														alt="<?php echo $product['name'];?>"
 														src="<?php echo '/img/'.$product['image'];?>"></a>
 													<div class="product-details">
 														<div class="access">
-															<input type="hidden" value="<?php echo $product['id'];?>" name="" class="">
-															<a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-															<a class="btn-edit" title="Edit item" href="#"><i
+															<input type="hidden" value="<?php echo $product['id'];?>"
+																name="" class=""> <a class="btn-remove1"
+																title="Remove This Item" href="#">Remove</a> <a
+																class="btn-edit" title="Edit item" href="#"><i
 																class="icon-pencil"></i><span class="hidden">Edit item</span></a>
 														</div>
 														<!--access-->
-														<strong><?php echo $product['quantity'] ?></strong> x <span class="price"><?php echo $product['price'];?></span>
+														<strong><?php echo $product['quantity'] ?></strong> x <span
+															class="price"><?php echo $product['price'];?></span>
 														<p class="product-name">
 															<a href="product-detail.html"><?php echo $product['name'];?></a>
 														</p>
@@ -599,8 +606,10 @@
         <?= $this->Html->script('owl.carousel.min.js'); ?>
         <?= $this->Html->script('jquery.mobile-menu.min.js'); ?>
         
-        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
-	    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+        <script type="text/javascript"
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+	<script type="text/javascript"
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
 	    <?= $this->Html->script('datepicker/bootstrap-datepicker.js'); ?>
 	    <?= $this->Html->script('timepicker/bootstrap-timepicker.min.js'); ?>
         <?= $this->Html->script('custom.js'); ?>
@@ -704,14 +713,26 @@
                             qty: $qty
                         },
                         success: function (response) {
+                        	var list="";
                            //alert(JSON.stringify(response));
+                           
                            if(response.result.cart_size){
-                           document.getElementById("total_items").innerHTML = response.result.cart_size;
+                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
+                        	   
+                        	   list+='<div class="basket">';
+                        	   list+='<a href="shopping-cart.html"><span id="total_items"> '+response.result.cart_size+' </span></a>';
+                        	   list+='</div>';                        	   
                            }
                            if(response.result.product_list){
                         	   //alert(JSON.stringify(response.result.product_list));
                         	   var count=0;
-                        	   var list="";
+                        	   list+='<div class="fl-mini-cart-content" style="display: none;">';
+								list+='<div class="block-subtitle">';
+									list+='<div class="top-subtotal" id="top-sub-total">';									
+										list+=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
+										list+='</div>';																		
+								list+='</div>';								
+								list+='<ul class="mini-products-list" id="cart-sidebar">';								
                         	   jQuery.each(response.result.product_list, function( index, value ) {
                             	   
                         		   list+='<li class="item first last">';
@@ -733,13 +754,25 @@
                         													   list+='</div>';
                         														   list+='</div>';
                         															   list+='</li>';
-
+                        															   
   									count++;
 								});
 								
-                           document.getElementById("cart-sidebar").innerHTML=list;
-                           document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
+                           //document.getElementById("cart-sidebar").innerHTML=list;
+                           //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
+
+                        	  
+							
                            }
+                           list+='</ul>';                           
+							list+='<div class="actions">';							
+								list+='<button class="btn-checkout" title="Checkout" type="button" onClick="">';								
+									list+='<span>Checkout</span>';									
+								list+='</button>';								
+							list+='</div>';							
+						list+='</div>';
+						alert(list);
+						document.getElementById("mini-cart-head").innerHTML=list;
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             alert(xhr.status);
