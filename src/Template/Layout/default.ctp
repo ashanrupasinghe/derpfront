@@ -45,7 +45,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700'
 	rel='stylesheet' type='text/css'>
-
+<script type="text/javascript">var myBaseUrl = '<?php echo $this->Url->build('/'); ?>';</script>
 </head>
 <body>
 	<div id="page">

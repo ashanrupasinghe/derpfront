@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
 				jQuery("#billing-please-wait").show();
 				jQuery.ajax({
 					type: 'post',
-                    url: 'http://localhost/d2dfront/cart/updateAddress',
+                    url: myBaseUrl+'cart/updateAddress',
                     dataType: 'json',
                     data: {
                     	address_id: address_id                        
@@ -77,7 +77,7 @@ jQuery(document).ready(function () {
 				jQuery("#billing-please-wait").show();
 				jQuery.ajax({
 					type: 'post',
-                    url: 'http://localhost/d2dfront/cart/addAddress',
+                    url: myBaseUrl+'cart/addAddress',
                     dataType: 'json',
                     data: {
                     	street_number: street_number,
@@ -124,7 +124,7 @@ jQuery(document).ready(function () {
 			var delivery_time=jQuery("#delivery_time").val();
 			jQuery.ajax({
 				type: 'post',
-                url: 'http://localhost/d2dfront/cart/updateDeliveryTime',
+                url: myBaseUrl+'cart/updateDeliveryTime',
                 dataType: 'json',
                 data: {
                 	delivery_date: delivery_date, 
@@ -165,7 +165,7 @@ jQuery(document).ready(function () {
 		          document.getElementById("total_items").value = 0;
 		          jQuery("div#err_3").append("<p style='color:green;'>Checkout compleated</p>");
 		          setTimeout(function(){// wait for 5 secs(2)
-		        	  location.href = 'http://localhost/d2dfront/user/dashboard';
+		        	  location.href = myBaseUrl+'/user/dashboard';
 		         }, 2000); 
 		          
 		          /*alert(JSON.stringify(response)); */
