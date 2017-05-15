@@ -161,7 +161,7 @@ jQuery(document).ready(function () {
                 dataType: 'json',                 
 		        success: function(response) { 
 		          jQuery("#review-please-wait").hide();		     
-		          document.getElementById("cart-sidebar").innerHTML="";
+		          document.getElementById("fl-mini-cart-content").innerHTML="";
 		          document.getElementById("total_items").value = 0;
 		          jQuery("div#err_3").append("<p style='color:green;'>Checkout compleated</p>");
 		          setTimeout(function(){// wait for 5 secs(2)

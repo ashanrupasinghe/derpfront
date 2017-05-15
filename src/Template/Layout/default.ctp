@@ -127,7 +127,7 @@
 										// print '<pre>';
 										// print_r($cart_products);
 										// die();										?>
-									<div class="fl-mini-cart-content" style="display: none;">
+									<div class="fl-mini-cart-content" id="fl-mini-cart-content" style="display: none;">
 										<div class="block-subtitle">
 											<div class="top-subtotal" id="top-sub-total">
 												<?php echo $cart_size;?> items, <span class="price">$<?php echo $total['grand_total'];?></span>
