@@ -54,33 +54,28 @@ class OrdersController extends AppController {
 			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 2) {
 				return true;
 			}
-			
-			
-			
 		}
 		
-		if (in_array ( $this->request->action, [
+		if (in_array ( $this->request->action, [ 
 				'getOrderList',
-				'viewOrder'
+				'viewOrder' 
 		] )) {
-				
+			
 			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 5) {
 				return true;
 			}
-				
-				
-				
 		}
 		
 		return parent::isAuthorized ( $user );
 	}
 	public function beforeFilter(\Cake\Event\Event $event) {
+		parent::beforeFilter ( $event );
 		// allow all action
 		$this->Auth->allow ( [ 
 				'getOrderList',
-				'viewOrder'
-				 
-		] );
+				'viewOrder' 
+		]
+		 );
 	}
 	
 	/**
@@ -1755,32 +1750,34 @@ class OrdersController extends AppController {
 			 * die ();
 			 */
 			/* if ($mobtoken_created_at->wasWithinLast ( 1 )) { */
-				$user->mobtoken_created_at = date ( 'Y-m-d H:i:s' );
-				$user_model->save ( $user );
-				
-				return [ 
-						'boolean' => true,
-						'message' => 'token matched',
-						'user_id' => $user->id 
-				];
-			/* } else {
-				return [ 
-						'boolean' => false,
-						'message' => 'token expired' 
-				];
-			} */
+			$user->mobtoken_created_at = date ( 'Y-m-d H:i:s' );
+			$user_model->save ( $user );
+			
+			return [ 
+					'boolean' => true,
+					'message' => 'token matched',
+					'user_id' => $user->id 
+			];
+			/*
+			 * } else {
+			 * return [
+			 * 'boolean' => false,
+			 * 'message' => 'token expired'
+			 * ];
+			 * }
+			 */
 		}
 	}
 	public function getOrderList() {
 		// {"status":0,"message":"Success","result":[{"id":1,”date":"xxx",”grand_total”:”xx”…},….]}
-		
-		
-		
-		$token = $this->__getToken();
+		$token = $this->__getToken ();
 		$chck = $this->__checkToken ( $token );
 		
 		if ($chck ['boolean']) {
-			$orders = $this->Orders->find ( 'all', [ 'conditions'=>['Orders.customerId'=>$chck ['user_id']],
+			$orders = $this->Orders->find ( 'all', [ 
+					'conditions' => [ 
+							'Orders.customerId' => $chck ['user_id'] 
+					],
 					'fields' => [ 
 							'id',
 							'subTotal',
@@ -1792,9 +1789,11 @@ class OrdersController extends AppController {
 							'deliveryDate',
 							'deliveryTime',
 							'created' 
-					]
-					 
-			] )->order(['created'=>'DESC'])->toArray ();
+					] 
+			]
+			 )->order ( [ 
+					'created' => 'DESC' 
+			] )->toArray ();
 			
 			if (sizeof ( $orders ) > 0) {
 				$return ['status'] = 0;
@@ -1809,35 +1808,50 @@ class OrdersController extends AppController {
 			$return ['status'] = 100;
 			$return ['message'] = $chck ['message'];
 		}
-		return   $return ;
+		return $return;
 		die ();
 	}
-	public function viewOrder() {
-		$this->request->allowMethod ( [ 
-				'post' 
-		] );
-		header ( 'Content-type: application/json' );
-		
-		$token = $this->request->data ( 'token' );
-		$order_id = $this->request->data ( 'order_id' );
+	public function viewOrder($order_id) {
+		/*
+		 * $this->request->allowMethod ( [
+		 * 'post'
+		 * ] );
+		 */
+		// header ( 'Content-type: application/json' );
+		$token = $this->__getToken ();
 		
 		$chck = $this->__checkToken ( $token );
 		
 		if ($chck ['boolean']) {
 			if ($order_id) {
-				
-				$total = $this->__getTotal ( $order_id );
-				$order_products = OrderProductsTable::getOrderProducts($order_id);						
+				$order = $this->Orders->find ( 'all', [ 
+						'conditions' => [ 
+								'id' => $order_id 
+						] 
+				] )->toArray ();
+				if (sizeof ( $order )) {
+					
+					if ($order [0]->customerId == $chck ['user_id']) {
 						
-				if (sizeof ( $order_products ) > 0) {
-					$return ['status'] = 0;
-					$return ['message'] = 'success';
-					$return ['result'] ['product_list'] = $order_products;
-					$return ['result'] ['total'] = $total;
+						$total = $this->__getTotal ( $order_id );
+						$order_products = OrderProductsTable::getOrderProducts ( $order_id );
+						
+						if (sizeof ( $order_products ) > 0) {
+							$return ['status'] = 0;
+							$return ['message'] = 'success';
+							$return ['result'] ['product_list'] = $order_products;
+							$return ['result'] ['total'] = $total;
+						} else {
+							$return ['status'] = 400;
+							$return ['message'] = 'products not fount';
+						}
+					} else {
+						$return ['status'] = 500;
+						$return ['message'] = "Unauthorized acess";
+					}
 				} else {
 					$return ['status'] = 400;
-					$return ['message'] = 'products not fount';
-					
+					$return ['message'] = 'order not fount';
 				}
 			} else {
 				$return ['status'] = 410;
@@ -1847,37 +1861,35 @@ class OrdersController extends AppController {
 			$return ['status'] = 100;
 			$return ['message'] = $chck ['message'];
 		}
-		echo json_encode ( $return );
-		die ();
-	}
-	
-	public function __getTotal($order_id) {
-		/* $tax_p = 0; // tax persontage 10
-		$discount_p = 0; // discount persentage 5
-		$counpon_value = 0; // call to a function to find coupon values
-		$sub_total = CartTable::getTotal ( $cart_id, 1 );
-	
-		$tax = $sub_total * $tax_p / 100;
-		$discount = $sub_total * $discount_p / 100;
-		$grand_total = $sub_total + $tax - $discount - $counpon_value; */
 		
-		$order=$this->Orders->get($order_id);
-	
+		$this->set ( 'return', $return );
+	}
+	public function __getTotal($order_id) {
+		/*
+		 * $tax_p = 0; // tax persontage 10
+		 * $discount_p = 0; // discount persentage 5
+		 * $counpon_value = 0; // call to a function to find coupon values
+		 * $sub_total = CartTable::getTotal ( $cart_id, 1 );
+		 *
+		 * $tax = $sub_total * $tax_p / 100;
+		 * $discount = $sub_total * $discount_p / 100;
+		 * $grand_total = $sub_total + $tax - $discount - $counpon_value;
+		 */
+		$order = $this->Orders->get ( $order_id );
+		
 		$total ['sub_total'] = $order->subTotal;
 		$total ['tax'] = $order->tax;
 		$total ['discount'] = $order->discount;
-		$total ['counpon_value'] = (int)$order->couponCode;
+		$total ['counpon_value'] = ( int ) $order->couponCode;
 		$total ['grand_total'] = $order->total;
 		return $total;
 	}
-	
-	private function __getToken(){
-		$user_id=$this->Auth->user('id');
-		$um=$this->loadModel('Users');
-		$u=$um->get($user_id);//current logedin user
+	private function __getToken() {
+		$user_id = $this->Auth->user ( 'id' );
+		$um = $this->loadModel ( 'Users' );
+		$u = $um->get ( $user_id ); // current logedin user
 		return $u->mobtoken;
 	}
-	
 }
 //http://www.jqueryscript.net/form/jQuery-Plugin-To-Duplicate-and-Remove-Form-Fieldsets-Multifield.html
 //http://stackoverflow.com/questions/17175534/clonned-select2-is-not-responding
