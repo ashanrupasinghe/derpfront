@@ -1164,7 +1164,7 @@ public function getCheckout() {
 			} else {
 				$return ['status'] = 0;
 				$return ['message'] = 'your cart is empty';
-				$return ['result'] ['product_list'] = null;
+				$return ['result'] ['product_list'] = [];
 				$return ['result'] ['cart_size'] = 0;
 				$return ['result'] ['total'] = $total;
 			}

@@ -262,37 +262,37 @@ jQuery(document).ready(function () {
 	                        	   list+='<a href="shopping-cart.html"><span id="total_items"> '+response.result.result.cart_size+' </span></a>';
 	                        	   list+='</div>';                        	   
 	                           }
-	                           if(response.result.result.product_list){
+	                           if(Object.keys(response.result.result.product_list).length>0){
 	                        	   //alert(JSON.stringify(response.result.product_list));
 	                        	   var count=0;
 	                        	   list+='<div class="fl-mini-cart-content" style="display: none;">';
-									list+='<div class="block-subtitle">';
-										list+='<div class="top-subtotal" id="top-sub-total">';									
-											list+=response.result.result.cart_size+' items, <span class="price">$'+response.result.result.total.grand_total+'</span>';
-											list+='</div>';																		
-									list+='</div>';								
-									list+='<ul class="mini-products-list" id="cart-sidebar">';								
+								   list+='<div class="block-subtitle">';
+								   list+='<div class="top-subtotal" id="top-sub-total">';									
+								   list+=response.result.result.cart_size+' items, <span class="price">$'+response.result.result.total.grand_total+'</span>';
+								   list+='</div>';																		
+								   list+='</div>';								
+								   list+='<ul class="mini-products-list" id="cart-sidebar">';								
 	                        	   jQuery.each(response.result.result.product_list, function( index, value ) {
 	                            	   
-	                        		   list+='<li class="item first last">';
-	                        		   list+='<div class="item-inner">';
-	                        			   list+='<a class="product-image" title="'+value.name+'" href="#">';
-	                        					   list+='<img alt="'+value.name+'" src="'+value.image+'"></a>';
-	                        					   list+='<div class="product-details">';
-	                        						   list+='<div class="access">';
-	                        							   list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
-	                        							   list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
-	                        								   list+='<a class="btn-edit" title="Edit item" href="#">';
-	                        									   list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
-	                        										   list+='</div>';
-												
-	                        											   list+='<strong>'+value.quantity+'</strong> x <span class="price">'+value.price+'</span>';
-	                        											   list+='<p class="product-name">';
-	                        												   list+='<a href="product-detail.html">'+value.name+'</a>';
-	                        												   list+='</p>';
-	                        													   list+='</div>';
-	                        														   list+='</div>';
-	                        															   list+='</li>';
+	                        		list+='<li class="item first last">';
+	                        		list+='<div class="item-inner">';
+	                        		list+='<a class="product-image" title="'+value.name+'" href="#">';
+	                        		list+='<img alt="'+value.name+'" src="'+value.image+'"></a>';
+	                        		list+='<div class="product-details">';
+	                        		list+='<div class="access">';
+	                        		list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
+	                        		list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
+	                        		list+='<a class="btn-edit" title="Edit item" href="#">';
+	                        		list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
+	                        		list+='</div>';
+										
+	                        		list+='<strong>'+value.quantity+'</strong> x <span class="price">'+value.price+'</span>';
+	                        		list+='<p class="product-name">';
+	                        		list+='<a href="product-detail.html">'+value.name+'</a>';
+	                        		list+='</p>';
+	                        		list+='</div>';
+	                        		list+='</div>';
+	                        		list+='</li>';
 	                        															   
 	  									count++;
 									});
@@ -304,14 +304,14 @@ jQuery(document).ready(function () {
 								
 	                           
 	                           list+='</ul>';                           
-								list+='<div class="actions">';							
-									list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
-										list+='<span>Checkout</span>';									
-									list+='</button>';								
-								list+='</div>';							
-							list+='</div>';
+							   list+='<div class="actions">';							
+							   list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
+							   list+='<span>Checkout</span>';									
+							   list+='</button>';								
+							   list+='</div>';							
+							   list+='</div>';
 	                           }
-	                           
+	                        document.getElementById("mini-cart-head").innerHTML=list;   
 	                        if(jQuery( "#shopping-cart-table" ).length){
 	                        	//cart table
 	                        	
@@ -328,10 +328,10 @@ jQuery(document).ready(function () {
 	                        		if(productcount==1){
 	                        			trclass+=" first last"
 	                        		}
-	                        		if((response.result.result.product_list).length==productcount){
+	                        		if(Object.keys(response.result.result.product_list).length==productcount){
 	                        			trclass+=" last"
 	                        		}
-	                        		table+= '<tr class="">'
+	                        		table+= '<tr class="'+trclass+'">'
 	                        	    table+= '<td class="image hidden-table"><a href="product-detail.html" title="'+value.name+'" class="product-image"><img src="'+value.image+'" width="75" alt="'+value.name+'"></a></td>';
 	                        	    table+= '<td>';
 	                        	    table+= '<h2 class="product-name">';
@@ -395,7 +395,7 @@ jQuery(document).ready(function () {
 	                        }   
 							//alert(list);
 							
-							document.getElementById("mini-cart-head").innerHTML=list;
+							
 	                        }
 	                         
 	                        jQuery.alert(response.message);
@@ -425,3 +425,4 @@ jQuery(document).ready(function () {
 		});
 	
 });
+//https://craftpip.github.io/jquery-confirm/#ajaxloading
