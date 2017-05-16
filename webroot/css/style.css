@@ -9008,7 +9008,7 @@ button.button.submit:before {
 	padding: 10px 0;
 	margin-top: 25px;
 }
-#shopping-cart-table {
+#shopping-cart-table,#shopping-cart-table-view {
 	border: none;
 	float: left;
 	width: 100%;
@@ -9035,7 +9035,7 @@ button.button.btn-continue:before {
 	padding: 15px;
 	vertical-align: top;
 }
-#shopping-cart-table tfoot tr td.last {
+#shopping-cart-table tfoot tr td.last,#shopping-cart-table-view tfoot tr td.last {
 	border-top: none;
 	border-top:#ececec double;
 	background:#fff;
@@ -9057,19 +9057,19 @@ button.button#empty_cart_button:before {
 	float: right;
 	margin-left: 8px;
 }
-#shopping-cart-table .product-name {
+#shopping-cart-table .product-name,#shopping-cart-table-view .product-name {
 	margin: 0px;
 	padding-bottom: 0px;
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 }
-#shopping-cart-table .product-name a {
+#shopping-cart-table .product-name a,#shopping-cart-table-view .product-name a {
 	text-transform: none;
 }
-#shopping-cart-table.data-table .price {
+#shopping-cart-table.data-table .price,#shopping-cart-table.data-table-view .price {
 	font-weight: bold;
 }
-#shopping-cart-table input.qty {
+#shopping-cart-table input.qty,#shopping-cart-table-view input.qty {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #ddd;
     font-size: 14px;
@@ -9080,7 +9080,7 @@ button.button#empty_cart_button:before {
     width: 40px;
     text-align: center;
 }
-#shopping-cart-table .edit-bnt {
+#shopping-cart-table .edit-bnt,#shopping-cart-table-view .edit-bnt {
 	float: left;
 	margin-top: 0px;
 }
@@ -9096,7 +9096,7 @@ a.edit-bnt:hover {
 .edit-bnt span {
 	display: none;
 }
-#shopping-cart-table a.remove-item {
+#shopping-cart-table a.remove-item,#shopping-cart-table-view a.remove-item {
 	background-color: #fff;
 	background-image: none;
 	color: #333;
@@ -9111,17 +9111,17 @@ a.edit-bnt:hover {
 	-webkit-transition: all 0.3s linear;
 	border: 1px #ddd solid
 }
-#shopping-cart-table a.remove-item:hover {
+#shopping-cart-table a.remove-item:hover,#shopping-cart-table-view a.remove-item:hover {
 	background-color: #ed6663;
 	color: #fff;
 	border: 1px #ed6663 solid
 }
-#shopping-cart-table a.remove-item:before {
+#shopping-cart-table a.remove-item:before,#shopping-cart-table-view a.remove-item:before {
 	content: "\f014";
 	font-family: FontAwesome;
 	font-size: 16px;
 }
-#shopping-cart-table a.remove-item span {
+#shopping-cart-table a.remove-item span,#shopping-cart-table-view a.remove-item span {
 	display: none;
 }
 #discount-coupon-form label {
@@ -9282,6 +9282,11 @@ button.button.coupon:before {
 	width: 100%;
 	padding-bottom: 8px;
 }
+#shopping-cart-totals-table-view {
+	float: right;
+	width: 100%;
+	padding-bottom: 8px;
+}
 .cart .totals table th, .cart .totals table td {
 	padding: 5px;
 	border: none !important;
@@ -9329,7 +9334,14 @@ button.button.btn-proceed-checkout span {
 	font-size: 14px;
 	color: #333;
 }
+#shopping-cart-totals-table-view .price {
+	font-size: 14px;
+	color: #333;
+}
 #shopping-cart-totals-table strong span.price {
+	font-weight: 900;
+}
+#shopping-cart-totals-table-view strong span.price {
 	font-weight: 900;
 }
 .a-right {

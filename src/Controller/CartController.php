@@ -36,7 +36,8 @@ class CartController extends AppController {
 				'completeCheckout',
 				'getCheckout',
 				'checkout',
-				'dashboard'
+				'dashboard',
+				'placeOrder'
 				
 				
 		] )) {
@@ -1218,5 +1219,80 @@ public function getCheckout() {
 		die();
 		//$cart_product=$this->loadModel('CartProducts');
 		
+	}
+	
+	public function placeOrder() {
+		$this->request->allowMethod ( [
+				'post'
+		] );
+		header ( 'Content-type: application/json' );
+	
+		$token = $this->__getToken();
+		$order_id = $this->request->data ( 'order_id' );
+	
+		$chck = $this->__checkToken ( $token );
+	
+		if ($chck ['boolean']) {
+			if ($order_id) {
+				$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
+				$orderModel = $this->loadModel ( 'Orders' );
+				$order = $orderModel->find ( 'all', [
+						'conditions' => [
+								'Orders.id' => $order_id
+						],
+						'contain' => [
+								'OrderProducts'
+						]
+				] )->toArray ();
+				if (sizeof ( $order ) > 0) {
+					$i = 0;
+					foreach ( $order [0]->order_products as $product ) {
+						$cart_products [$i] ['cart_id'] = $cart_id;
+						$cart_products [$i] ['product_id'] = $product ['product_id'];
+						$cart_products [$i] ['qty'] = $product ['product_quantity'];
+						$cart_products [$i] ['type'] = 1;
+						$i ++;
+					}
+					/*
+					 * print_r( $cart_products);
+					 * die();
+					 */
+					if (sizeof ( $cart_products ) > 0) {
+						$this->__clearCart ( $cart_id );
+						$cartProductModel = $this->loadModel ( 'CartProducts' );
+						$cartPrdoductsEntities = $cartProductModel->newEntities ( $cart_products );
+						if ($cartProductModel->saveMany ( $cartPrdoductsEntities )) {
+							
+							$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+							 
+							$return ['status'] = 0;
+							$return ['message'] = 'go to checkout process to compleae reorder';
+							$return ['result'] ['product_list'] = $cart_products;
+							$return ['result'] ['cart_size'] = sizeof($cart_products);
+							$return ['result'] ['total'] = $this->__getTotal($cart_id);
+							
+							
+						} else {
+							$return ['status'] = 904;
+							$return ['message'] = 'products not saved';
+						}
+					} else {
+						$return ['status'] = 611;
+						$return ['message'] = 'no products found in order';
+					}
+				} else {
+					$return ['status'] = 433;
+					$return ['message'] = 'no order found';
+				}
+			} else {
+				$return ['status'] = 520;
+				$return ['message'] = 'order id can not be empty';
+			}
+		} else {
+			$return ['status'] = 100;
+			$return ['message'] = $chck ['message'];
+		}
+		echo json_encode ( $return );
+		die ();
 	}
 }

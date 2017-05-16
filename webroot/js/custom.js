@@ -486,5 +486,91 @@ jQuery(document).ready(function () {
 	});
 	
 	
+	/*reorder */
+	jQuery("body").on("click",".link-reorder", function(){
+		order_id = jQuery(this).parent().find("input[name='product_id']").val();
+		
+		jQuery.confirm({
+		    title: 'Reorder',
+		    content: 'confirm to reorder',
+		    buttons: {
+		        confirm: function () {
+		        	
+		        	jQuery.ajax({
+		    			type: 'post',
+		                url: myBaseUrl+'order/reorder',
+		                dataType: 'json',
+		                data: {
+		                	order_id: order_id
+		                },
+		                success: function (response) { 
+		                	if(response.status==0){
+		                		list="";
+		                		
+		                		if(response.result.cart_size>=0){
+			                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
+			                        	   
+			                        	   list+='<div class="basket">';
+			                        	   list+='<a href="'+myBaseUrl+'user/cart'+'"><span id="total_items"> '+response.result.cart_size+' </span></a>';
+			                        	   list+='</div>';                        	   
+			                           }
+			                           if(Object.keys(response.result.product_list).length>0){
+			                        	   //alert(JSON.stringify(response.result.product_list));
+			                        	   var count=0;
+			                        	   list+='<div class="fl-mini-cart-content" style="display: none;">';
+										   list+='<div class="block-subtitle">';
+										   list+='<div class="top-subtotal" id="top-sub-total">';									
+										   list+=response.result.cart_size+' items, <span class="price">LKR'+response.result.total.grand_total+'</span>';
+										   list+='</div>';																		
+										   list+='</div>';								
+										   list+='<ul class="mini-products-list" id="cart-sidebar">';								
+			                        	   jQuery.each(response.result.product_list, function( index, value ) {
+			                            	   
+			                        		list+='<li class="item first last">';
+			                        		list+='<div class="item-inner">';
+			                        		list+='<a class="product-image" title="'+value.name+'" href="#">';
+			                        		list+='<img alt="'+value.name+'" src="'+value.image+'"></a>';
+			                        		list+='<div class="product-details">';
+			                        		list+='<div class="access">';
+			                        		list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
+			                        		list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
+			                        		list+='<a class="btn-edit" title="Edit item" href="#">';
+			                        		list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
+			                        		list+='</div>';
+												
+			                        		list+='<strong>'+value.quantity+'</strong> x <span class="price">'+value.price+'</span>';
+			                        		list+='<p class="product-name">';
+			                        		list+='<a href="product-detail.html">'+value.name+'</a>';
+			                        		list+='</p>';
+			                        		list+='</div>';
+			                        		list+='</div>';
+			                        		list+='</li>';
+			                        															   
+			  									count++;
+											});				
+			                           list+='</ul>';                           
+									   list+='<div class="actions">';							
+									   list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
+									   list+='<span>Checkout</span>';									
+									   list+='</button>';								
+									   list+='</div>';							
+									   list+='</div>';
+			                           }
+			                        document.getElementById("mini-cart-head").innerHTML=list;
+		                	}
+		                	jQuery.alert(response.message);
+		                },
+		                error: function (xhr, status) {
+		    	        	jQuery.alert("Something went wrong: "+JSON.stringify(xhr));
+		    	        }
+		    			}); 
+		        },
+		        cancel: function () {
+		           return;
+		        }
+		    }
+		});
+	});
+	
 });
 //https://craftpip.github.io/jquery-confirm/#ajaxloading

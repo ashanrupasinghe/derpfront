@@ -1841,6 +1841,8 @@ class OrdersController extends AppController {
 							$return ['message'] = 'success';
 							$return ['result'] ['product_list'] = $order_products;
 							$return ['result'] ['total'] = $total;
+							$return ['result'] ['order_id'] = $order_id;
+							
 						} else {
 							$return ['status'] = 400;
 							$return ['message'] = 'products not fount';

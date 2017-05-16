@@ -55,7 +55,14 @@
                         <td>jhon doe</td>
                         <td><span class="price">LKR<?php echo $order['total'];?></span></td>
                         <td><em><?php echo $payment_status[$order['status']];?></em></td>
-                        <td class="a-center last"><span class="nobr"> <a href="<?php echo $this->Url->build('/order/view/'.$order['id']);?>">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
+                        <td class="a-center last">
+                        	<span class="nobr"> 
+                        		<a href="<?php echo $this->Url->build('/order/view/'.$order['id']);?>">View Order</a>
+                        	 	<span class="separator">|</span>                        	 
+                        	 	<a href="#" class="link-reorder">Reorder</a> 
+                        	 	<input type="hidden" name="product_id" value="<?php echo $order['id']; ?>">
+                        	 </span>
+                        </td>
                       </tr>
                      <?php $count++;?> 
                     <?php endforeach;?>

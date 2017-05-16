@@ -31,7 +31,7 @@
    
         <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
         <fieldset>
-            <table id="shopping-cart-table" class="data-table cart-table table-striped">
+            <table id="shopping-cart-table-view" class="data-table cart-table table-striped">
                 <colgroup><col width="1">
                 <col>
                 <col width="1">
@@ -138,7 +138,7 @@ else :?>
 <h3>Shopping Cart Total</h3>
 <div class="inner">
 
-    <table id="shopping-cart-totals-table" class="table shopping-cart-table-total">
+    <table id="shopping-cart-totals-table-view" class="table shopping-cart-table-total">
         <colgroup><col>
         <col width="1">
         </colgroup><tfoot>
@@ -181,7 +181,8 @@ else :?>
   
 <ul class="checkout">           
 <li>
-    <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick="location.href = '<?php echo $this->Url->build('/order/placeOrder');?>'"><span>Reorder This</span></button>
+	<input type="hidden" name="product_id" value="<?php echo $return ['result'] ['order_id'] ?>">
+    <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout link-reorder" onClick=""><span>Reorder This</span></button>
 </li><br>
 <!-- <li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a>
 </li><br> -->
