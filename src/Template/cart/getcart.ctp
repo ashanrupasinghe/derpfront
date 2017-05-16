@@ -176,8 +176,8 @@
 <li>
     <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick="location.href = '<?php echo $this->Url->build('/order/checkout');?>'"><span>Proceed to Checkout</span></button>
 </li><br>
-<li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a>
-</li><br>
+<!-- <li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a>
+</li><br> -->
 </ul>                
 </div><!--inner-->
  </div><!--totals-->

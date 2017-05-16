@@ -455,7 +455,7 @@ jQuery(document).ready(function () {
             success: function (response) {            	
 
             	jQuery("#popup-quick-view-edit #quick_edit_h1").text(response.name);
-            	jQuery("#popup-quick-view-edit #quick_edit_price").text(response.price);
+            	jQuery("#popup-quick-view-edit #quick_edit_price").text("LKR"+response.price);
             	jQuery("#popup-quick-view-edit #quick_edit_package").text(response.package_type.type);
             	jQuery("#popup-quick-view-edit #quick_edit_description").text(response.description);
             	jQuery("#popup-quick-view-edit #quick_edit_qty").val(response.cart_products[0].qty);
