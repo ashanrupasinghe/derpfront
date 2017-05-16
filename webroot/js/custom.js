@@ -75,7 +75,12 @@ jQuery(document).ready(function () {
 				var country=jQuery("#country").val();
 				var phone_number=jQuery("#phone_number").val();				
 				
+                if (street_number.trim() == "" || street_address.trim() == "" || city.trim() == "" || phone_number.trim() == "") {//sudha
+                    jQuery('#checkout_address_error').show();//sudha
+                } else {//sudha
+                	
 				jQuery("#billing-please-wait").show();
+				jQuery('#checkout_address_error').hide();//sudha
 				jQuery.ajax({
 					type: 'post',
                     url: myBaseUrl+'cart/addAddress',
@@ -111,6 +116,8 @@ jQuery(document).ready(function () {
 			      });  
 			}
 			
+		}//sudha
+			
 			
 		}else if(jQuery('#checkout-step-shipping').is(":visible")){
 			jQuery(".back").hide();
@@ -118,11 +125,16 @@ jQuery(document).ready(function () {
 			next_fs = jQuery('#checkout-step-review');
 			current_collored = jQuery("#opc-shipping");
 			next_collored = jQuery("#opc-review");
-			jQuery("#shipping-please-wait").show();
+			//jQuery("#shipping-please-wait").show();//sudha
 			jQuery("div#err_2").empty();
 			
 			var delivery_date=jQuery("#delivery_date").val();
 			var delivery_time=jQuery("#delivery_time").val();
+            if (delivery_date.trim() == "" || delivery_time.trim() == "" ) {//sudha
+                jQuery('#checkout_date_error').show();//sudha
+            } else {//sudha
+                jQuery("#shipping-please-wait").show();
+                
 			jQuery.ajax({
 				type: 'post',
                 url: myBaseUrl+'cart/updateDeliveryTime',
@@ -148,7 +160,7 @@ jQuery(document).ready(function () {
 		        	jQuery("div#err_2").append("<p>Something went wrong: "+err.message+"</p>");
 		        }    
 		      }); 
-						
+		}//suda				
 		
 		}else if(jQuery('#checkout-step-review').is(":visible")){
 			jQuery(".back").hide();
