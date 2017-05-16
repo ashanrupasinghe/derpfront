@@ -103,7 +103,7 @@
             
         </fieldset>
 <?php else :?>
-No product found
+<p class="nothing-found">Your Cart Is Empty</p>
 <?php endif;?>        
     </form>
 </div>
