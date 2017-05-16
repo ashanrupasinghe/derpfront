@@ -364,7 +364,7 @@
 									<div class="buttons-set" id="billing-buttons-container">
 										<p class="required">* Required Fields</p>
 										<button type="button" title="Continue" class="button continue"
-											onClick="billing.save()">
+											onClick="">
 											<span>Continue</span>
 										</button>
 										<span class="please-wait" id="billing-please-wait"
@@ -421,10 +421,10 @@
 								<div class="buttons-set" id="shipping-buttons-container">
 									<p class="required">* Required Fields</p>
 									<button type="button" class="button continue" title="Continue"
-										onClick="shipping.save()">
+										onClick="">
 										<span>Continue</span>
 									</button>
-									<a href="#" onClick="checkout.back(); return false;"
+									<a href="#" onClick="return false;"
 										class="back"><small>« </small>Back</a> <span
 										id="shipping-please-wait" class="please-wait"
 										style="display: none;"> <?php echo $this->Html->image('opc-ajax-loader.gif',['alt'=>'Loading next step...','title'=>'Loading next step...','class'=>'v-middle']); ?> Loading next step... </span>
@@ -448,10 +448,10 @@
 								<div class="buttons-set" id="shipping-buttons-container">
 									
 									<button type="button" class="button continue" title="Continue"
-										onClick="shipping.save()">
+										onClick="">
 										<span>Compleate Checkout</span>
 									</button>
-									<a href="#" onClick="checkout.back(); return false;"
+									<a href="#" onClick="return false;"
 										class="back"><small>« </small>Back</a> <span
 										id="review-please-wait" class="please-wait"
 										style="display: none;"> <?php echo $this->Html->image('opc-ajax-loader.gif',['alt'=>'Loading next step...','title'=>'Loading next step...','class'=>'v-middle']); ?> Loading next step... </span>

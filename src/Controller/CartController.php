@@ -28,7 +28,7 @@ use Cake\I18n\Time;
 class CartController extends AppController {
 	public function isAuthorized($user) {
 		if (in_array ( $this->request->action, [
-				'getcart',
+				/* 'getcart', */
 				'getAddress',
 				'updateAddress',
 				'addAddress',
@@ -36,7 +36,9 @@ class CartController extends AppController {
 				'completeCheckout',
 				'getCheckout',
 				'checkout',
-				'dashboard'
+				'dashboard',
+				'getcart'
+				
 		] )) {
 			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 5) {
 				return true;
@@ -48,7 +50,7 @@ class CartController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow (['addproduct']);
+		$this->Auth->allow (['addproduct','deleteproduct']);
 	}
 
     public function addproduct() {
@@ -1058,5 +1060,101 @@ public function getCheckout() {
 		print_r($order['result']);
 		die();	 */	
 		$this->set(['user'=>$user[0]->customers,'orders'=>$orders['result']]);
+	}
+	
+	
+	public function deleteproduct() {
+		
+		$this->request->allowMethod ( [
+				'post',
+				'delete'
+		] );
+	
+		header ( 'Content-type: application/json' );
+		if ($this->request->is ( 'post' )) {
+			$product_id = $this->request->data ( 'product_id' );			
+			//$token = $this->__getToken();
+			//$chck = $this->__checkToken ( $token );
+			//if ($chck ['boolean']) {
+				if ($product_id != null) {
+					$session = $this->request->session();
+					$cart_id = $session->read('cart_id');					
+					if ($cart_id) {
+						$cart_product_model = $this->loadModel ( 'CartProducts' );
+	
+						$product = $cart_product_model->find ( 'all', [
+								'fields' => [
+										'id'
+								],
+								'conditions' => [
+										'cart_id' => $cart_id,
+										'product_id' => $product_id,
+										'type' => 1
+								]
+						] )->toArray ();
+								if (sizeof ( $product ) > 0) {
+									if ($cart_product_model->delete ( $cart_product_model->get ( $product [sizeof ( $product ) - 1]->id ) )) {
+										$return ['status'] = 0;
+										$return ['message'] = 'Pruduct deleted successfully';
+										$return ['result'] = $this->__getcartIn ( $cart_id );
+									} else {
+										$return ['status'] = 914;
+										$return ['message'] = 'Culd not delete the product';
+									}
+								} else {
+									$return ['status'] = 411;
+									$return ['message'] = 'The product not found in the cart';
+								}
+					} else {
+						$return ['status'] = 444;
+						$return ['message'] = 'you havent create a cart';
+					}
+				} else {
+					$return ['status'] = 410;
+					$return ['message'] = 'please select product id';
+				}
+			/* } else {
+				$return ['status'] = 100;
+				$return ['message'] = $chck ['message'];
+			} */
+		} else {
+			$return ['status'] = 500;
+			$return ['message'] = "Unauthorized acess";
+		}
+		echo json_encode ( $return );
+		die ();
+	}
+	
+	public function __getcartIn($cart_id) {
+		$this->request->allowMethod ( [
+				'post',
+				'get'
+		] );
+		header ( 'Content-type: application/json' );
+		//$cart_id = $this->__getCurrentCartId ( $user_id );
+	
+		if ($cart_id) {
+				
+			$total = $this->__getTotal ( $cart_id );
+			$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+			// $cart_products = $this->__getProductList ( $cart_id, 1 );
+				
+			if (sizeof ( $cart_products ) > 0) {
+				$return ['status'] = 0;
+				$return ['message'] = 'success';
+				$return ['result'] ['product_list'] = $cart_products;
+				$return ['result'] ['total'] = $total;
+			} else {
+				$return ['status'] = 0;
+				$return ['message'] = 'your cart is empty';
+				$return ['result'] ['product_list'] = $cart_products;
+				$return ['result'] ['total'] = $total;
+			}
+		} else {
+			$return ['status'] = 444;
+			$return ['message'] = "you haven't create a cart";
+		}
+		return $return;
+		die ();
 	}
 }

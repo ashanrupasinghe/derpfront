@@ -1,3 +1,4 @@
+
 jQuery(document).ready(function () {
 	
 	//Timepicker:::http://jdewit.github.io/bootstrap-timepicker/
@@ -12,8 +13,8 @@ jQuery(document).ready(function () {
       autoclose: true
     });
 	
-	if(jQuery("#address_id").val()===""){        	
-    	jQuery("#address_id").css("display", "block");
+	if(jQuery("#address_id").val()===""){
+    	jQuery("#billing-new-address-form").css("display", "block");
         
     }	
 	jQuery("#address_id").change(function(){
@@ -132,7 +133,7 @@ jQuery(document).ready(function () {
                 }, 
 		        success: function(response) { 
 		          jQuery(".back").show();	
-		          jQuery("#billing-please-wait").hide();
+		          jQuery("#shipping-please-wait").hide();
 		          /*alert(JSON.stringify(response)); */
 		          next_fs.show(); 
 		  		  current_fs.hide();
@@ -141,7 +142,7 @@ jQuery(document).ready(function () {
 		        }, 
 		        error: function (xhr, status) {  
 		        	var err = eval("(" + xhr.responseText + ")");
-		        	jQuery("#billing-please-wait").hide();	
+		        	jQuery("#shipping-please-wait").hide();	
 		        	jQuery(".back").show();
 		        	//jQuery("div#err_2").empty();
 		        	jQuery("div#err_2").append("<p>Something went wrong: "+err.message+"</p>");
@@ -165,7 +166,7 @@ jQuery(document).ready(function () {
 		          document.getElementById("total_items").value = 0;
 		          jQuery("div#err_3").append("<p style='color:green;'>Checkout compleated</p>");
 		          setTimeout(function(){// wait for 5 secs(2)
-		        	  location.href = myBaseUrl+'/user/dashboard';
+		        	  location.href = myBaseUrl+'user/dashboard';
 		         }, 2000); 
 		          
 		          /*alert(JSON.stringify(response)); */
@@ -223,5 +224,56 @@ jQuery(document).ready(function () {
 		list+="<option>New Address</option>";
 		return list;
 	}
+	//remove item from cart
+	/*jQuery(".remove-from-cart-jq-function").click(function(){		
+		product_id = jQuery(this).parent().find("input[name='product_id']").val();
+		alert(product_id);
+		
+	});*/
+	
+	jQuery("body").on("click",".remove-from-cart-jq-function", function(){
+		product_id = jQuery(this).parent().find("input[name='product_id']").val();
+		
+		jQuery.confirm({
+		    title: 'Confirm!',
+		    content: 'Are you sure you would like to remove this item from the shopping cart?',
+		    buttons: {
+		        confirm: function () {
+		        	jQuery.ajax({
+		    			type: 'post',
+		                url: myBaseUrl+'cart/deleteproduct',
+		                dataType: 'json',
+		                data: {
+		                	product_id: product_id
+		                },
+		    	        success: function(response) {	
+		    	         jQuery.alert(JSON.stringify(response));
+		    	         if(response.status==0){
+		    	        	 //success
+		    	        	 alert('x');
+		    	         }
+		    	         jQuery.alert(message);
+		    	        }, 
+		    	        error: function (xhr, status) { 
+		    	        	//err = eval("(" + xhr.responseText + ")");
+		    	        	//jQuery("div#err_3").append("<p>Something went wrong: "+err.message+"</p>");
+		    	        	jQuery.alert("Something went wrong: "+JSON.stringify(xhr));
+		    	        }    
+		    	      }); 
+		        },
+		        cancel: function () {
+		        	//jQuery.alert('CANCEL');
+		        	return;
+		        }
+		    }
+		});
+		
+		
+		
+		
+		
+		
+		
+		});
 	
 });

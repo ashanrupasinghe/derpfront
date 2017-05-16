@@ -313,7 +313,7 @@ class UsersController extends AppController {
 			$data = $this->request->data;
 			
 			$user_data = [ 
-					'username' => $data ['username'],
+					'username' => $data ['email'],
 					'user_type' => 5,
 					'password' => $data ['password'],
 					'confirm_password' => $data ['confirm_password'],

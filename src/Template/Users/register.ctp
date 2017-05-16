@@ -63,7 +63,7 @@
 								</div></li>
 							<li><label for="username">Email Address<em class="required">*</em></label>
 								<div class="input-box">
-									<input type="text" name="username" value="" id="username"
+									<input type="text" name="email" value="" id="email"
 										class="input-text required-entry validate-email"
 										title="Email Address">
 								</div></li>

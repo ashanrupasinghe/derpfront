@@ -20,6 +20,7 @@
         <?= $this->Html->css('jquery.mobile-menu.css')?>
         <?= $this->Html->css('datepicker/datepicker3.css')?>
         <?= $this->Html->css('timepicker/bootstrap-timepicker.min.css')?>
+        <?= $this->Html->css('jquery-confirm.min.css')?>
         <?= $this->Html->css('style.css')?>
         <?= $this->Html->css('responsive.css')?>
 
@@ -103,15 +104,21 @@
 										<?php if ($authUser):?>
 											<li><a href="#" title="My Account">My Account</a></li>
 										<?php endif;?>	
-											<li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
+											<!-- <li><a href="wishlist.html" title="Wishlist">Wishlist</a></li> -->
 											<li><a
 												href="<?php echo $this->Url->build('/order/checkout');?>"
 												title="Checkout">Checkout</a></li>
-											<li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
+											
 										<?php if (!$authUser):?>	
 											<li class="last"><a
 												href="<?php echo $this->Url->build('/user/login');?>"
-												title="Login"><span>Login</span></a></li>
+												title="Login"><span>Login/Sign Up</span></a></li>
+										<?php 
+											 else:
+											 ?>	
+											<li class="last"><a
+												href="<?php echo $this->Url->build('/user/logout');?>"
+												title="Login"><span>Logout</span></a></li>
 										<?php endif;?>	
 										</ul>
 									</div>
@@ -149,7 +156,7 @@
 													<div class="product-details">
 														<div class="access">
 															<input type="hidden" value="<?php echo $product['id'];?>"
-																name="" class=""> <a class="btn-remove1"
+																name="product_id" class=""> <a class="btn-remove1 remove-from-cart-jq-function"
 																title="Remove This Item" href="#">Remove</a> <a
 																class="btn-edit" title="Edit item" href="#"><i
 																class="icon-pencil"></i><span class="hidden">Edit item</span></a>
@@ -612,6 +619,7 @@
 		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
 	    <?= $this->Html->script('datepicker/bootstrap-datepicker.js'); ?>
 	    <?= $this->Html->script('timepicker/bootstrap-timepicker.min.js'); ?>
+	    <?= $this->Html->script('jquery-confirm.min.js'); ?>
         <?= $this->Html->script('custom.js'); ?>
 
         <script type="text/javascript">
@@ -745,8 +753,8 @@
                         					   list+='<img alt="'+value.name+'" src="'+value.image+'"></a>';
                         					   list+='<div class="product-details">';
                         						   list+='<div class="access">';
-                        							   list+='<input type="hidden" value="'+value.id+'" name="" class="">';
-                        							   list+='<a class="btn-remove1" title="Remove This Item" href="#">Remove</a>';
+                        							   list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
+                        							   list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
                         								   list+='<a class="btn-edit" title="Edit item" href="#">';
                         									   list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
                         										   list+='</div>';

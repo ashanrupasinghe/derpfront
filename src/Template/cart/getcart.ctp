@@ -83,8 +83,8 @@
         </span>
             </td>
             <td class="a-center last">
-
-   <a href="#" title="Remove item" class="button remove-item"><span><span>Remove item</span></span></a></td>
+	<input type="hidden" value="<?php echo $product['id'];?>" name="product_id" class="">
+   <a href="#" title="Remove item" class="button remove-item remove-from-cart-jq-function"><span><span>Remove item</span></span></a></td>
 
 
 
