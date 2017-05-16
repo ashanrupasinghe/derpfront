@@ -18,7 +18,8 @@
                             <div class="cart wow bounceInUp animated">
     
             <div class="table-responsive shopping-cart-tbl  container">
-    <form action="" method="post">
+    <form action="" method="post" id="get-checkot-table-form">
+    <?php if (sizeof($return['result']['product_list'])>0):?>
         <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
         <fieldset>
             <table id="shopping-cart-table" class="data-table cart-table table-striped">
@@ -101,6 +102,9 @@
             </table>
             
         </fieldset>
+<?php else :?>
+No product found
+<?php endif;?>        
     </form>
 </div>
 

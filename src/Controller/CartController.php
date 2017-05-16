@@ -36,8 +36,8 @@ class CartController extends AppController {
 				'completeCheckout',
 				'getCheckout',
 				'checkout',
-				'dashboard',
-				'getcart'
+				'dashboard'
+				
 				
 		] )) {
 			if (isset ( $user ['user_type'] ) && $user ['user_type'] == 5) {
@@ -50,7 +50,7 @@ class CartController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow (['addproduct','deleteproduct']);
+		$this->Auth->allow (['addproduct','deleteproduct','getcart']);
 	}
 
     public function addproduct() {
@@ -199,10 +199,12 @@ class CartController extends AppController {
     }
     
     public function getcart() {
-    	$token=$this->__getToken();     	
+    	/* $token=$this->__getToken();     	
     	$chck = $this->__checkToken ($token);
     	if ($chck ['boolean']) {
-    		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] );
+    		$cart_id = $this->__getCurrentCartId ( $chck ['user_id'] ); */
+    	$session = $this->request->session();
+    	$cart_id = $session->read('cart_id');
     		if ($cart_id) {
     
     			$total = $this->__getTotal ( $cart_id );
@@ -214,24 +216,38 @@ class CartController extends AppController {
     				$return ['message'] = 'success';
     				$return ['result'] ['product_list'] = $cart_products;
     				$return ['result'] ['total'] = $total; 
-    				$this->set(['return'=>$return]);
+    				//$this->set(['return'=>$return]);
     			} else {
     				$return ['status'] = 0;
     				$return ['message'] = 'your cart is empty';
     				$return ['result'] ['product_list'] = $cart_products;
     				$return ['result'] ['total'] = $total;
-    				$this->set(['return'=>$return]);
+    				//$this->set(['return'=>$return]);
     			}
+    			
+    			
     		} else {
+    			$return ['status'] = 0;
+    			$return ['message'] = 'your cart is empty';
+    			$return ['result'] ['product_list'] = [];
+    			$return ['result'] ['total'] = [
+    					'sub_total'=>0,
+    					'tax'=>0,
+    					'discount'=>0,
+    					'counpon_value'=>0,
+    					'grand_total'=>0
+    					
+    			];
     			/* $return ['status'] = 444;
     			$return ['message'] = "you haven't create a cart"; */
-    			$this->Flash->error(__('you have not create a cart'));
+    			//$this->Flash->error(__('you have not create a cart'));
     		}
-    	} else {
-    		/* $return ['status'] = 100;
-    		$return ['message'] = $chck ['message']; */
+    		$this->set(['return'=>$return]);
+    	/* } else {
+    		 $return ['status'] = 100;
+    		$return ['message'] = $chck ['message'];
     		$this->Flash->error(__('Token miss match'));
-    	}
+    	} */
     
     	
     }

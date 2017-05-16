@@ -251,7 +251,8 @@ jQuery(document).ready(function () {
 		    	        	success: function (response) {
 
 	                            if(response.status==0){
-	                        	var list="";
+	                        	list="";
+	                        	table="";
 	                          
 	                           
 	                           if(response.result.result.cart_size>=0){
@@ -310,7 +311,63 @@ jQuery(document).ready(function () {
 								list+='</div>';							
 							list+='</div>';
 	                           }
+	                           
+	                        if(jQuery( "#shopping-cart-table" ).length){
+	                        	//cart table
+	                        	
+	                        	table+='<input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">';
+	                        	table+='<fieldset>';
+	                        	table+='<table id="shopping-cart-table" class="data-table cart-table table-striped">';
+	                        	table+='<colgroup><col width="1"><col><col width="1"><col width="1"><col width="1"><col width="1"><col width="1"></colgroup><thead>';
+	                        	table+='<tr class="first last"><th rowspan="1">&nbsp;</th><th rowspan="1"><span class="nobr">Product Name</span></th><th rowspan="1"></th><th class="a-center" colspan="1"><span class="nobr">Unit Price</span></th><th rowspan="1" class="a-center">Qty</th><th class="a-center" colspan="1">Subtotal</th></tr>';
+	                        	table+='</thead><tfoot><tr class="first last"><td colspan="50" class="a-right last"><button type="button" title="Continue Shopping" class="button btn-continue" onClick=""><span><span>Continue Shopping</span></span></button><button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update"><span><span>Update Cart</span></span></button><button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Cart</span></span></button></td></tr></tfoot>';
+	                        	table+='<tbody>';
+	                        	productcount=1;
+	                        	jQuery.each(response.result.result.product_list, function( index, value ) {
+	                        		trclass="odd";
+	                        		if(productcount==1){
+	                        			trclass+=" first last"
+	                        		}
+	                        		if((response.result.result.product_list).length==productcount){
+	                        			trclass+=" last"
+	                        		}
+	                        		table+= '<tr class="">'
+	                        	    table+= '<td class="image hidden-table"><a href="product-detail.html" title="'+value.name+'" class="product-image"><img src="'+value.image+'" width="75" alt="'+value.name+'"></a></td>';
+	                        	    table+= '<td>';
+	                        	    table+= '<h2 class="product-name">';
+	                        	    table+= '<a href="product-detail.html">'+value.name+'</a>';
+	                        	    table+= '</h2>';
+	                        	    table+= '</td>';
+	                        	    table+= '<td class="a-center hidden-table">';
+	                        	    table+= '<a href="#" class="edit-bnt" title="Edit item parameters"></a>';
+	                        	    table+= '</td>';
+	                        	    table+= '<td class="a-right hidden-table">';
+	                        	    table+= '<span class="cart-price">';
+	                        	    table+= '<span class="price">$'+value.price+'</span>';                
+	                        	    table+= '</span>';
+                                    table+= '</td>';
+	                                table+= '<td class="a-center movewishlist">';
+	                                table+= '<input name="cart[26340][qty]" value="'+value.quantity+'" size="4" title="Qty" class="input-text qty" maxlength="12">';
+	                        	    table+= '</td>';
+	                        	    table+= '<td class="a-right movewishlist">';
+	                        	    table+= '<span class="cart-price">';
+	                        	    table+= '<span class="price">$'+value.total+'</span>';                            
+	                        	    table+= '</span>';
+	                        	    table+= '</td>';
+	                        	    table+= '<td class="a-center last">';
+	                        		table+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
+	                        	    table+= '<a href="#" title="Remove item" class="button remove-item remove-from-cart-jq-function"><span><span>Remove item</span></span></a></td>';
+     	                        	table+='</tr> ';     	                        	
+	                        		productcount++;
+	                        	});
+	                        		                        	
+	                        	table+='</tbody></table></fieldset>';
+	                        	document.getElementById("get-checkot-table-form").innerHTML=table;
+	                        }else{
+	                        	document.getElementById("get-checkot-table-form").innerHTML="no item found";
+	                        }   
 							//alert(list);
+							
 							document.getElementById("mini-cart-head").innerHTML=list;
 	                        }
 	                         
