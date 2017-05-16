@@ -440,5 +440,18 @@ jQuery(document).ready(function () {
 		
 		});
 	
+	
+	jQuery("body").on("click",".edit-product-jq-function", function(){
+		product_id = jQuery(this).parent().find("input[name='product_id']").val();
+			jQuery("#popup-quick-view-edit").css({'display':'block'});
+			jQuery("#fade").css({'display':'block'});
+		
+	});
+	jQuery("body").on("click",".close-quic-edit", function(){
+		jQuery("#popup-quick-view-edit").css({'display':'none'});
+		jQuery("#fade").css({'display':'none'});
+	});
+	
+	
 });
 //https://craftpip.github.io/jquery-confirm/#ajaxloading

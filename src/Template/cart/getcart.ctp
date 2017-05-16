@@ -63,7 +63,8 @@
                 </h2>
                                                         </td>
     <td class="a-center hidden-table">
-                <a href="#" class="edit-bnt" title="Edit item parameters"></a>
+    			<input type="hidden" value="<?php echo $product['id'];?>" name="product_id" class="">
+                <a href="#" class="edit-bnt edit-product-jq-function" title="Edit item parameters"></a>
             </td>
     
     

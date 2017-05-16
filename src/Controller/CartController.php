@@ -67,7 +67,7 @@ class CartController extends AppController {
         $phpsessid = $session->read('d2d_session_id');
         $phpsessid = '123456';
         $phpsessid=session_id();    
-         
+        $cart_product_model = $this->loadModel('CartProducts');
         if ($session->read('cart_id') == "") {
             $cart_id = $this->add('', $phpsessid);
             $session->write('cart_id', $cart_id);
@@ -105,11 +105,34 @@ class CartController extends AppController {
                     $return ['message'] = 'Product not added to cart';
                 }
             } else {
-                $return ['status'] = 888;
-                $return ['message'] = 'Product already in your cart';
+            	$current_product_qty = $this->__isInCart($cart_id, $product_id, 1);
+            	if($current_product_qty!=$product_qty){
+            		            		
+            		 $cart_product = $cart_product_model->find('all', ['conditions' => ['cart_id' => $cart_id,'product_id' => $product_id]])->first();
+            				
+            		$cart_product->qty = $product_qty;
+            		if ($cart_product_model->save($cart_product)) {
+            			$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+            			$return ['status'] = 0;
+            			$return ['message'] = 'Pruduct qty updated successfully';
+            			$return ['result'] ['product_list'] = $cart_products;
+            			$return ['result'] ['cart_size'] = sizeof($cart_products);
+            			$return ['result'] ['total'] = $this->__getTotal($cart_id);
+            		} else {
+            			$return ['status'] = 500;
+            			$return ['message'] = 'Culd not update the qty';
+            		}
+            		
+            	}else{
+            		$return ['status'] = 888;
+            		$return ['message'] = "Product with same same quantity already in your cart";
+            	}
+                
             }
         } else {
-            $product = $this->__isInCart($cart_id, $product_id, 1);
+        	$return ['status'] = 500;
+        	$return ['message'] = 'PLease select a product ant qty';
+            /* $product = $this->__isInCart($cart_id, $product_id, 1);
             $new_qty = $product_qty; //+ $product['qty']; 
             $product->qty = $new_qty;
             if ($cart_product_model->save($product)) {
@@ -118,7 +141,7 @@ class CartController extends AppController {
             } else {
                 $return ['status'] = 500;
                 $return ['message'] = 'Culd not update the qty';
-            }
+            } */
         }
         /* } else {
           $return ['status'] = 500;

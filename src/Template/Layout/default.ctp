@@ -127,7 +127,7 @@
 							<div class="fl-cart-contain">
 								<div class="mini-cart" id="mini-cart-head">
 									<div class="basket">
-										<a href="shopping-cart.html"><span id="total_items"> <?php echo $cart_size;?> </span></a>
+										<a href="<?php echo $this->Url->build('/user/cart');?>"><span id="total_items"> <?php echo $cart_size;?> </span></a>
 									</div>
 									<?php if (sizeof($cart_products)>0):?>
 									<?php
@@ -158,7 +158,7 @@
 															<input type="hidden" value="<?php echo $product['id'];?>"
 																name="product_id" class=""> <a class="btn-remove1 remove-from-cart-jq-function"
 																title="Remove This Item" href="#">Remove</a> <a
-																class="btn-edit" title="Edit item" href="#"><i
+																class="btn-edit edit-product-jq-function" title="Edit item" href="#"><i
 																class="icon-pencil"></i><span class="hidden">Edit item</span></a>
 														</div>
 														<!--access-->
@@ -601,6 +601,109 @@
 		</div>
 		<!--newsletter-sign-box-->
 	</div>
+
+<!-- quick view start -->	
+	<div id="popup-quick-view-edit" class="popup1" style="display: block;">
+ 
+  <div class="quick-view-box">
+
+
+<img src="images/close-icon.png" alt="close" class="x close-quic-edit">
+
+   <div class="product-view product-essential container">
+            <div class="row">
+              
+              <form action="" method="post" id="product_addtocart_form">
+                <!--End For version 1, 2, 6 -->
+                <!-- For version 3 -->
+                <div class="product-img-box col-sm-6 col-xs-12">
+                  <div class="new-label new-top-left"> New </div>
+                  <div class="product-image">
+                    <div class="large-image"> <a href="products-images/product-img.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="products-images/product-img.jpg"> </a> </div>
+                    <div class="flexslider flexslider-thumb">
+                      <ul class="previews-list slides">
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- end: more-images -->
+                </div>
+                <!--End For version 1,2,6-->
+                <!-- For version 3 -->
+                <div class="product-shop col-sm-6 col-xs-12">
+                
+                  <div class="product-name">
+                    <h1 itemprop="name">RETIS LAPEN CASEN</h1>
+                  </div>
+                  <!--product-name-->
+                  <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                  <div class="rating">
+                    <div class="ratings">
+                      <div class="rating-box">
+                        <div class="rating" style="width:50%"></div>
+                      </div>
+                      <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                    </div>
+                  </div>
+                  </span>
+                  <div class="price-block">
+                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price">$129.00</span> </span> </div>
+                    <p class="availability in-stock">
+                      <link itemprop="availability" href="http://schema.org/InStock">
+                      <span>In stock</span></p>
+                  </div>
+                  <!--price-block-->
+                  <div class="short-description">
+                    <h2>Quick Overview</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor.  </p>
+                  </div>
+                  <div class="add-to-box">
+                    <div class="add-to-cart">
+                      <div class="pull-left">
+                        <div class="custom pull-left">
+                         <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                          <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                           <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                        </div>
+                        <!--custom pull-left-->
+                      </div>
+                      <!--pull-left-->
+                      <button type="button" title="update Cart" class="button btn-cart" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
+                    </div>
+                   
+                  </div>
+                  <!--add-to-box-->
+                  <!-- thm-mart Social Share-->
+                  <div class="social">
+                    <ul class="link">
+                      <li class="fb"> <a href="http://www.facebook.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="pintrest"> <a href="http://pinterest.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                    </ul>
+                  </div>
+                  <!-- thm-mart Social Share Close-->
+                </div>
+                <!--product-shop-->
+                <!--Detail page static block for version 3-->
+              </form>
+            </div>
+          </div> 
+
+
+
+
+
+  </div> 
+</div>
+<!-- end quick view -->
 	<div id="fade" style="display: block;"></div>
 
 	<!-- JavaScript -->
@@ -755,7 +858,7 @@
                         						   list+='<div class="access">';
                         							   list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
                         							   list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
-                        								   list+='<a class="btn-edit" title="Edit item" href="#">';
+                        								   list+='<a class="btn-edit edit-product-jq-function" title="Edit item" href="#">';
                         									   list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
                         										   list+='</div>';
 											
@@ -786,7 +889,8 @@
 						//alert(list);
 						document.getElementById("mini-cart-head").innerHTML=list;
                         }
-                        alert(response.message);    
+
+                            jQuery.alert(response.message);    
 						
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
@@ -795,10 +899,86 @@
                           }
                     });
                     });
+
+                
             });
 
 
             
         </script>
+<!-- quick view page js -->        
+        <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 0,
+                startheight:900,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+                
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+            
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'on',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'on',
+                forceFullWidth: 'off',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+            
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+        </script>
+<!-- end quick view page js -->        
 </body>
 </html>
