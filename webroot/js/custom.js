@@ -253,7 +253,7 @@ jQuery(document).ready(function () {
 	                            if(response.status==0){
 	                        	list="";
 	                        	table="";
-	                          
+	                        	Totaltable="";
 	                           
 	                           if(response.result.result.cart_size>=0){
 	                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
@@ -362,9 +362,36 @@ jQuery(document).ready(function () {
 	                        	});
 	                        		                        	
 	                        	table+='</tbody></table></fieldset>';
+	                        	
+	                        	Totaltable+='<colgroup><col>';
+	                            Totaltable+='<col width="1">';
+	                            Totaltable+='</colgroup><tfoot>';
+	                            Totaltable+='<tr>';
+	                            Totaltable+='<td style="" class="a-left" colspan="1"><strong>Grand Total</strong></td>';
+	                            Totaltable+='<td style="" class="a-right"><strong><span class="price">$'+response.result.result.total.grand_total+'</span></strong></td>';    
+	                        	Totaltable+='</tr>';
+	                            Totaltable+='</tfoot>';
+	                            Totaltable+='<tbody>';
+	                            Totaltable+='<tr>';
+	                            Totaltable+='<td style="" class="a-left" colspan="1"> Subtotal</td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.sub_total+'</span></td>';
+	                        	Totaltable+='</tr>';
+	                        	Totaltable+='<tr>';
+	                            Totaltable+='<td style="" class="a-left" colspan="1">  Tax    </td>';
+	                            Totaltable+='<td style="" class="a-right"> <span class="price">$'+response.result.result.total.tax+'</span></td>';
+	                            Totaltable+='</tr>';
+	                            Totaltable+='<tr>';
+	                            Totaltable+='<td style="" class="a-left" colspan="1">     Discount    </td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.discount+'</span>    </td>';
+	                            Totaltable+='</tr>';
+	                            Totaltable+='<tr>';
+	                            Totaltable+='<td style="" class="a-left" colspan="1">        Counpon Value    </td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.counpon_value+'</span>    </td>';
+	                            Totaltable+='</tr>';
+	                            Totaltable+='</tbody>';
 	                        	document.getElementById("get-checkot-table-form").innerHTML=table;
-	                        }else{
-	                        	document.getElementById("get-checkot-table-form").innerHTML="no item found";
+	                        	document.getElementById("shopping-cart-totals-table").innerHTML=Totaltable;
+	                        	
 	                        }   
 							//alert(list);
 							
