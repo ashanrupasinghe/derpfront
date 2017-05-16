@@ -816,8 +816,8 @@
 
             jQuery(document).ready( function() {               
             	jQuery('.add-to-cart-jq-function').click(function(){
-            		var $product_id = jQuery(this).closest('div').find('#product_id').val();
-                    var $qty = jQuery(this).closest('div').find('#qty').val();
+            		var $product_id = jQuery(this).closest('div').find("input[name='product_id']").val();
+                    var $qty = jQuery(this).closest('div').find("input[name='qty']").val();
                    /*  var $product_id = jQuery(this).closest('div').find('input.add_to_cart_product_id').val();
                     var $qty = jQuery(this).closest('div').find('input.add_to_cart_product_qty').val(); */
 					//alert($product_id+" "+$qty);
@@ -839,7 +839,7 @@
                            //document.getElementById("total_items").innerHTML = response.result.cart_size;
                         	   
                         	   list+='<div class="basket">';
-                        	   list+='<a href="shopping-cart.html"><span id="total_items"> '+response.result.cart_size+' </span></a>';
+                        	   list+='<a href="'+myBaseUrl+'user/cart'+'"><span id="total_items"> '+response.result.cart_size+' </span></a>';
                         	   list+='</div>';                        	   
                            }
                            if(response.result.product_list){

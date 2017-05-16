@@ -271,7 +271,7 @@ jQuery(document).ready(function () {
 	                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
 	                        	   
 	                        	   list+='<div class="basket">';
-	                        	   list+='<a href="shopping-cart.html"><span id="total_items"> '+response.result.result.cart_size+' </span></a>';
+	                        	   list+='<a href="'+myBaseUrl+'user/cart'+'"><span id="total_items"> '+response.result.result.cart_size+' </span></a>';
 	                        	   list+='</div>';                        	   
 	                           }
 	                           if(Object.keys(response.result.result.product_list).length>0){
@@ -459,10 +459,9 @@ jQuery(document).ready(function () {
             	jQuery("#popup-quick-view-edit #quick_edit_description").text(response.description);
             	jQuery("#popup-quick-view-edit #quick_edit_qty").val(response.cart_products[0].qty);
             	jQuery("#popup-quick-view-edit #product_id").val(response.id);
-            	jQuery("#popup-quick-view-edit #quick_view_img").attr('src','/products-images/product-img.jpg');
+            	jQuery("#popup-quick-view-edit #quick_view_img").attr('src','/products-images/product-img.jpg');            	
             	
-            	
-            	alert(JSON.stringify(response.cart_products[0].qty));
+            	//alert(JSON.stringify(response.cart_products[0].qty));
             	
             	jQuery("#popup-quick-view-edit").css({'display':'block'});
     			jQuery("#fade").css({'display':'block'});
