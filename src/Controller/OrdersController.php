@@ -71,11 +71,11 @@ class OrdersController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter ( $event );
 		// allow all action
-		$this->Auth->allow ( [ 
+		/* $this->Auth->allow ( [ 
 				'getOrderList',
 				'viewOrder' 
 		]
-		 );
+		 ); */
 	}
 	
 	/**
