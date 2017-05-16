@@ -922,7 +922,8 @@
                         	    table+= '</h2>';
                         	    table+= '</td>';
                         	    table+= '<td class="a-center hidden-table">';
-                        	    table+= '<a href="#" class="edit-bnt" title="Edit item parameters"></a>';
+                        	    table+= '<input value="'+value.id+'" name="product_id" class="" type="hidden"> ';
+                        	    table+= '<a href="#" class="edit-bnt edit-product-jq-function" title="Edit item parameters"></a>';
                         	    table+= '</td>';
                         	    table+= '<td class="a-right hidden-table">';
                         	    table+= '<span class="cart-price">';
