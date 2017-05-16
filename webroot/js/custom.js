@@ -252,9 +252,9 @@ jQuery(document).ready(function () {
 
 	                            if(response.status==0){
 	                        	var list="";
-	                          // alert(JSON.stringify(response));
+	                          
 	                           
-	                           if(response.result.result.cart_size){
+	                           if(response.result.result.cart_size>=0){
 	                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
 	                        	   
 	                        	   list+='<div class="basket">';
@@ -301,7 +301,7 @@ jQuery(document).ready(function () {
 
 	                        	  
 								
-	                           }
+	                           
 	                           list+='</ul>';                           
 								list+='<div class="actions">';							
 									list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
@@ -309,11 +309,12 @@ jQuery(document).ready(function () {
 									list+='</button>';								
 								list+='</div>';							
 							list+='</div>';
+	                           }
 							//alert(list);
 							document.getElementById("mini-cart-head").innerHTML=list;
 	                        }
-	                        alert(response.message);    
-	                        jQuery.alert('hari');
+	                         
+	                        jQuery.alert(response.message);
 	                        },
 		    	         
 		    	         

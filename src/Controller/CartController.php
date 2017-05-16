@@ -1148,8 +1148,8 @@ public function getCheckout() {
 			} else {
 				$return ['status'] = 0;
 				$return ['message'] = 'your cart is empty';
-				$return ['result'] ['product_list'] = $cart_products;
-				$return ['result'] ['cart_size'] = sizeof($cart_products);
+				$return ['result'] ['product_list'] = null;
+				$return ['result'] ['cart_size'] = 0;
 				$return ['result'] ['total'] = $total;
 			}
 		} else {
