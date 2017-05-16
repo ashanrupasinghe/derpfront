@@ -94,7 +94,7 @@
                                                                                                 <ul class="currencies_list">
                                                                                                     <li><a href="#" title="EGP"> £</a></li>
                                                                                                     <li><a href="#" title="EUR"> €</a></li>
-                                                                                                    <li><a href="#" title="USD"> $</a></li>
+                                                                                                    <li><a href="#" title="USD"> LKR</a></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             fl-currency
@@ -137,7 +137,7 @@
 									<div class="fl-mini-cart-content" id="fl-mini-cart-content" style="display: none;">
 										<div class="block-subtitle">
 											<div class="top-subtotal" id="top-sub-total">
-												<?php echo $cart_size;?> items, <span class="price">$<?php echo $total['grand_total'];?></span>
+												<?php echo $cart_size;?> items, <span class="price">LKR<?php echo $total['grand_total'];?></span>
 											</div>
 											<!--top-subtotal-->
 											<!--pull-right-->
@@ -927,7 +927,7 @@
                         	    table+= '</td>';
                         	    table+= '<td class="a-right hidden-table">';
                         	    table+= '<span class="cart-price">';
-                        	    table+= '<span class="price">$'+value.price+'</span>';                
+                        	    table+= '<span class="price">LKR'+value.price+'</span>';                
                         	    table+= '</span>';
                                 table+= '</td>';
                                 table+= '<td class="a-center movewishlist">';
@@ -935,7 +935,7 @@
                         	    table+= '</td>';
                         	    table+= '<td class="a-right movewishlist">';
                         	    table+= '<span class="cart-price">';
-                        	    table+= '<span class="price">$'+value.total+'</span>';                            
+                        	    table+= '<span class="price">LKR'+value.total+'</span>';                            
                         	    table+= '</span>';
                         	    table+= '</td>';
                         	    table+= '<td class="a-center last">';
@@ -952,25 +952,25 @@
                             Totaltable+='</colgroup><tfoot>';
                             Totaltable+='<tr>';
                             Totaltable+='<td style="" class="a-left" colspan="1"><strong>Grand Total</strong></td>';
-                            Totaltable+='<td style="" class="a-right"><strong><span class="price">$'+response.result.total.grand_total+'</span></strong></td>';    
+                            Totaltable+='<td style="" class="a-right"><strong><span class="price">LKR'+response.result.total.grand_total+'</span></strong></td>';    
                         	Totaltable+='</tr>';
                             Totaltable+='</tfoot>';
                             Totaltable+='<tbody>';
                             Totaltable+='<tr>';
                             Totaltable+='<td style="" class="a-left" colspan="1"> Subtotal</td>';
-                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.total.sub_total+'</span></td>';
+                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.total.sub_total+'</span></td>';
                         	Totaltable+='</tr>';
                         	Totaltable+='<tr>';
                             Totaltable+='<td style="" class="a-left" colspan="1">  Tax    </td>';
-                            Totaltable+='<td style="" class="a-right"> <span class="price">$'+response.result.total.tax+'</span></td>';
+                            Totaltable+='<td style="" class="a-right"> <span class="price">LKR'+response.result.total.tax+'</span></td>';
                             Totaltable+='</tr>';
                             Totaltable+='<tr>';
                             Totaltable+='<td style="" class="a-left" colspan="1">     Discount    </td>';
-                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.total.discount+'</span>    </td>';
+                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.total.discount+'</span>    </td>';
                             Totaltable+='</tr>';
                             Totaltable+='<tr>';
                             Totaltable+='<td style="" class="a-left" colspan="1">        Counpon Value    </td>';
-                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.total.counpon_value+'</span>    </td>';
+                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.total.counpon_value+'</span>    </td>';
                             Totaltable+='</tr>';
                             Totaltable+='</tbody>';
                             document.getElementById("get-checkot-table-form").innerHTML=table;

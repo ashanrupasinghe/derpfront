@@ -178,7 +178,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -217,7 +217,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -257,7 +257,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -296,7 +296,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -335,7 +335,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -375,7 +375,7 @@
                                       </div>
                                     </div>
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR125.00</span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -410,7 +410,7 @@
       <li>
         <div class="feature-box free-shipping">
           <div class="icon-truck"></div>
-          <div class="content">FREE SHIPPING on order over $99</div>
+          <div class="content">FREE SHIPPING on order over LKR99</div>
         </div>
       </li>
       <li>

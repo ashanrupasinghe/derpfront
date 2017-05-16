@@ -280,7 +280,7 @@ jQuery(document).ready(function () {
 	                        	   list+='<div class="fl-mini-cart-content" style="display: none;">';
 								   list+='<div class="block-subtitle">';
 								   list+='<div class="top-subtotal" id="top-sub-total">';									
-								   list+=response.result.result.cart_size+' items, <span class="price">$'+response.result.result.total.grand_total+'</span>';
+								   list+=response.result.result.cart_size+' items, <span class="price">LKR'+response.result.result.total.grand_total+'</span>';
 								   list+='</div>';																		
 								   list+='</div>';								
 								   list+='<ul class="mini-products-list" id="cart-sidebar">';								
@@ -310,7 +310,7 @@ jQuery(document).ready(function () {
 									});
 									
 	                           //document.getElementById("cart-sidebar").innerHTML=list;
-	                           //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
+	                           //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">LKR'+response.result.total.grand_total+'</span>';
 
 	                        	  
 								
@@ -356,7 +356,7 @@ jQuery(document).ready(function () {
 	                        	    table+= '</td>';
 	                        	    table+= '<td class="a-right hidden-table">';
 	                        	    table+= '<span class="cart-price">';
-	                        	    table+= '<span class="price">$'+value.price+'</span>';                
+	                        	    table+= '<span class="price">LKR'+value.price+'</span>';                
 	                        	    table+= '</span>';
                                     table+= '</td>';
 	                                table+= '<td class="a-center movewishlist">';
@@ -364,7 +364,7 @@ jQuery(document).ready(function () {
 	                        	    table+= '</td>';
 	                        	    table+= '<td class="a-right movewishlist">';
 	                        	    table+= '<span class="cart-price">';
-	                        	    table+= '<span class="price">$'+value.total+'</span>';                            
+	                        	    table+= '<span class="price">LKR'+value.total+'</span>';                            
 	                        	    table+= '</span>';
 	                        	    table+= '</td>';
 	                        	    table+= '<td class="a-center last">';
@@ -381,25 +381,25 @@ jQuery(document).ready(function () {
 	                            Totaltable+='</colgroup><tfoot>';
 	                            Totaltable+='<tr>';
 	                            Totaltable+='<td style="" class="a-left" colspan="1"><strong>Grand Total</strong></td>';
-	                            Totaltable+='<td style="" class="a-right"><strong><span class="price">$'+response.result.result.total.grand_total+'</span></strong></td>';    
+	                            Totaltable+='<td style="" class="a-right"><strong><span class="price">LKR'+response.result.result.total.grand_total+'</span></strong></td>';    
 	                        	Totaltable+='</tr>';
 	                            Totaltable+='</tfoot>';
 	                            Totaltable+='<tbody>';
 	                            Totaltable+='<tr>';
 	                            Totaltable+='<td style="" class="a-left" colspan="1"> Subtotal</td>';
-	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.sub_total+'</span></td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.result.total.sub_total+'</span></td>';
 	                        	Totaltable+='</tr>';
 	                        	Totaltable+='<tr>';
 	                            Totaltable+='<td style="" class="a-left" colspan="1">  Tax    </td>';
-	                            Totaltable+='<td style="" class="a-right"> <span class="price">$'+response.result.result.total.tax+'</span></td>';
+	                            Totaltable+='<td style="" class="a-right"> <span class="price">LKR'+response.result.result.total.tax+'</span></td>';
 	                            Totaltable+='</tr>';
 	                            Totaltable+='<tr>';
 	                            Totaltable+='<td style="" class="a-left" colspan="1">     Discount    </td>';
-	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.discount+'</span>    </td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.result.total.discount+'</span>    </td>';
 	                            Totaltable+='</tr>';
 	                            Totaltable+='<tr>';
 	                            Totaltable+='<td style="" class="a-left" colspan="1">        Counpon Value    </td>';
-	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.counpon_value+'</span>    </td>';
+	                            Totaltable+='<td style="" class="a-right"><span class="price">LKR'+response.result.result.total.counpon_value+'</span>    </td>';
 	                            Totaltable+='</tr>';
 	                            Totaltable+='</tbody>';
 	                            if(Object.keys(response.result.result.product_list).length>0){

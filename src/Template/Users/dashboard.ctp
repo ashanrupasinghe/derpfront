@@ -51,7 +51,7 @@
                         <td>12800000002</td>
                         <td><span class="nobr">5/12/2015</span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$403.00</span></td>
+                        <td><span class="price">LKR403.00</span></td>
                         <td><em>Pending</em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> </span></td>
                       </tr>
@@ -59,7 +59,7 @@
                         <td>12800000001</td>
                         <td><span class="nobr">5/11/2015</span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$506.50</span></td>
+                        <td><span class="price">LKR506.50</span></td>
                         <td><em>Pending</em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
@@ -67,7 +67,7 @@
                         <td>13100000001</td>
                         <td><span class="nobr">5/9/2015</span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$997.84</span></td>
+                        <td><span class="price">LKR997.84</span></td>
                         <td><em>Pending</em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
@@ -75,7 +75,7 @@
                         <td>12000000002</td>
                         <td><span class="nobr">4/1/2015</span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$60.00</span></td>
+                        <td><span class="price">LKR60.00</span></td>
                         <td><em>Pending</em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
@@ -83,7 +83,7 @@
                         <td>12000000001</td>
                         <td><span class="nobr">4/1/2015</span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$208.00</span></td>
+                        <td><span class="price">LKR208.00</span></td>
                         <td><em>Pending</em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
@@ -235,7 +235,7 @@
         <li>
           <div class="feature-box free-shipping">
             <div class="icon-truck"></div>
-            <div class="content">FREE SHIPPING on order over $99</div>
+            <div class="content">FREE SHIPPING on order over LKR99</div>
           </div>
         </li>
         <li>

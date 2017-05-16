@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -200,7 +200,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -240,7 +240,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -279,7 +279,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -318,7 +318,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -358,7 +358,7 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR125.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
                                             <button class="button btn-cart" type="button"><span>Add to Cart</span></button>

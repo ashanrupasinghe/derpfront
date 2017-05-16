@@ -53,7 +53,7 @@
                         <td><?php echo $order['id'];?></td>
                         <td><span class="nobr"><?php echo $order['created'];?></span></td>
                         <td>jhon doe</td>
-                        <td><span class="price">$<?php echo $order['total'];?></span></td>
+                        <td><span class="price">LKR<?php echo $order['total'];?></span></td>
                         <td><em><?php echo $order['status'];?></em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
@@ -211,7 +211,7 @@
         <li>
           <div class="feature-box free-shipping">
             <div class="icon-truck"></div>
-            <div class="content">FREE SHIPPING on order over $99</div>
+            <div class="content">FREE SHIPPING on order over LKR99</div>
           </div>
         </li>
         <li>

@@ -149,7 +149,7 @@
 			<li>
 				<div class="feature-box free-shipping">
 					<div class="icon-truck"></div>
-					<div class="content">FREE SHIPPING on order over $99</div>
+					<div class="content">FREE SHIPPING on order over LKR99</div>
 				</div>
 			</li>
 			<li>
