@@ -54,7 +54,7 @@
                         <td><span class="nobr"><?php echo $order['created'];?></span></td>
                         <td>jhon doe</td>
                         <td><span class="price">LKR<?php echo $order['total'];?></span></td>
-                        <td><em><?php echo $order['status'];?></em></td>
+                        <td><em><?php echo $payment_status[$order['status']];?></em></td>
                         <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#" class="link-reorder">Reorder</a> </span></td>
                       </tr>
                      <?php $count++;?> 

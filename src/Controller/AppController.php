@@ -53,6 +53,13 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
         $this->set('authUser', $this->Auth->user());//set a variable for view, for check userloged in or not
+        $this->set('payment_status',[
+        		1=>'pending',2=>'informed to supplier',
+        		3=>'products_ready',4=>'delivery tookover',
+				5=>'delivered',6=>'completed',
+        		7=>'driver informed', 9=>'cancelled'
+        		
+        ]);
     }
     
     public function beforeFilter(\Cake\Event\Event $event) {
