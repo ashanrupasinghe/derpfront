@@ -246,14 +246,77 @@ jQuery(document).ready(function () {
 		                data: {
 		                	product_id: product_id
 		                },
-		    	        success: function(response) {	
-		    	         jQuery.alert(JSON.stringify(response));
-		    	         if(response.status==0){
-		    	        	 //success
-		    	        	 alert('x');
-		    	         }
-		    	         jQuery.alert(message);
-		    	        }, 
+		    	        	
+		    	         
+		    	        	success: function (response) {
+
+	                            if(response.status==0){
+	                        	var list="";
+	                          // alert(JSON.stringify(response));
+	                           
+	                           if(response.result.result.cart_size){
+	                           //document.getElementById("total_items").innerHTML = response.result.cart_size;
+	                        	   
+	                        	   list+='<div class="basket">';
+	                        	   list+='<a href="shopping-cart.html"><span id="total_items"> '+response.result.result.cart_size+' </span></a>';
+	                        	   list+='</div>';                        	   
+	                           }
+	                           if(response.result.result.product_list){
+	                        	   //alert(JSON.stringify(response.result.product_list));
+	                        	   var count=0;
+	                        	   list+='<div class="fl-mini-cart-content" style="display: none;">';
+									list+='<div class="block-subtitle">';
+										list+='<div class="top-subtotal" id="top-sub-total">';									
+											list+=response.result.result.cart_size+' items, <span class="price">$'+response.result.result.total.grand_total+'</span>';
+											list+='</div>';																		
+									list+='</div>';								
+									list+='<ul class="mini-products-list" id="cart-sidebar">';								
+	                        	   jQuery.each(response.result.result.product_list, function( index, value ) {
+	                            	   
+	                        		   list+='<li class="item first last">';
+	                        		   list+='<div class="item-inner">';
+	                        			   list+='<a class="product-image" title="'+value.name+'" href="#">';
+	                        					   list+='<img alt="'+value.name+'" src="'+value.image+'"></a>';
+	                        					   list+='<div class="product-details">';
+	                        						   list+='<div class="access">';
+	                        							   list+='<input type="hidden" value="'+value.id+'" name="product_id" class="">';
+	                        							   list+='<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
+	                        								   list+='<a class="btn-edit" title="Edit item" href="#">';
+	                        									   list+='<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
+	                        										   list+='</div>';
+												
+	                        											   list+='<strong>'+value.quantity+'</strong> x <span class="price">'+value.price+'</span>';
+	                        											   list+='<p class="product-name">';
+	                        												   list+='<a href="product-detail.html">'+value.name+'</a>';
+	                        												   list+='</p>';
+	                        													   list+='</div>';
+	                        														   list+='</div>';
+	                        															   list+='</li>';
+	                        															   
+	  									count++;
+									});
+									
+	                           //document.getElementById("cart-sidebar").innerHTML=list;
+	                           //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
+
+	                        	  
+								
+	                           }
+	                           list+='</ul>';                           
+								list+='<div class="actions">';							
+									list+='<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\''+myBaseUrl+'/order/checkout\'">';								
+										list+='<span>Checkout</span>';									
+									list+='</button>';								
+								list+='</div>';							
+							list+='</div>';
+							//alert(list);
+							document.getElementById("mini-cart-head").innerHTML=list;
+	                        }
+	                        alert(response.message);    
+	                        jQuery.alert('hari');
+	                        },
+		    	         
+		    	         
 		    	        error: function (xhr, status) { 
 		    	        	//err = eval("(" + xhr.responseText + ")");
 		    	        	//jQuery("div#err_3").append("<p>Something went wrong: "+err.message+"</p>");
