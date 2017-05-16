@@ -389,7 +389,11 @@ jQuery(document).ready(function () {
 	                            Totaltable+='<td style="" class="a-right"><span class="price">$'+response.result.result.total.counpon_value+'</span>    </td>';
 	                            Totaltable+='</tr>';
 	                            Totaltable+='</tbody>';
+	                            if(Object.keys(response.result.result.product_list).length>0){
 	                        	document.getElementById("get-checkot-table-form").innerHTML=table;
+	                            }else{
+	                            	document.getElementById("get-checkot-table-form").innerHTML="nothing found";
+	                            }
 	                        	document.getElementById("shopping-cart-totals-table").innerHTML=Totaltable;
 	                        	
 	                        }   
