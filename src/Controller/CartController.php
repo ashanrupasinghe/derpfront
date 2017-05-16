@@ -50,7 +50,7 @@ class CartController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow (['addproduct','deleteproduct','getcart']);
+		$this->Auth->allow (['addproduct','deleteproduct','getcart','quickedit']);
 	}
 
     public function addproduct() {
@@ -1197,5 +1197,26 @@ public function getCheckout() {
 		}
 		return $return;
 		die ();
+	}
+	/**
+	 * pass data to quic edit
+	 * @param unknown $cart_id
+	 * @param unknown $procuct_id
+	 */
+	public function quickedit(){
+		$this->request->allowMethod ( [
+				'post'
+		] );
+		header ( 'Content-type: application/json' );
+		$session = $this->request->session();
+		$cart_id = $session->read('cart_id');
+		$product_id=$this->request->data('product_id');
+				
+		$prduct_model=$this->loadModel('Products');		
+		$result=$prduct_model->find('all',['conditions'=>['Products.id'=>$product_id],'contain'=>['packageType','CartProducts'=>['conditions'=>['cart_id'=>$cart_id,'product_id'=>$product_id]]]])->toArray();
+		echo json_encode($result[0]);
+		die();
+		//$cart_product=$this->loadModel('CartProducts');
+		
 	}
 }

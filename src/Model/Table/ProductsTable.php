@@ -46,6 +46,9 @@ class ProductsTable extends Table
         $this->hasMany('productSuppliers', [
         		'foreignKey' => 'product_id'
         ]);
+        $this->hasMany('CartProducts', [
+        		'foreignKey' => 'product_id'
+        ]);
 		
 		//$this->belongsTo('suppliers',['foreignKey'=>'supplierId']);
 		$this->belongsTo('packageType',['foreignKey'=>'package']);

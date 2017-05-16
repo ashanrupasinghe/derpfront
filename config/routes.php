@@ -69,6 +69,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/user/cart', ['controller' => 'Cart', 'action' => 'getcart']);
     $routes->connect('/order/checkout', ['controller' => 'Cart', 'action' => 'checkout']);
     $routes->connect('cart/deleteproduct', ['controller' => 'Cart', 'action' => 'deleteproduct']);
+    $routes->connect('cart/quickedit', ['controller' => 'Cart', 'action' => 'quickedit']);
     
     
     /**

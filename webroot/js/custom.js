@@ -443,8 +443,41 @@ jQuery(document).ready(function () {
 	
 	jQuery("body").on("click",".edit-product-jq-function", function(){
 		product_id = jQuery(this).parent().find("input[name='product_id']").val();
-			jQuery("#popup-quick-view-edit").css({'display':'block'});
-			jQuery("#fade").css({'display':'block'});
+		
+		jQuery.ajax({
+			type: 'post',
+            url: myBaseUrl+'cart/quickedit',
+            dataType: 'json',
+            data: {
+            	product_id: product_id
+            },
+            success: function (response) {            	
+
+            	jQuery("#popup-quick-view-edit #quick_edit_h1").text(response.name);
+            	jQuery("#popup-quick-view-edit #quick_edit_price").text(response.price);
+            	jQuery("#popup-quick-view-edit #quick_edit_package").text(response.package_type.type);
+            	jQuery("#popup-quick-view-edit #quick_edit_description").text(response.description);
+            	jQuery("#popup-quick-view-edit #quick_edit_qty").val(response.cart_products[0].qty);
+            	jQuery("#popup-quick-view-edit #product_id").val(response.id);
+            	jQuery("#popup-quick-view-edit #quick_view_img").attr('src','/products-images/product-img.jpg');
+            	
+            	
+            	alert(JSON.stringify(response.cart_products[0].qty));
+            	
+            	jQuery("#popup-quick-view-edit").css({'display':'block'});
+    			jQuery("#fade").css({'display':'block'});
+            	
+            	
+            },
+            error: function (xhr, status) {
+	        	jQuery.alert("Something went wrong: "+JSON.stringify(xhr));
+	        }
+			}); 
+		
+		
+		
+		
+			
 		
 	});
 	jQuery("body").on("click",".close-quic-edit", function(){

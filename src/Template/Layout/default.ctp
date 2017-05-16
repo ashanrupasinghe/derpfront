@@ -603,12 +603,12 @@
 	</div>
 
 <!-- quick view start -->	
-	<div id="popup-quick-view-edit" class="popup1" style="display: block;">
+	<div id="popup-quick-view-edit" class="popup1" style="display: none;">
  
   <div class="quick-view-box">
 
 
-<img src="images/close-icon.png" alt="close" class="x close-quic-edit">
+<img src="/images/close-icon.png" alt="close" class="x close-quic-edit">
 
    <div class="product-view product-essential container">
             <div class="row">
@@ -619,18 +619,18 @@
                 <div class="product-img-box col-sm-6 col-xs-12">
                   <div class="new-label new-top-left"> New </div>
                   <div class="product-image">
-                    <div class="large-image"> <a href="products-images/product-img.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="products-images/product-img.jpg"> </a> </div>
-                    <div class="flexslider flexslider-thumb">
+                    <div class="large-image"> <a href="/products-images/product-img.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="/products-images/product-img.jpg" id="quick_view_img"> </a> </div>
+                    <!-- <div class="flexslider flexslider-thumb">
                       <ul class="previews-list slides">
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <!-- end: more-images -->
                 </div>
@@ -639,7 +639,7 @@
                 <div class="product-shop col-sm-6 col-xs-12">
                 
                   <div class="product-name">
-                    <h1 itemprop="name">RETIS LAPEN CASEN</h1>
+                    <h1 itemprop="name" id="quick_edit_h1">RETIS LAPEN CASEN</h1>
                   </div>
                   <!--product-name-->
                   <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
@@ -648,12 +648,12 @@
                       <div class="rating-box">
                         <div class="rating" style="width:50%"></div>
                       </div>
-                      <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                      <p class="rating-links"><!-- <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a>  --></p>
                     </div>
                   </div>
                   </span>
                   <div class="price-block">
-                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price">$129.00</span> </span> </div>
+                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price" id="quick_edit_price">$129.00</span>&nbsp;(<span id="quick_edit_package"></span>)</span> </div>
                     <p class="availability in-stock">
                       <link itemprop="availability" href="http://schema.org/InStock">
                       <span>In stock</span></p>
@@ -661,20 +661,22 @@
                   <!--price-block-->
                   <div class="short-description">
                     <h2>Quick Overview</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor.  </p>
+                    <p id="quick_edit_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor.  </p>
                   </div>
                   <div class="add-to-box">
                     <div class="add-to-cart">
                       <div class="pull-left">
                         <div class="custom pull-left">
-                         <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
-                          <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                           <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                         <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                          
+                          <input type="text" name="qty" id="quick_edit_qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                          <input name="product_id" id="product_id" value="" class="add_to_cart_product_qty" type="hidden">
+                          <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                         </div>
                         <!--custom pull-left-->
                       </div>
                       <!--pull-left-->
-                      <button type="button" title="update Cart" class="button btn-cart" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
+                      <button type="button" title="update Cart" class="button btn-cart add-to-cart-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
                     </div>
                    
                   </div>
@@ -682,11 +684,13 @@
                   <!-- thm-mart Social Share-->
                   <div class="social">
                     <ul class="link">
+                    <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
                       <li class="fb"> <a href="http://www.facebook.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                      <li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                      <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      
+                      
+                      <!-- <li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
                       <li class="pintrest"> <a href="http://pinterest.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                      <li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>-->
                     </ul>
                   </div>
                   <!-- thm-mart Social Share Close-->
