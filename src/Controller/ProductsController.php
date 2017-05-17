@@ -213,7 +213,9 @@ class ProductsController extends AppController {
                 return [$first_level_categories, $second_category_array, $third_category_array];
             }
             
-            
+            /**
+             * useing for get sub categories list in category()  
+             */
             public function getCategoryTree2() {
             
             	//Get first level categories
@@ -257,8 +259,6 @@ class ProductsController extends AppController {
             		} 
             		 
             	}
-            	
-            	
             	
             	return [
             			'first'=>$first_level_categories_id, 
