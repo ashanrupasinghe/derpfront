@@ -68,11 +68,16 @@ class ProductsController extends AppController {
     }    
         
     public function category($slug) {
+    	$cat_levels=$this->getCategoryTree2();
+    	/* print '<pre>';
+    	print_r(in_array(14, $cat_levels['second']));
+    	die(); */ 
         $return = [];
         $conditions = [
             'status' => 1
         ]; // enabled broducts
 
+        
         if ($slug != null) {
             // check is a perent
             $cat = $this->Products->Categories->find('all', [
@@ -80,26 +85,33 @@ class ProductsController extends AppController {
                             'slug' => $slug
                         ]
                     ])->first();
+                            /* print '<pre>';
+                            //echo $cat['id'];
+                print_r($cat_levels['cat_list']['lev3']); 
+                die();  */
             if (sizeof($cat) > 0) {
                 $return['category'] = $cat;
-                if ($cat ['parent_id'] == 0) { // parent
-                    $sub_cat = $this->Products->Categories->find('list', [
-                                'conditions' => [
-                                    'parent_id' => $cat ['id']
-                                ]
-                            ])->toArray(); // get correct childs
-                    foreach ($sub_cat as $key => $val) {
-                        $sub_categories [] = $key;
-                    }
-                    $conditions = [
-                        'category_id IN ' => $sub_categories
-                    ];
-                } else { // chiled
-                    $conditions = [
-                        'category_id ' => $cat ['id']
-                    ];
+                $sub_categories=[];
+                
+                if ($cat ['parent_id'] == 0){
+                	$sub_categories=$cat_levels['cat_list']['lev1'][$cat ['id']];
+                	/* print_r($sub_categories);
+                	die(); */
+                }elseif (in_array($cat ['id'], $cat_levels['second'])){
+                	$sub_categories=$cat_levels['cat_list']['lev2'][$cat ['id']];
+                	/* print_r($sub_categories);
+                	die(); */
+                }elseif (in_array($cat ['id'], $cat_levels['third'])){
+                	$sub_categories=$cat_levels['cat_list']['lev3'][$cat ['id']];
+                	/* print_r($sub_categories);
+                	die(); */
                 }
-
+                
+                
+                
+                $conditions['category_id IN ']=$sub_categories;
+               
+                
                 $product_list = $this->Products->find('all', [
                             'conditions' => $conditions,
                             'fields' => [
@@ -123,7 +135,10 @@ class ProductsController extends AppController {
                         ]);
                     }
                         ]);
-
+						/* print '<pre>';
+                        print_r($product_list);
+                        die();  */
+                        
                         $return ['status'] = 0;
                         if (sizeof($product_list) > 0) {
                             $return ['message'] = 'Success';
@@ -180,7 +195,80 @@ class ProductsController extends AppController {
                         $second_category_array[$second_category['parent_id']] = array();
                     $second_category_array[$second_category['parent_id']][] = $second_category;
                 }
-                return [$first_level_categories, $second_category_array];
+                
+                $third_level_categories = $categories->find()
+                        ->select(['id', 'title', 'parent_id', 'slug'])
+                        ->where(['level' => '2'])
+                        ->toArray();
+
+                $third_category_array = array();
+
+                foreach ($third_level_categories AS $third_category) {
+                    //$second_category_array[$second_category['parent_id']] = array();
+                    if (!is_array($third_category_array[$third_category['parent_id']]))
+                        $third_category_array[$third_category['parent_id']] = array();
+                    $third_category_array[$third_category['parent_id']][] = $third_category;
+                }
+                
+                return [$first_level_categories, $second_category_array, $third_category_array];
+            }
+            
+            
+            public function getCategoryTree2() {
+            
+            	//Get first level categories
+            	$categories = TableRegistry::get('Categories');
+            
+            	$first_level_categories = $categories->find('list',['keyField' => 'id', 'valueField' => 'parent_id'])
+            	
+            	->where(['parent_id' => '0'])
+            	->toArray();
+            	$first_level_categories_id=array_keys($first_level_categories);
+            	
+            	$second_level_categories = $categories->find('list',['keyField' => 'id', 'valueField' => 'parent_id'])
+            	
+            	->where(['parent_id IN ' => $first_level_categories_id])
+            	->toArray();
+            	$second_level_categories_id=array_keys($second_level_categories);
+            	
+            	$third_level_categories = $categories->find('list',['keyField' => 'id', 'valueField' => 'parent_id'])            	
+            	->where(['parent_id IN ' => $second_level_categories_id])
+            	->toArray();
+            	$third_level_categories_id=array_keys($third_level_categories);
+            	$catArray=[];
+            	$catArray2=[];
+            	$catArray3=[];
+            	foreach ($first_level_categories as $cat_id=>$cat_parent){ 
+            		$catArray[$cat_id][]=$cat_id;
+            		 foreach($second_level_categories as $cat2_id=>$cat2_parent){            		 	
+            			  if ($cat2_parent==$cat_id){
+            			  	$catArray[$cat_id][]=$cat2_id;   
+            			  	$catArray2[$cat2_id][]=$cat2_id;
+            			 	foreach ($third_level_categories as $cat3_id=>$cat3_parent){
+            			 		if ($cat3_parent==$cat2_id){
+            			 			$catArray[$cat_id][]=$cat3_id; 
+            			 			$catArray2[$cat2_id][]=$cat3_id;
+            			 			$catArray3[$cat3_id]=$cat3_id;
+            			 		}
+            			 	}
+            			 	
+            			 }
+            			 
+            		} 
+            		 
+            	}
+            	
+            	
+            	
+            	return [
+            			'first'=>$first_level_categories_id, 
+            			'second'=>$second_level_categories_id, 
+            			'third'=>$third_level_categories_id,
+            			'cat_list'=>[
+            					'lev1'=>$catArray,
+            					'lev2'=>$catArray2,
+            					'lev3'=>$catArray3
+            			]];
             }
 
         }
