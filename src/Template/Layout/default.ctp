@@ -152,7 +152,7 @@
 													<a class="product-image"
 														title="<?php echo $product['name'];?>" href="#l"><img
 														alt="<?php echo $product['name'];?>"
-														src="<?php echo '/img/'.$product['image'];?>"></a>
+														src="<?php echo $product['image'];?>"></a>
 													<div class="product-details">
 														<div class="access">
 															<input type="hidden" value="<?php echo $product['id'];?>"

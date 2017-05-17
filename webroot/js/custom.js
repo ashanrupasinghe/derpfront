@@ -460,7 +460,7 @@ jQuery(document).ready(function () {
             	jQuery("#popup-quick-view-edit #quick_edit_description").text(response.description);
             	jQuery("#popup-quick-view-edit #quick_edit_qty").val(response.cart_products[0].qty);
             	jQuery("#popup-quick-view-edit #product_id").val(response.id);
-            	jQuery("#popup-quick-view-edit #quick_view_img").attr('src','/products-images/product-img.jpg');            	
+            	jQuery("#popup-quick-view-edit #quick_view_img").attr('src',response.image);            	
             	
             	//alert(JSON.stringify(response.cart_products[0].qty));
             	
