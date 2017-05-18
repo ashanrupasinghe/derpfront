@@ -747,7 +747,7 @@
                                     list += '<div class="fl-mini-cart-content" style="display: none;">';
                                     list += '<div class="block-subtitle">';
                                     list += '<div class="top-subtotal" id="top-sub-total">';
-                                    list += response.result.cart_size + ' items, <span class="price">$' + response.result.total.grand_total + '</span>';
+                                    list += response.result.cart_size + ' items, <span class="price">LKR' + response.result.total.grand_total + '</span>';
                                     list += '</div>';
                                     list += '</div>';
                                     list += '<ul class="mini-products-list" id="cart-sidebar">';
@@ -780,15 +780,15 @@
                                     //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
 
 
-
+                                    list += '</ul>';
+                                    list += '<div class="actions">';
+                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + '/order/checkout\'">';
+                                    list += '<span>Checkout</span>';
+                                    list += '</button>';
+                                    list += '</div>';
+                                    list += '</div>';
                                 }
-                                list += '</ul>';
-                                list += '<div class="actions">';
-                                list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + '/order/checkout\'">';
-                                list += '<span>Checkout</span>';
-                                list += '</button>';
-                                list += '</div>';
-                                list += '</div>';
+                                
                                 //alert(list);
                                 document.getElementById("mini-cart-head").innerHTML = list;
                                 //if in cart page,

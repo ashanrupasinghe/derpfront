@@ -731,12 +731,107 @@ jQuery(document).ready(function () {
 		});
 		
 		
-		
-		
-		
-		
-		
 		});
+	
+/*add to wishlist*/
+	jQuery('.add-to-wishlist-jq-function').click(function () {
+        var $product_id = jQuery(this).closest('div').find("input[name='product_id']").val();
+        var $qty = jQuery(this).closest('div').find("input[name='qty']").val();
+        /*  var $product_id = jQuery(this).closest('div').find('input.add_to_cart_product_id').val();
+         var $qty = jQuery(this).closest('div').find('input.add_to_cart_product_qty').val(); */
+        //alert($product_id+" "+$qty);
+        jQuery.ajax({
+            type: 'post',
+            url: myBaseUrl+'user/addwishlistitem',
+            dataType: 'json',
+            data: {
+                product_id: $product_id,
+                qty: $qty
+            },
+            success: function (response) {
+
+                if (response.status == 0) {
+                    list = "";
+                    table = "";
+                    Totaltable = "";
+                    // alert(JSON.stringify(response));
+
+                    if (response.result.cart_size) {
+                        //document.getElementById("total_items").innerHTML = response.result.cart_size;
+
+                        list += '<div class="basket">';
+                        list += '<a href="' + myBaseUrl + 'user/wishlist' + '"><span id="total_items"> ' + response.result.cart_size + ' </span></a>';
+                        list += '</div>';
+                    }
+                    document.getElementById("mini-wishlist-head").innerHTML=list; 
+                    //if in cart page,
+                    if (jQuery("#wishlist-table").length) {
+                        //cart table
+
+                        table += '<input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">';
+                        table += '<fieldset>';
+                        table += '<table id="wishlist-table" class="data-table cart-table table-striped">';
+                        table += '<colgroup><col width="1"><col><col width="1"><col width="1"><col width="1"><col width="1"><col width="1"></colgroup><thead>';
+                        table += '<tr class="first last"><th rowspan="1">&nbsp;</th><th rowspan="1"><span class="nobr">Product Name</span></th><th rowspan="1"></th><th class="a-center" colspan="1"><span class="nobr">Unit Price</span></th><th rowspan="1" class="a-center">Qty</th><th class="a-center" colspan="1">Subtotal</th></tr>';
+                        table += '</thead><tfoot><tr class="first last"><td colspan="50" class="a-right last"><button type="button" title="Continue Shopping" class="button btn-continue" onClick=""><span><span>Continue Shopping</span></span></button><button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update"><span><span>Update Cart</span></span></button><button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Cart</span></span></button></td></tr></tfoot>';
+                        table += '<tbody>';
+                        productcount = 1;
+                        jQuery.each(response.result.product_list, function (index, value) {
+                            trclass = "odd";
+                            if (productcount == 1) {
+                                trclass += " first last"
+                            }
+                            if (Object.keys(response.result.product_list).length == productcount) {
+                                trclass += " last"
+                            }
+                            table += '<tr class="' + trclass + '">'
+                            table += '<td class="image hidden-table"><a href="product-detail.html" title="' + value.name + '" class="product-image"><img src="' + value.image + '" width="75" alt="' + value.name + '"></a></td>';
+                            table += '<td>';
+                            table += '<h2 class="product-name">';
+                            table += '<a href="product-detail.html">' + value.name + '</a>';
+                            table += '</h2>';
+                            table += '</td>';
+                            table += '<td class="a-center hidden-table">';
+                            table += '<input value="' + value.id + '" name="product_id" class="" type="hidden"> ';
+                            table += '<a href="#" class="edit-bnt edit-product-jq-function" title="Edit item parameters"></a>';
+                            table += '</td>';
+                            table += '<td class="a-right hidden-table">';
+                            table += '<span class="cart-price">';
+                            table += '<span class="price">LKR' + value.price + '</span>';
+                            table += '</span>';
+                            table += '</td>';
+                            table += '<td class="a-center movewishlist">';
+                            table += '<input name="cart[26340][qty]" value="' + value.quantity + '" size="4" title="Qty" class="input-text qty" maxlength="12">';
+                            table += '</td>';
+                            table += '<td class="a-right movewishlist">';
+                            table += '<span class="cart-price">';
+                            table += '<span class="price">LKR' + value.total + '</span>';
+                            table += '</span>';
+                            table += '</td>';
+                            table += '<td class="a-center last">';
+                            table += '<input type="hidden" value="' + value.id + '" name="product_id" class="">';
+                            table += '<a href="#" title="Remove item" class="button remove-item remove-from-wishlist-jq-function"><span><span>Remove item</span></span></a></td>';
+                            table += '</tr> ';
+                            productcount++;
+                        });
+
+                        table += '</tbody></table></fieldset>';                        
+                        document.getElementById("get-wishlist-table-form").innerHTML=table;
+                    }
+                }
+
+
+                jQuery.alert(response.message);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    });
+	
+	
 	
 });
 //https://craftpip.github.io/jquery-confirm/#ajaxloading

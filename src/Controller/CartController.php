@@ -39,7 +39,8 @@ class CartController extends AppController {
 				'dashboard',
 				'placeOrder',
 				'getwishlist',
-				'deleteWishListItem'
+				'deleteWishListItem',
+				'addWishListItem'
 				
 				
 		] )) {
@@ -53,7 +54,7 @@ class CartController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow (['addproduct','deleteproduct','getcart','quickedit']);
+		$this->Auth->allow (['addproduct','deleteproduct','getcart','quickedit','addWishListItem']);
 	}
 
     public function addproduct() {
@@ -188,14 +189,15 @@ class CartController extends AppController {
             }
     }
 
-    public function __isInCart($cart_id, $product_id) {
+    public function __isInCart($cart_id, $product_id,$type=1) {
     	
         $cart_product_model = $this->loadModel('CartProducts');
         
         $result = $cart_product_model->find('all', [
                     'conditions' => [
                         'cart_id' => $cart_id,
-                        'product_id' => $product_id
+                        'product_id' => $product_id,
+                    	'type'=>$type	
                     ]
                 ])->toArray();
                    
@@ -1401,5 +1403,80 @@ public function deleteWishListItem() {
 		}
 		echo json_encode ( $return );
 		die ();
+	}
+	
+	public function addWishListItem() {
+		if(!$this->Auth->user()){
+			$return ['status'] = 500;
+			$return ['message'] = 'Please login before add to wishlist';
+		}else{
+		
+		$product_id = $this->request->data('product_id');
+		$product_qty = $this->request->data('qty');
+	
+		
+		$session = $this->request->session();
+		$cart_id = $session->read('cart_id');
+		
+		if ($product_id != null && $product_qty != null) {
+			 
+			if ($cart_id && !($this->__isInCart($cart_id, $product_id, 0))) {
+				 
+				 
+				$data = [
+						'cart_id' => $cart_id,
+						'product_id' => $product_id,
+						'qty' => $product_qty,
+						'type' => 0
+				];
+	
+				$cart_product_model = $this->loadModel('CartProducts');
+				$product_entity = $cart_product_model->newEntity($data);
+				$saving = $cart_product_model->save($product_entity);
+	
+				if ($saving) {
+					$cart_products = CartProductsTable::getCart ( $cart_id, 0 );
+					 
+					$return ['status'] = 0;
+					$return ['message'] = 'Product has been added to cart';
+					$return ['result'] ['product_list'] = $cart_products;
+					$return ['result'] ['cart_size'] = sizeof($cart_products);
+					$return ['result'] ['total'] = $this->__getTotal($cart_id,0);
+				} else {
+					$return ['status'] = 500;
+					$return ['message'] = 'Product not added to Wishlist';
+				}
+			} else {
+				$current_product_qty = $this->__isInCart($cart_id, $product_id, 0);
+				if($current_product_qty!=$product_qty){
+	
+					$cart_product = $cart_product_model->find('all', ['conditions' => ['cart_id' => $cart_id,'product_id' => $product_id]])->first();
+	
+					$cart_product->qty = $product_qty;
+					if ($cart_product_model->save($cart_product)) {
+						$cart_products = CartProductsTable::getCart ( $cart_id, 0 );
+						$return ['status'] = 0;
+						$return ['message'] = 'Pruduct qty updated successfully';
+						$return ['result'] ['product_list'] = $cart_products;
+						$return ['result'] ['cart_size'] = sizeof($cart_products);
+						$return ['result'] ['total'] = $this->__getTotal($cart_id,0);
+					} else {
+						$return ['status'] = 500;
+						$return ['message'] = 'Culd not update the qty';
+					}
+	
+				}else{
+					$return ['status'] = 888;
+					$return ['message'] = "Product with same same quantity already in your Wishlist";
+				}
+	
+			}
+		} else {
+			$return ['status'] = 500;
+			$return ['message'] = 'PLease select a product ant qty';		
+		}
+		}
+		echo json_encode($return);
+		die();
 	}
 }

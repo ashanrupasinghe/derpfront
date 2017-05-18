@@ -71,6 +71,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/order/checkout', ['controller' => 'Cart', 'action' => 'checkout']);
     $routes->connect('/cart/deleteproduct', ['controller' => 'Cart', 'action' => 'deleteproduct']);
     $routes->connect('/user/deletewishlistitem', ['controller' => 'Cart', 'action' => 'deleteWishListItem']);
+    $routes->connect('/user/addwishlistitem', ['controller' => 'Cart', 'action' => 'addWishListItem']);
     $routes->connect('/cart/quickedit', ['controller' => 'Cart', 'action' => 'quickedit']);
     $routes->connect('/order/view/:id', ['controller' => 'Orders', 'action' => 'viewOrder'],['pass'=>['id']]);
     $routes->connect('/order/reorder', ['controller' => 'Cart', 'action' => 'placeOrder']);

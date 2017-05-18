@@ -92,6 +92,7 @@
                       </div>
                       <!--pull-left-->
                       <button type="button" title="Add to Cart" class="button btn-cart fuck add-to-cart-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
+                      <button type="button" title="Add to Wishlist" class="button btn-cart btn-wishlist fuck add-to-wishlist-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Wishlist</span></button>
                     </div>
                     <!--add-to-cart-->
 <!--                    <div class="email-addto-box">
