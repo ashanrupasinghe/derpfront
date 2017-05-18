@@ -567,7 +567,7 @@
 
                                                 <input type="text" name="qty" id="quick_edit_qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                                                 <input name="product_id" id="product_id" value="" class="add_to_cart_product_qty" type="hidden">
-                                                <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if (!isNaN(qty) & amp; & amp; qty > 0) result.value--; return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                                                <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if (!isNaN(qty) && qty > 0) result.value--; return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                                             </div>
                                             <!--custom pull-left-->
                                         </div>

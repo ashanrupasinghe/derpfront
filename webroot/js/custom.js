@@ -748,7 +748,7 @@ jQuery(document).ready(function () {
                 qty: qty
             },
             success: function (response) {
-            	alert(JSON.stringify(response));
+            	//alert(JSON.stringify(response));
                 if (response.status == 0) {
                     list = "";
                     table = "";
