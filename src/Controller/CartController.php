@@ -54,7 +54,7 @@ class CartController extends AppController {
 	public function beforeFilter(\Cake\Event\Event $event) {
 		// allow all action
 		parent::beforeFilter($event);
-		$this->Auth->allow (['addproduct','deleteproduct','getcart','quickedit','addWishListItem']);
+		$this->Auth->allow (['addproduct','deleteproduct','getcart','quickedit']);
 	}
 
     public function addproduct() {
@@ -81,7 +81,7 @@ class CartController extends AppController {
         
         
         if ($product_id != null && $product_qty != null) {
-        	
+        	$cart_product_model = $this->loadModel('CartProducts');
             if ($cart_id && !($this->__isInCart($cart_id, $product_id, 1))) {
             	
             	
@@ -92,7 +92,7 @@ class CartController extends AppController {
                     'type' => 1
                 ];
 
-                $cart_product_model = $this->loadModel('CartProducts');
+                
                 $product_entity = $cart_product_model->newEntity($data);
                 $saving = $cart_product_model->save($product_entity);
                 
@@ -1097,18 +1097,33 @@ public function getCheckout() {
 	
 	public function dashboard(){
 		$user_id=$this->Auth->user('id');	
+		
 		//$customers_model=$this->loadModel('');	
-		$user=$this->Cart->find('all',['fields'=>['Customers.id','Customers.user_id','Customers.firstName','Customers.lastName','Customers.newsLetter','Customers.address','Customers.city','Customers.email','Customers.mobileNo'],'contain'=>['users','users.Customers'],'conditions'=>['Users.id'=>$user_id]])->toArray();
-		$orders=(new OrdersController())->getOrderList();
-		/* print '<pre>';
-		print_r($order['result']);
-		die();	 */	
+		$user=$this->Cart->Users->find('all',[
+				'conditions'=>['Users.id'=>$user_id],
+				'contain'=>[
+						'Customers'=>[
+								'fields'=>[
+										'id',
+										'user_id',
+										'firstName',
+										'lastName',
+										'newsLetter',
+										'address',
+										'city',
+										'email',										
+										'mobileNo'										
+								]								
+						]						
+				]				
+		]
+				)->toArray();
+		$orders=(new OrdersController())->getOrderList();			
 		$this->set(['user'=>$user[0]->customers,'orders'=>$orders['result']]);
 	}
 	
 	
-	public function deleteproduct() {
-		
+	public function deleteproduct() {		
 		$this->request->allowMethod ( [
 				'post',
 				'delete'
@@ -1406,20 +1421,23 @@ public function deleteWishListItem() {
 	}
 	
 	public function addWishListItem() {
+		header ( 'Content-type: application/json' );
+				
 		if(!$this->Auth->user()){
 			$return ['status'] = 500;
 			$return ['message'] = 'Please login before add to wishlist';
 		}else{
 		
 		$product_id = $this->request->data('product_id');
-		$product_qty = $this->request->data('qty');
-	
+		$product_qty = $this->request->data('qty');	
+		
 		
 		$session = $this->request->session();
 		$cart_id = $session->read('cart_id');
 		
 		if ($product_id != null && $product_qty != null) {
-			 
+			$cart_product_model = $this->loadModel('CartProducts');
+			
 			if ($cart_id && !($this->__isInCart($cart_id, $product_id, 0))) {
 				 
 				 
@@ -1430,7 +1448,7 @@ public function deleteWishListItem() {
 						'type' => 0
 				];
 	
-				$cart_product_model = $this->loadModel('CartProducts');
+				
 				$product_entity = $cart_product_model->newEntity($data);
 				$saving = $cart_product_model->save($product_entity);
 	
@@ -1447,11 +1465,13 @@ public function deleteWishListItem() {
 					$return ['message'] = 'Product not added to Wishlist';
 				}
 			} else {
-				$current_product_qty = $this->__isInCart($cart_id, $product_id, 0);
+				$current_product_qty = $this->__isInCart($cart_id, $product_id, 0);			
+				
 				if($current_product_qty!=$product_qty){
+					
 	
 					$cart_product = $cart_product_model->find('all', ['conditions' => ['cart_id' => $cart_id,'product_id' => $product_id]])->first();
-	
+					
 					$cart_product->qty = $product_qty;
 					if ($cart_product_model->save($cart_product)) {
 						$cart_products = CartProductsTable::getCart ( $cart_id, 0 );
@@ -1473,7 +1493,7 @@ public function deleteWishListItem() {
 			}
 		} else {
 			$return ['status'] = 500;
-			$return ['message'] = 'PLease select a product ant qty';		
+			$return ['message'] = 'Please select a product and qty';		
 		}
 		}
 		echo json_encode($return);

@@ -735,25 +735,24 @@ jQuery(document).ready(function () {
 	
 /*add to wishlist*/
 	jQuery('.add-to-wishlist-jq-function').click(function () {
-        var $product_id = jQuery(this).closest('div').find("input[name='product_id']").val();
-        var $qty = jQuery(this).closest('div').find("input[name='qty']").val();
-        /*  var $product_id = jQuery(this).closest('div').find('input.add_to_cart_product_id').val();
-         var $qty = jQuery(this).closest('div').find('input.add_to_cart_product_qty').val(); */
-        //alert($product_id+" "+$qty);
+        product_id = jQuery(this).closest('div').find("input[name='product_id']").val();
+        //qty=1
+        qty = jQuery(this).closest('div').find("input[name='qty']").val();
+        
         jQuery.ajax({
             type: 'post',
             url: myBaseUrl+'user/addwishlistitem',
             dataType: 'json',
             data: {
-                product_id: $product_id,
-                qty: $qty
+                product_id: product_id,
+                qty: qty
             },
             success: function (response) {
-
+            	alert(JSON.stringify(response));
                 if (response.status == 0) {
                     list = "";
                     table = "";
-                    Totaltable = "";
+                    
                     // alert(JSON.stringify(response));
 
                     if (response.result.cart_size) {
