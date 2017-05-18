@@ -287,11 +287,14 @@ class UsersController extends AppController {
 		$session = $this->request->session ();
 		$user = $this->Users->get ( $this->Auth->user ( 'id' ), [ 
 				'contain' => [ 
-						'cart' 
+						'Cart' 
 				] 
 		] ); // user cart id
-		$user_cart = $user->Cart;
-		$cart_id = $user_cart ['id']; // logedin user cart id
+		/* print '<pre>';
+		print_r($user->cart->id);
+		die(); */
+		//$user_cart = $user->Cart;
+		$cart_id = $user->cart->id; // logedin user cart id
 		
 		if ($session->read ( 'cart_id' ) != "") {
 			$cart_products = $this->loadModel ( 'cartProducts' );
