@@ -586,38 +586,23 @@ jQuery(document).ready(function () {
                 data: {
                 	query: query                        
                 }, 
-		        success: function(data,status,xhr) { 
-		        	//alert(JSON.stringify(data));
+		        success: function(data,status,xhr) {		        	
 		        	jQuery.each(data, function(i, object) {
 		                map[object.name] = object;
 		                objects.push(object.name);
 		            });
 		           
-		        	//alert(JSON.stringify(map));
-		            
-		        	// process(response);
 		        	 return process(objects);
 		        }, 
 		        error: function (xhr, status) {  
-		        	alert('dd');
-		        	alert(JSON.stringify(xhr));
+		        	jQuery.alert("something went wrong");
 		        }    
 		      }); 
-	    	
-	    	
-	    	
-	    /*return jQuery.get(myBaseUrl+"products/autocomplete", { query: query }, function (data) {
-	    		alert(JSON.stringify(data));
-	           // return process(data);
-
-	        });*/
+	   
 
 	    },
 	    updater: function (item) {
-	    	window.location=myBaseUrl+'product/'+map[item].slug;
-	    	
-	    	//alert("c");
-	    	
+	    	window.location=myBaseUrl+'product/'+map[item].slug;	    	
 	    	//jQuery("#search-product").val(map[item].slug);
 	    	/*product_name=jQuery("#search-product").parent().find('ul.typeahead li.active a').text();	    	
 	    	jQuery("#search-product").val(product_name);*/
