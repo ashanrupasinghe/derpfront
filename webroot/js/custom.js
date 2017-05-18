@@ -602,10 +602,9 @@ jQuery(document).ready(function () {
 
 	    },
 	    updater: function (item) {
-	    	window.location=myBaseUrl+'product/'+map[item].slug;	    	
-	    	//jQuery("#search-product").val(map[item].slug);
-	    	/*product_name=jQuery("#search-product").parent().find('ul.typeahead li.active a').text();	    	
-	    	jQuery("#search-product").val(product_name);*/
+	    	window.location=myBaseUrl+'product/'+map[item].slug;	
+	    	return item;
+	    	
 	    	
 	        
 	    }
