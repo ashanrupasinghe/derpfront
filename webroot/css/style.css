@@ -12171,3 +12171,21 @@ letter-spacing: 1px;
  
 line-height: 38px;
 }
+/**/
+
+.min-wishlist .basket a:first-child::before {
+    content: '\f004';
+    font-family: FontAwesome;
+    font-size: 24px;
+    padding-right: 5px;
+    color: #fff;
+}
+.add-to-cart-btn::before{
+	content: "\f07a";
+font-family: FontAwesome;
+font-size: 12px;
+padding: 9px 10px;
+}
+#wishlist-table a.remove-item span, #wishlist-table-view a.remove-item span {
+    display: none;
+}

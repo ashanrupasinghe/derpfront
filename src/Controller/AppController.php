@@ -77,10 +77,17 @@ class AppController extends Controller
     			$cart_products=CartProductsTable::getCart($cart_id, 1);
     			$cart_size=sizeof($cart_products);
     			$total=( new CartController)->__getTotal ( $cart_id );
+    			
+    			$wishlist_products=CartProductsTable::getCart($cart_id, 0);
+    			$wishlist_size=sizeof($wishlist_products);
     		}else {
     			$cart_size=0;
     			$cart_products=[];
     			$total=0;
+    			
+    			$wishlist_size=0;
+    			$wishlist_products=[];
+    			
     		}
     		
     		/* if($this->Session->check('fbid')){
@@ -92,6 +99,9 @@ class AppController extends Controller
     	$this->set('cart_size', $cart_size);
     	$this->set('cart_products', $cart_products);
     	$this->set('total', $total);
+    	
+    	$this->set('wishlist_size', $wishlist_size);
+    	$this->set('wishlist_products', $wishlist_products);
     }
     /**
      * Before render callback.
