@@ -572,5 +572,60 @@ jQuery(document).ready(function () {
 		});
 	});
 	
+	//type ahead script
+	jQuery('input.search-product').typeahead({
+		
+	    source:  function (query, process) {	
+	    	objects = [];
+	        map = {};
+	    	//alert(query);
+	    	jQuery.ajax({
+				type: 'post',
+                url: myBaseUrl+'products/autocomplete',
+                dataType: 'json',
+                data: {
+                	query: query                        
+                }, 
+		        success: function(data,status,xhr) { 
+		        	//alert(JSON.stringify(data));
+		        	jQuery.each(data, function(i, object) {
+		                map[object.name] = object;
+		                objects.push(object.name);
+		            });
+		           
+		        	//alert(JSON.stringify(map));
+		            
+		        	// process(response);
+		        	 return process(objects);
+		        }, 
+		        error: function (xhr, status) {  
+		        	alert('dd');
+		        	alert(JSON.stringify(xhr));
+		        }    
+		      }); 
+	    	
+	    	
+	    	
+	    /*return jQuery.get(myBaseUrl+"products/autocomplete", { query: query }, function (data) {
+	    		alert(JSON.stringify(data));
+	           // return process(data);
+
+	        });*/
+
+	    },
+	    updater: function (item) {
+	    	window.location=myBaseUrl+'product/'+map[item].slug;
+	    	
+	    	//alert("c");
+	    	
+	    	//jQuery("#search-product").val(map[item].slug);
+	    	/*product_name=jQuery("#search-product").parent().find('ul.typeahead li.active a').text();	    	
+	    	jQuery("#search-product").val(product_name);*/
+	    	
+	        
+	    }
+
+	});
+	
 });
 //https://craftpip.github.io/jquery-confirm/#ajaxloading

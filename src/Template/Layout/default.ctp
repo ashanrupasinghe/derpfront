@@ -190,7 +190,7 @@
 							<div class="collapse navbar-collapse">
 								<form class="navbar-form" role="search">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search">
+										<input id="search-product" name="search-product" type="text" class="form-control search-product" placeholder="Search" value="">
 										<span class="input-group-btn">
 											<button type="submit" class="search-btn">
 												<span class="glyphicon glyphicon-search"> <span
@@ -724,6 +724,8 @@
 		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 	<script type="text/javascript"
 		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+		
 	    <?= $this->Html->script('datepicker/bootstrap-datepicker.js'); ?>
 	    <?= $this->Html->script('timepicker/bootstrap-timepicker.min.js'); ?>
 	    <?= $this->Html->script('jquery-confirm.min.js'); ?>

@@ -270,6 +270,17 @@ class ProductsController extends AppController {
             					'lev3'=>$catArray3
             			]];
             }
+            
+            
+            public function autocomplete() {   
+            	header('Content-type: application/json');
+            	$data=$this->Products->find()
+            		->select(['id','slug','name'])
+            		->where(['name LIKE'=>"%apple%"])
+            		->toArray();            	
+            	echo json_encode($data);
+            	die();
+            }
 
         }
         
