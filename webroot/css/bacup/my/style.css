@@ -3306,7 +3306,6 @@ ul.pdt-list li.item a img.image-hover {
 .products-grid .item .item-inner .item-img {
 	position: relative;
 	border: 1px #eaeaea solid;
-	height: 200px;
 }
 .products-grid .item .item-inner .item-img .ico-product {
 	position: absolute;
@@ -3343,8 +3342,7 @@ ul.pdt-list li.item a img.image-hover {
 	width: 100%;
 }
 .products-grid .item .item-inner .item-img .item-img-info a.product-image img {
-	    width: auto;
-    height: 180px;
+	width: 100%;
 }
 .products-grid .item .item-inner .item-img:hover img {
 	-webkit-transform: scale(1.2);
@@ -12173,7 +12171,6 @@ letter-spacing: 1px;
  
 line-height: 38px;
 }
-
 /**/
 
 .min-wishlist .basket a:first-child::before {
