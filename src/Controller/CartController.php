@@ -83,7 +83,7 @@ class CartController extends AppController {
         if ($product_id != null && $product_qty != null) {
         	$cart_product_model = $this->loadModel('CartProducts');
             if ($cart_id && !($this->__isInCart($cart_id, $product_id, 1))) {
-            	
+            	$is_in_wishlist=$this->__isInCart($cart_id, $product_id,0);
             	
                 $data = [
                     'cart_id' => $cart_id,
@@ -97,13 +97,27 @@ class CartController extends AppController {
                 $saving = $cart_product_model->save($product_entity);
                 
                 if ($saving) {
+                	//if in wishlist remove that
+                	if ($is_in_wishlist){
+                		$cart_product_model->deleteAll([
+                				'cart_id' => $cart_id,
+                				'product_id' => $product_id,
+    							'type' => 0                				
+                		]);
+                	}
                 	$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+                	$wishlist_products = CartProductsTable::getCart ( $cart_id, 0 );
                 	
                     $return ['status'] = 0;
                     $return ['message'] = 'Product has been added to cart';
                     $return ['result'] ['product_list'] = $cart_products;
                     $return ['result'] ['cart_size'] = sizeof($cart_products);
                     $return ['result'] ['total'] = $this->__getTotal($cart_id);
+                    
+                    $return ['result'] ['wishlist_product_list'] = $wishlist_products;
+                    $return ['result'] ['wishlist_size'] = sizeof($wishlist_products);
+                    $return ['result'] ['wishlist_total'] = $this->__getTotal($cart_id,0);
+                    
                 } else {
                     $return ['status'] = 500;
                     $return ['message'] = 'Product not added to cart';
@@ -117,11 +131,17 @@ class CartController extends AppController {
             		$cart_product->qty = $product_qty;
             		if ($cart_product_model->save($cart_product)) {
             			$cart_products = CartProductsTable::getCart ( $cart_id, 1 );
+            			$wishlist_products = CartProductsTable::getCart ( $cart_id, 0 );
+            			
             			$return ['status'] = 0;
             			$return ['message'] = 'Pruduct qty updated successfully';
             			$return ['result'] ['product_list'] = $cart_products;
             			$return ['result'] ['cart_size'] = sizeof($cart_products);
             			$return ['result'] ['total'] = $this->__getTotal($cart_id);
+            			
+            			$return ['result'] ['wishlist_product_list'] = $wishlist_products;
+            			$return ['result'] ['wishlist_size'] = sizeof($wishlist_products);
+            			$return ['result'] ['wishlist_total'] = $this->__getTotal($cart_id,0);
             		} else {
             			$return ['status'] = 500;
             			$return ['message'] = 'Culd not update the qty';

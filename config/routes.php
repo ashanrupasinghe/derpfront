@@ -75,6 +75,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/cart/quickedit', ['controller' => 'Cart', 'action' => 'quickedit']);
     $routes->connect('/order/view/:id', ['controller' => 'Orders', 'action' => 'viewOrder'],['pass'=>['id']]);
     $routes->connect('/order/reorder', ['controller' => 'Cart', 'action' => 'placeOrder']);
+    $routes->connect('/user/iswishlistitem', ['controller' => 'Cart', 'action' => 'isWishListItem']);
     
     
     /**

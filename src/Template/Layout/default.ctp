@@ -189,7 +189,7 @@
                                 </div>
                                 <!--mini-cart-->
                                 <!-- wishlist -->
-                                <div class="fl-cart-contain">
+                                <div class="fl-cart-contain first-icon">
           <div class="mini-cart min-wishlist" id="mini-wishlist-head">
             <div class="basket"> <a href="<?php echo $this->Url->build('/user/wishlist'); ?>"><span> <?php echo $wishlist_size;?> </span></a> </div>
             
@@ -727,20 +727,31 @@
                             qty: $qty
                         },
                         success: function (response) {
-
+                        	
                             if (response.status == 0) {
                                 list = "";
                                 table = "";
                                 Totaltable = "";
+
+                                wishlist_list="";
+                                wishlist_table="";
                                 // alert(JSON.stringify(response));
 
-                                if (response.result.cart_size) {
+                                if (response.result.cart_size>=0) {
                                     //document.getElementById("total_items").innerHTML = response.result.cart_size;
 
                                     list += '<div class="basket">';
                                     list += '<a href="' + myBaseUrl + 'user/cart' + '"><span id="total_items"> ' + response.result.cart_size + ' </span></a>';
                                     list += '</div>';
                                 }
+                                if (response.result.wishlist_size>=0) {
+                                    //document.getElementById("total_items").innerHTML = response.result.cart_size;
+
+                                    wishlist_list += '<div class="basket">';
+                                    wishlist_list += '<a href="' + myBaseUrl + 'user/wishlist' + '"><span id="total_items"> ' + response.result.wishlist_size + ' </span></a>';
+                                    wishlist_list += '</div>';
+                                }
+                                
                                 if (response.result.product_list) {
                                     //alert(JSON.stringify(response.result.product_list));
                                     var count = 0;
@@ -790,7 +801,9 @@
                                 }
                                 
                                 //alert(list);
+                                document.getElementById("mini-wishlist-head").innerHTML = wishlist_list;
                                 document.getElementById("mini-cart-head").innerHTML = list;
+                                
                                 //if in cart page,
                                 if (jQuery("#shopping-cart-table").length) {
                                     //cart table
@@ -874,6 +887,76 @@
                                     document.getElementById("shopping-cart-totals-table").innerHTML = Totaltable;
 
                                 }
+
+
+
+
+
+
+                              //if in wishlist page,
+                                if (jQuery("#wishlist-table").length) {
+                                    //cart table
+
+                                    wishlist_table += '<input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">';
+                                    wishlist_table += '<fieldset>';
+                                    wishlist_table += '<table id="wishlist-table" class="data-table wishlist-table table-striped">';
+                                    wishlist_table += '<colgroup><col width="1"><col><col width="1"><col width="1"><col width="1"><col width="1"><col width="1"></colgroup><thead>';
+                                    wishlist_table += '<tr class="first last"><th rowspan="1">&nbsp;</th><th rowspan="1"><span class="nobr">Product Name</span></th><th rowspan="1"></th><th class="a-center" colspan="1"><span class="nobr">Unit Price</span></th><th rowspan="1" class="a-center">Qty</th><th class="a-center" colspan="1">Subtotal</th></tr>';
+                                    wishlist_table += '</thead><tfoot><tr class="first last"><td colspan="50" class="a-right last"><button type="button" title="Continue Shopping" class="button btn-continue" onClick=""><span><span>Continue Shopping</span></span></button><button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update"><span><span>Update Cart</span></span></button><button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Cart</span></span></button></td></tr></tfoot>';
+                                    wishlist_table += '<tbody>';
+                                    productcount = 1;
+                                    jQuery.each(response.result.wishlist_product_list, function (index, value) {
+                                        trclass = "odd";
+                                        if (productcount == 1) {
+                                            trclass += " first last"
+                                        }
+                                        if (Object.keys(response.result.wishlist_product_list).length == productcount) {
+                                            trclass += " last"
+                                        }
+                                        wishlist_table += '<tr class="' + trclass + '">'
+                                        wishlist_table += '<td class="image hidden-table"><a href="product-detail.html" title="' + value.name + '" class="product-image"><img src="' + value.image + '" width="75" alt="' + value.name + '"></a></td>';
+                                        wishlist_table += '<td>';
+                                        wishlist_table += '<h2 class="product-name">';
+                                        wishlist_table += '<a href="product-detail.html">' + value.name + '</a>';
+                                        wishlist_table += '</h2>';
+                                        wishlist_table += '</td>';
+                                        wishlist_table += '<td class="a-center hidden-table">';
+                                        wishlist_table += '<input value="' + value.id + '" name="product_id" class="" type="hidden"> ';
+                                        wishlist_table += '<a href="#" class="edit-bnt add-to-cart-btn edit-product-jq-function" title="Edit item parameters"></a>';
+                                        wishlist_table += '</td>';
+                                        wishlist_table += '<td class="a-right hidden-table">';
+                                        wishlist_table += '<span class="cart-price">';
+                                        wishlist_table += '<span class="price">LKR' + value.price + '</span>';
+                                        wishlist_table += '</span>';
+                                        wishlist_table += '</td>';
+                                        wishlist_table += '<td class="a-center movewishlist">';
+                                        wishlist_table += '<input name="cart[26340][qty]" value="' + value.quantity + '" size="4" title="Qty" class="input-text qty" maxlength="12">';
+                                        wishlist_table += '</td>';
+                                        wishlist_table += '<td class="a-right movewishlist">';
+                                        wishlist_table += '<span class="cart-price">';
+                                        wishlist_table += '<span class="price">LKR' + value.total + '</span>';
+                                        wishlist_table += '</span>';
+                                        wishlist_table += '</td>';
+                                        wishlist_table += '<td class="a-center last">';
+                                        wishlist_table += '<input type="hidden" value="' + value.id + '" name="product_id" class="">';
+                                        wishlist_table += '<a href="#" title="Remove item" class="button remove-item remove-from-cart-jq-function"><span><span>Remove item</span></span></a></td>';
+                                        wishlist_table += '</tr> ';
+                                        productcount++;
+                                    });
+
+                                    wishlist_table += '</tbody></table></fieldset>';
+
+                                    if(Object.keys(response.result.wishlist_product_list).length>0){
+                                    	document.getElementById("get-wishlist-table-form").innerHTML = wishlist_table;
+        	                            }else{
+        	                            	document.getElementById("get-wishlist-table-form").innerHTML = "<p class='nothing-found'>Your Wishlist Is Empty</p>";
+        	                            }
+    	                            
+                                    
+                                    
+                                    
+
+                                }
                             }
 
 
@@ -882,8 +965,8 @@
 
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            alert(xhr.status);
-                            alert(thrownError);
+                        	jQuery.alert(xhr.status);
+                        	jQuery.alert(thrownError);
                         }
                     });
                 });

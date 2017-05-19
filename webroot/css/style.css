@@ -12194,3 +12194,7 @@ padding: 9px 10px;
     content: "\f004";
     font-family: 'FontAwesome';
 }
+
+.fl-cart-contain.first-icon{
+border-right: 1px solid #ffffff;
+}
