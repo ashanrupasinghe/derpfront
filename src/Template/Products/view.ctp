@@ -93,7 +93,7 @@
                       <!--pull-left-->
                       <button type="button" title="Add to Cart" class="button btn-cart fuck add-to-cart-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
                       <?php if ($authUser): ?>
-                      <button type="button" title="Add to Wishlist" class="button btn-cart btn-wishlist fuck add-to-wishlist-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Wishlist</span></button>
+                      <button type="button" title="Add to Wishlist" class="button btn-cart btn-wishlist fuck add-to-wishlist-jq-function" onClick=""><span><i class="icon-basket"></i>Wishlist</span></button>
                       <?php endif;?>
                     </div>
                     <!--add-to-cart-->
@@ -319,7 +319,7 @@
                                   <div class="item-box-hover">
                                     <div class="box-inner">
                                       <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
-                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
                                       
                                     </div>
                                   </div>

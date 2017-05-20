@@ -103,8 +103,9 @@
                                             <ul class="links">
                                                 <?php if ($authUser): ?>
                                                     <li><a href="<?php echo $this->Url->build('/user/dashboard'); ?>" title="My Account">My Account</a></li>
+                                                    <li><a href="<?php echo $this->Url->build('/user/wishlist'); ?>" title="Wishlist">Wishlist</a></li>
                                                 <?php endif; ?>	
-                                                <!-- <li><a href="wishlist.html" title="Wishlist">Wishlist</a></li> -->
+                                                
                                                 <li><a
                                                         href="<?php echo $this->Url->build('/order/checkout'); ?>"
                                                         title="Checkout">Checkout</a></li>

@@ -1476,7 +1476,7 @@ public function deleteWishListItem() {
 					$cart_products = CartProductsTable::getCart ( $cart_id, 0 );
 					 
 					$return ['status'] = 0;
-					$return ['message'] = 'Product has been added to cart';
+					$return ['message'] = 'Product has been added to Wishlist';
 					$return ['result'] ['product_list'] = $cart_products;
 					$return ['result'] ['cart_size'] = sizeof($cart_products);
 					$return ['result'] ['total'] = $this->__getTotal($cart_id,0);
