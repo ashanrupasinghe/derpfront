@@ -1754,13 +1754,16 @@ class CartController extends AppController {
 		] );
 		// echo $delivery_mail_addrrss['email'];
 		// 
-		$admin_mail_address="ashanrupasinghe11@gmail.com";
+		$admin_mail_address="spanrupasinghe111@gmail.com";
 		$customer=$order_model->find('all',['conditions'=>['Orders.id'=>$orderId],'contain'=>['Customers']])->first();		
-		$customer_mail_address=$customer->Customers['email'];//"ashanrupasinghe11@gmail.com"
-		$customer_mail_address="ashanrupasinghe11@gmail.com";
-		$delivery_mail [$delivery_mail_addrrss ['email']] = $delivery_mail_string;
+		$customer_mail_address=$customer->customers['email'];//"ashanrupasinghe11@gmail.com"
+		//$customer_mail_address="ashanrupasinghe11@gmail.com";
+		
+		$customer_mail [$this->Auth->user('username')] = $delivery_mail_string;
 		$admin_mail [$admin_mail_address] = $delivery_mail_string;
-		$customer_mail [$customer_mail_address] = $delivery_mail_string;
+		$delivery_mail [$delivery_mail_addrrss ['email']] = $delivery_mail_string;
+		
+		
 		/*
 		 * print_r($emails[4]);
 		 * print_r($emails[3]);
