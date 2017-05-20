@@ -34,7 +34,7 @@ use Cake\View\Helper\PaginatorHelper;
 class ProductsController extends AppController {
 
     public $paginate = [
-        'limit' => 20,
+        'limit' => 21,
         'order' => [
             'Products.title' => 'asc'
         ]
@@ -65,6 +65,9 @@ class ProductsController extends AppController {
         $package_type = $package_type_query->toArray();
         $this->set('package_type', $package_type);
         $this->set(compact('product'));
+		
+		$category_list = $this->getCategoryTree();
+                $this->set('category_tree', $category_list);
     }
 
     public function category($slug) {

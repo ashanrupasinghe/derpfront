@@ -186,8 +186,71 @@ class OrdersController extends AppController {
 		$this->set ( '_serialize', [ 
 				'order' 
 		] );
+		
+		$category_list = $this->getCategoryTree();
+                $this->set('category_tree', $category_list);
 	}
 	
+	public function getCategoryTree() {
+
+                // Get first level categories
+                $categories = TableRegistry::get('Categories');
+
+                $first_level_categories = $categories->find()->select([
+                            'id',
+                            'title',
+                            'slug'
+                        ])->where([
+                            'level' => '0',
+                            'status' => '1'
+                        ])->toArray();
+
+                $second_level_categories = $categories->find()->select([
+                            'id',
+                            'title',
+                            'parent_id',
+                            'slug'
+                        ])->where([
+                            'level' => '1',
+                            'status' => '1'
+                        ])->toArray();
+
+                $second_category_array = array();
+
+                foreach ($second_level_categories as $second_category) {
+                    // $second_category_array[$second_category['parent_id']] = array();
+                    if (!is_array($second_category_array [$second_category ['parent_id']]))
+                        $second_category_array [$second_category ['parent_id']] = array();
+                    $second_category_array [$second_category ['parent_id']] [] = $second_category;
+                }
+
+                $third_level_categories = $categories->find()->select([
+                            'id',
+                            'title',
+                            'parent_id',
+                            'slug'
+                        ])->where([
+                            'level' => '2',
+                            'status' => '1'
+                        ])->toArray();
+
+                $third_category_array = array();
+
+                foreach ($third_level_categories as $third_category) {
+                    // $second_category_array[$second_category['parent_id']] = array();
+                    if (!is_array($third_category_array [$third_category ['parent_id']]))
+                        $third_category_array [$third_category ['parent_id']] = array();
+                    $third_category_array [$third_category ['parent_id']] [] = $third_category;
+                }
+
+                return [
+                    $first_level_categories,
+                    $second_category_array,
+                    $third_category_array
+                ];
+            }
+
+			
 	/**
 	 */
 	public function update($id = null, $delivery_id = null) {
