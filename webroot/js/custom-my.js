@@ -2,7 +2,7 @@
 jQuery(document).ready(function () {
 	
 	//Timepicker:::http://jdewit.github.io/bootstrap-timepicker/
-	/*jQuery(".delivery_time").timepicker({
+	jQuery(".delivery_time").timepicker({
       showInputs: false,
       showMeridian:false,
       defaultTime:'current'
@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
   //Date picker
 	jQuery('#delivery_date').datepicker({
       autoclose: true
-    });*/
+    });
 	
 	if(jQuery("#address_id").val()===""){
     	jQuery("#billing-new-address-form").css("display", "block");
@@ -128,11 +128,11 @@ jQuery(document).ready(function () {
 			//jQuery("#shipping-please-wait").show();//sudha
 			jQuery("div#err_2").empty();
 			
-			var delivery_date=jQuery(".delivery_date").val();
-			var delivery_time=jQuery(".delivery_time").val();
-			/*var delivery_date="05/31/2017";
-			var delivery_time="12:45";*/
-            
+			var delivery_date=jQuery("#delivery_date").val();
+			var delivery_time=jQuery("#delivery_time").val();
+            if (delivery_date.trim() == "" || delivery_time.trim() == "" ) {//sudha
+                jQuery('#checkout_date_error').show();//sudha
+            } else {//sudha
                 jQuery("#shipping-please-wait").show();
                 
 			jQuery.ajax({
@@ -160,6 +160,8 @@ jQuery(document).ready(function () {
 		        	jQuery("div#err_2").append("<p>Something went wrong: "+err.message+"</p>");
 		        }    
 		      }); 
+		}//suda				
+		
 		}else if(jQuery('#checkout-step-review').is(":visible")){
 			jQuery(".back").hide();
 			current_fs = jQuery('#checkout-step-review');			
@@ -186,7 +188,6 @@ jQuery(document).ready(function () {
 		  		  //next_collored.addClass("active");
 		        }, 
 		        error: function (xhr, status) { 
-		        	alert(JSON.stringify(xhr));
 		        	var err = eval("(" + xhr.responseText + ")");
 		        	jQuery("#review-please-wait").hide();	
 		        	jQuery(".back").show();

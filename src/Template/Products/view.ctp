@@ -35,7 +35,7 @@
                 <div class="product-img-box col-sm-6 col-xs-12">
                   <div class="new-label new-top-left"> New </div>
                   <div class="product-image">
-                    <div class="large-image"> <a href="#" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="/products-images/product-img.jpg"> </a> </div>
+                    <div class="large-image"> <a href="#" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="<?php echo $product->image; ?>"> </a> </div>
 <!--                    <div class="flexslider flexslider-thumb">
                       <ul class="previews-list slides">
                         <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
@@ -110,13 +110,7 @@
                   <!--add-to-box-->
                   <!-- thm-mart Social Share-->
                   <div class="social">
-                    <ul class="link">
-                      <li class="fb"> <a href="http://www.facebook.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                      <!--<li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>-->
-                      <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                      <!--<li class="pintrest"> <a href="http://pinterest.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>-->
-                      <!--<li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>-->
-                    </ul>
+                    
                   </div>
                   <!-- thm-mart Social Share Close-->
                 </div>
@@ -145,7 +139,7 @@
      
       
           <!--product-collateral-->
-          <div class="box-additional">
+          <div class="box-additional" style="display:none;">
             <!-- BEGIN RELATED PRODUCTS -->
             <div class="related-pro container">
               <div class="slider-items-products">
@@ -407,33 +401,33 @@
   <!--main-container-->
 </div>
 <!--col1-layout-->
-<div class="our-features-box wow bounceInUp animated animated">
-  <div class="container">
-    <ul>
-      <li>
-        <div class="feature-box free-shipping">
-          <div class="icon-truck"></div>
-          <div class="content">FREE SHIPPING on order over LKR99</div>
+    <div class="our-features-box wow bounceInUp animated animated">
+        <div class="container">
+            <ul>
+                <li>
+                    <div class="feature-box free-shipping">
+                        <div class="icon-truck"></div>
+                        <div class="content">FREE SHIPPING <br/> IN COLOMBO</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-box need-help">
+                        <div class="icon-support"></div>
+                        <div class="content">NEED HELP <br/> 011 7 55 66 00</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-box money-back">
+                        <div class="icon-money"></div>
+                        <div class="content">CHEAPEST PRICE</div>
+                    </div>
+                </li>
+                <li class="last">
+                    <div class="feature-box return-policy">
+                        <div class="icon-return"></div>
+                        <div class="content">100% FRESH PRODUCTS</div>
+                    </div>
+                </li>
+            </ul>
         </div>
-      </li>
-      <li>
-        <div class="feature-box need-help">
-          <div class="icon-support"></div>
-          <div class="content">Need Help +1 800 123 1234</div>
-        </div>
-      </li>
-      <li>
-        <div class="feature-box money-back">
-          <div class="icon-money"></div>
-          <div class="content">Money Back Guarantee</div>
-        </div>
-      </li>
-      <li class="last">
-        <div class="feature-box return-policy">
-          <div class="icon-return"></div>
-          <div class="content">30 days return Service</div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+    </div>

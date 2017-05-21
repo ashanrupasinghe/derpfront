@@ -57,8 +57,7 @@ class CartController extends AppController {
 				'deleteproduct',
 				'getcart',
 				'quickedit',
-				'sendNotification',
-				'boka'
+				'sendNotification' 
 		] );
 	}
 	public function initialize() {
@@ -732,7 +731,7 @@ class CartController extends AppController {
 							// update shipping order id
 							$this->__updateShippingOrderId ( $cart_id, $order_id );							
 							if ($this->__clearCart ( $cart_id )) {
-								$this->__sendNotification ( $order_id,$cart_id,$chck ['user_id']);
+								$this->__sendNotification ( $order_id,$cart_id );
 								$return ['status'] = 0;
 								$return ['message'] = "success";
 							} else {
@@ -934,21 +933,6 @@ class CartController extends AppController {
 				$return ['unavailable_date'] = $this->__getUnavailableDates ();
 				$return ['delivery_start_time'] = new Time ( '06:00:00' );
 				$return ['delivery_end_time'] = new Time ( '18:00:00' );
-				
-				$unavailable_dates_array = array();
-                foreach($return ['unavailable_date'] AS $date){
-                     $unavailable_dates_array[] = date('d-m-Y',strtotime($date->date));
-                }
-                
-                $next_five_days = $this->__getNextFiveDays();
-                
-                foreach($next_five_days AS $key=>$next_day){
-                    if(in_array($next_day,$unavailable_dates_array)){
-                        unset($next_five_days[$key]);
-                    }
-                }
-                $return["next_days_for_delivery"] = $next_five_days;
-				
 			} else {
 				$return ['status'] = 444;
 				$return ['message'] = "you haven't create a cart";
@@ -960,31 +944,6 @@ class CartController extends AppController {
 		
 		return $return;
 	}
-	
-	function __getNextFiveDays(){
-        $dates = array();
-                $i = -1;
-
-                while (true) {
-                    $i++;
-
-                    $time = strtotime("+$i days");
-                    $dayOfWeek = date('w', $time);
-
-                    /* 'w' - day of week, numeric, i.e. "0" (Sunday) to "6" (Saturday) */
-                    if (($dayOfWeek == 0) or ( $dayOfWeek == 6)) {
-                        continue;
-                    }
-
-                    $dates[] = date('d-m-Y', $time);
-
-                    if (count($dates) >= 5) {
-                        break;
-                    }
-                }
-                return $dates;
-    }
-	
 	function __getDeliveryTime($cart_id) {
 		$shippingModel = $this->loadModel ( 'Shipping' );
 		
@@ -1636,7 +1595,7 @@ class CartController extends AppController {
 				$third_category_array 
 		];
 	}
-	private function __sendNotification($orderId,$cart_id,$user_id) {
+	private function __sendNotification($orderId,$cart_id) {
 		$order_model = $this->loadModel ( 'Orders' );
 		$orders_products_model = $this->loadModel ( 'OrderProducts' );
 		$supplier_notify_model = $this->loadModel ( 'SupplierNotifications' );
@@ -1677,7 +1636,7 @@ class CartController extends AppController {
 		$dilivery_notification_result = $delivery_notify_model->save ( $dlilevery_notification_entity );
 		
 		$this->Notification->setNotification ( 1, '', '', $orderId, '', '', '', '' );	
-		$this->sendToAll2 ( $orderId, 'new', $supplerids, $order->deliveryId, "",$cart_id,$user_id ); // send emails,product_name,product_quantity,product_supplier
+		$this->sendToAll2 ( $orderId, 'new', $supplerids, $order->deliveryId, "",$cart_id ); // send emails,product_name,product_quantity,product_supplier
 	}
 	
 	// new order information email
@@ -1693,8 +1652,7 @@ class CartController extends AppController {
 	 *        	if you sent this email after long time, you need to get price from OrderProducts table,
 	 *        	because product price may change time to time
 	 */
-	public function sendToAll2($orderId, $trype, $suppliers, $delivery, $orderdata=null,$cart_id=null,$user_id=null) {
-		$id_of_the_order=$orderId;
+	public function sendToAll2($orderId, $trype, $suppliers, $delivery, $orderdata=null,$cart_id=null) {
 		$products_model = $this->loadModel ( 'Products' );
 		$suppliers_model = $this->loadModel ( 'Suppliers' );
 		$delivery_model = $this->loadModel ( 'Delivery' );
@@ -1796,15 +1754,14 @@ class CartController extends AppController {
 		] );
 		// echo $delivery_mail_addrrss['email'];
 		// 
-		$admin_mail_address=Configure::read('admin_email');
+		$admin_mail_address="spanrupasinghe111@gmail.com";
 		//$customer=$order_model->find('all',['conditions'=>['Orders.id'=>$orderId],'contain'=>['Customers']])->first();		
 		//$customer_mail_address=$customer->customers['email'];//"ashanrupasinghe11@gmail.com"
 		//$customer_mail_address="ashanrupasinghe11@gmail.com";
-		$order_data=(new OrdersController ())->__getOrderMailData ($id_of_the_order);
+		$order_data=(new OrdersController ())->__getOrderMailData ($orderId);
 		
-		$user=$this->Cart->Users->get($user_id);		
-		$customer_mail [$user->username] = $order_data;		
-		//$customer_mail [$this->Auth->user('username')] = $order_data;
+		
+		$customer_mail [$this->Auth->user('username')] = $order_data;
 		$admin_mail [$admin_mail_address] = $order_data;
 		$delivery_mail [$delivery_mail_addrrss ['email']] = $delivery_mail_string;
 		
@@ -1878,22 +1835,21 @@ class CartController extends AppController {
 			$message_full = $message . $message_body . $message_end;
 				
 			// echo 'xxx'.$email.'<br>'.$message_full;
-			$from_mail_address=Configure::read('from_email');
+				
 			$email = new Email ( 'default' );
 			$email->from ( [
-					$from_mail_address => 'Direct2door.lk'
+					'spanrupasinghe11@gmail.com' => 'Direct2door.com'
 			] )->to ( $email_add )->subject ( $subject )->emailFormat ( 'html' )->send ( $message_full );
 			$message_full = "";
 		}
 	}
 	
 public function sendemail2($type = 'new', $recipients, $recipient_type){
-	$from_mail_address=Configure::read('from_email');
 		foreach ( $recipients as $email_add => $data ) {
 			$email = new Email ();
 			$email 	->template('customerorder')
 					->viewVars($data)
-				   	->from ( [$from_mail_address => 'Direct2door.lk'] )
+				   	->from ( ['spanrupasinghe11@gmail.com' => 'Direct2door.com'] )
 					->to ( $email_add )
 					->subject ( "Your Direct 2 door order confirmation" )
 					->emailFormat ( 'html' )
@@ -1956,33 +1912,6 @@ public function sendemail2($type = 'new', $recipients, $recipient_type){
 			$subTotal += $total;
 		}
 		return $subTotal;
-	}
-	
-	public function boka(){
-		$order_data=(new OrdersController ())->__getOrderMailData (38);
-		print '<pre>';
-		$x=$order_data['order']->shipping[0]->delivery_date_time;
-		
-		echo $x->format('Y-m-d').'<br>'. $x->format('g:i A'); 
-		die();
-		
-		/*
-		 * shipping taabele 
-order table
-
-
-src/Controller/CartController.php
-src/Controller/OrdersController.php	
-
-src/Model/Table/OrdersTable.php	
-src/Model/Table/ShippingTable.php
-
-src/Template/Email/html/customerorder-1.ctp
-src/Template/Email/html/customerorder.ctp
-src/Template/Layout/Email/html/default-invoice.ctp
-
-
-Configure::read('admin_email');*/
 	}
 	
 	

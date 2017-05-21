@@ -1,5 +1,3 @@
-use PhpParser\Node\Expr\Print_;
-
 <div class="page-heading">
     <div class="breadcrumbs">
         <div class="container">
@@ -83,7 +81,7 @@ use PhpParser\Node\Expr\Print_;
                                     <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                         <div class="item-inner">
                                             <div class="item-img">
-                                                <div class="item-img-info"><a href="/product/<?php echo $product->slug; ?>" title="<?php echo $product->name; ?>" class="product-image"><img src="/products-images/product-img.jpg" alt="<?php echo $product->name; ?>"></a>
+                                                <div class="item-img-info"><a href="/product/<?php echo $product->slug; ?>" title="<?php echo $product->name; ?>" class="product-image"><img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"></a>
 
                                                     <div class="item-box-hover">
                                                         <div class="box-inner">
@@ -139,33 +137,4 @@ use PhpParser\Node\Expr\Print_;
 </section>
 <!--main-container col2-left-layout--> 
 
-<div class="our-features-box wow bounceInUp animated animated">
-    <div class="container">
-        <ul>
-            <li>
-                <div class="feature-box free-shipping">
-                    <div class="icon-truck"></div>
-                    <div class="content">FREE SHIPPING</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box need-help">
-                    <div class="icon-support"></div>
-                    <div class="content">Need Help +1 800 123 1234</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box money-back">
-                    <div class="icon-money"></div>
-                    <div class="content">Money Back Guarantee</div>
-                </div>
-            </li>
-            <li class="last">
-                <div class="feature-box return-policy">
-                    <div class="icon-return"></div>
-                    <div class="content">30 days return Service</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
+<?php include '../Partials/our_features.ctp'; ?>

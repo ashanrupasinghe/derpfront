@@ -1,4 +1,4 @@
-<?php 
+<?php
 //echo '<pre>';
 //print_r($sub_categories['1']);
 ?>
@@ -12,15 +12,22 @@
             <ul>
                 <?php
                 $i = 0;
-                foreach ($main_categories AS $main_cat) {
+
+                foreach ($category_tree[0] AS $main_cat) {
                     ?>
-                    <li> <a class="<?php echo ($i == 0 ? 'active' : ''); ?>" href="/products/category/<?php echo $main_cat['slug']; ?>"><?php echo $main_cat['title']; ?></a> <span class="subDropdown <?php echo ($i == 0 ? 'minus' : 'plus'); ?>"></span>
+                    <li > <a class="<?php echo ($i == 0 ? 'active' : ''); ?>" href="/products/category/<?php echo $main_cat['slug']; ?>"><?php echo $main_cat['title']; ?></a> <span class="subDropdown <?php echo ($i == 0 ? 'minus' : 'plus'); ?>"></span>
 
                         <ul class="level0_<?php echo $main_cat['id']; ?>" style="display:<?php echo ($i == 0 ? 'block' : 'none'); ?>">
-                        <?php foreach ($sub_categories[$main_cat['id']] AS $sub_cat) { ?>
-                                <li> <a href="/products/category/<?php echo $sub_cat['slug']; ?>"> <?php echo $sub_cat['title']; ?> </a>
+                            <?php foreach ($category_tree[1][$main_cat['id']] AS $sub_cat) { ?>
+                                <li> <a href="/products/category/<?php echo $sub_cat['slug']; ?>"> <?php echo $sub_cat['title']; ?> </a><span class="subDropdown plus"></span>
+                                    <ul class="level1" style="display:none">
+                                        <?php foreach ($category_tree[2][$sub_cat['id']] AS $sub_sub_cat) { ?>
+                                            <li> <a href="/products/category/<?php echo $sub_sub_cat['slug']; ?>"> <?php echo $sub_sub_cat['title']; ?> </a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
                                 </li>
-                        <?php } ?>
+                            <?php } ?>
                         </ul>
                     </li>
                     <?php
@@ -40,8 +47,8 @@
                 <dt class="odd">Category</dt>
                 <dd class="odd">
                     <ol>
-                        <?php foreach($main_categories AS $main_cat){ ?>
-                        <li> <a href="/products/category/<?php echo $main_cat['slug']; ?>"> <?php echo $main_cat['title']; ?> </a> </li>
+                       <?php foreach ($category_tree[0] AS $main_cat) { ?>
+                            <li> <a href="/products/category/<?php echo $main_cat['slug']; ?>"> <?php echo $main_cat['title']; ?> </a> </li>
                         <?php } ?>
                     </ol>
                 </dd>
@@ -64,19 +71,19 @@
                     <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="item active"><img src="images/blog-banner.png" alt="slide3">
+                    <div class="item active"><img src="/images/blog-banner.png" alt="slide3">
                         <div class="carousel-caption">
                             <h3><a title=" Sample Product" href="product-detail.html">50% OFF</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             <a class="link" href="#">Buy Now</a></div>
                     </div>
-                    <div class="item"><img src="images/blog-banner.png" alt="slide1">
+                    <div class="item"><img src="/images/blog-banner.png" alt="slide1">
                         <div class="carousel-caption">
                             <h3><a title=" Sample Product" href="product-detail.html">Hot collection</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                     </div>
-                    <div class="item"><img src="images/blog-banner.png" alt="slide2">
+                    <div class="item"><img src="/images/blog-banner.png" alt="slide2">
                         <div class="carousel-caption">
                             <h3><a title=" Sample Product" href="product-detail.html">Summer collection</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -90,15 +97,17 @@
     <div class="block block-list block-cart" style="display: none;">
         <div class="block-title"> My Cart </div>
         <div class="block-content">
+            <?php if (sizeof($cart_products) > 0): ?>
             <div class="summary">
-                <p class="amount">There is <a href="#">1 item</a> in your cart.</p>
-                <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">LKR299.00</span> </p>
+                <p class="amount">There are <a href="#"><?php echo $cart_size; ?> items</a> in your cart.</p>
+                <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">LKR<?php echo $total['grand_total']; ?>.00</span> </p>
             </div>
             <div class="ajax-checkout">
                 <button type="button" title="Checkout" class="button button-checkout" onClick="#"> <span>Checkout</span> </button>
             </div>
             <p class="block-subtitle">Recently added item(s)</p>
             <ul id="cart-sidebar" class="mini-products-list">
+                 <?php foreach ($cart_products as $product): ?>
                 <li class="item">
                     <div class="item-inner"> <a href="#" class="product-image"><img src="products-images/product-img.jpg" width="80" alt="product"></a>
                         <div class="product-details">
@@ -113,6 +122,7 @@
                         <!--product-details-bottoms--> 
                     </div>
                 </li>
+                <?php endforeach; ?>
                 <li class="item  last1">
                     <div class="item-inner"> <a href="#" class="product-image"><img src="products-images/product-img.jpg" width="80" alt="product"></a>
                         <div class="product-details">
@@ -128,10 +138,11 @@
                     </div>
                 </li>
             </ul>
+            <?php endif; ?>
         </div>
     </div>
 
     <!--block block-list block-compare--> 
 
-    <div class="hot-banner"><img src="/images/hot-trends-banner.png" alt="banner"></div>  
+    <!--<div class="hot-banner"><img src="/images/hot-trends-banner.png" alt="banner"></div>-->  
 </aside>

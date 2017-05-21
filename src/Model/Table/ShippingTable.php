@@ -44,6 +44,7 @@ class ShippingTable extends Table
         $this->belongsTo('Orders', [
             'foreignKey' => 'order_id'
         ]);
+        
     }
 
     /**

@@ -221,3 +221,8 @@ Type::build('timestamp')
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+
+Configure::write(array(
+'admin_email'=>'sudharshan.ars@gmail.com',
+'from_email'=>'sudharshan.ars@gmail.com'
+));

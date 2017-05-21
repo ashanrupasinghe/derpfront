@@ -1832,14 +1832,18 @@ class OrdersController extends AppController {
 		}
 	}
 	public function getOrderList() {
-		// {"status":0,"message":"Success","result":[{"id":1,”date":"xxx",”grand_total”:”xx”…},….]}
+	
 		$token = $this->__getToken ();
 		$chck = $this->__checkToken ( $token );
+		
+		// {"status":0,"message":"Success","result":[{"id":1,”date":"xxx",”grand_total”:”xx”…},….]}
+		$cus=$this->Orders->Customers->find('all',['conditions'=>['user_id'=>$chck ['user_id']]])->toArray();
+		
 		
 		if ($chck ['boolean']) {
 			$orders = $this->Orders->find ( 'all', [ 
 					'conditions' => [ 
-							'Orders.customerId' => $chck ['user_id'] 
+							'Orders.customerId' => $cus[0]->id 
 					],
 					'fields' => [ 
 							'id',
@@ -1884,7 +1888,7 @@ class OrdersController extends AppController {
 		$token = $this->__getToken ();
 		
 		$chck = $this->__checkToken ( $token );
-		
+		$cus=$this->Orders->Customers->find('all',['conditions'=>['user_id'=>$chck ['user_id']]])->toArray();
 		if ($chck ['boolean']) {
 			if ($order_id) {
 				$order = $this->Orders->find ( 'all', [ 
@@ -1894,7 +1898,7 @@ class OrdersController extends AppController {
 				] )->toArray ();
 				if (sizeof ( $order )) {
 					
-					if ($order [0]->customerId == $chck ['user_id']) {
+					if ($order [0]->customerId == $cus[0]->id) {
 						
 						$total = $this->__getTotal ( $order_id );
 						$order_products = OrderProductsTable::getOrderProducts ( $order_id );
@@ -1954,6 +1958,28 @@ class OrdersController extends AppController {
 		$um = $this->loadModel ( 'Users' );
 		$u = $um->get ( $user_id ); // current logedin user
 		return $u->mobtoken;
+	}
+	
+	public function __getOrderMailData($id = null) {
+		$order = $this->Orders->get ( $id, [
+				'contain' => [
+						'OrderProducts',
+						'callcenter',
+						'delivery',
+						'customers',
+						'city',
+						'Shipping',
+						'OrderProducts.Products',
+						'OrderProducts.Products.packageType',
+						'OrderProducts.Suppliers',
+						'OrderProducts.Suppliers.city'
+				]
+		] );
+	
+		
+		$total = $this->countTotal ( $id );
+		return ['order'=>$order,'total_pdf'=>$total];
+		
 	}
 }
 //http://www.jqueryscript.net/form/jQuery-Plugin-To-Duplicate-and-Remove-Form-Fieldsets-Multifield.html

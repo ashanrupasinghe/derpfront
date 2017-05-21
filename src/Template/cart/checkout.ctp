@@ -438,7 +438,7 @@
 					<li id="opc-review" class="section">
 						<div class="step-title">
 							<span class="number">3</span>
-							<h3 class="one_page_heading">Compleate Checkout</h3>
+							<h3 class="one_page_heading">Complete Checkout</h3>
 						</div>
 						<div id="err_3" class="step a-item error-div"></div>
 						<div id="checkout-step-review" class="step a-item"
@@ -449,7 +449,7 @@
 									
 									<button type="button" class="button continue" title="Continue"
 										onClick="">
-										<span>Compleate Checkout</span>
+										<span>Complete Checkout</span>
 									</button>
 									<a href="#" onClick="return false;"
 										class="back"><small>« </small>Back</a> <span
