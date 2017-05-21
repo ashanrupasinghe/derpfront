@@ -1860,7 +1860,7 @@ class CartController extends AppController {
 		$total = $subtotal + $tax - $discount - $counpon_value;
 		// change adding discount directly,
 	
-		$direct_discount = $data ['direct_discount'];
+		$direct_discount = 0;//$data ['direct_discount'];
 		if ($direct_discount == "") {
 			$direct_discount = 0;
 		}
