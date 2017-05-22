@@ -76,7 +76,7 @@
     
                 <td class="a-right hidden-table">
                             <span class="cart-price">
-                                                <span class="price">LKR<?php echo $product['price'];?></span>                
+                                                <span class="price">LKR<?php echo ' '.$product['price'];?></span>                
             </span>
 
 
@@ -87,7 +87,7 @@
         <td class="a-right movewishlist">
                     <span class="cart-price">
         
-                                                <span class="price">LKR<?php echo $product['total'];?></span>                            
+                                                <span class="price">LKR<?php echo ' '.$product['total'];?></span>                            
         </span>
             </td>
             
@@ -147,7 +147,7 @@ else :?>
         <strong>Grand Total</strong>
     </td>
     <td style="" class="a-right">
-        <strong><span class="price">LKR<?php echo $return['result']['total']['grand_total'];?></span></strong>
+        <strong><span class="price">LKR<?php echo ' '.$return['result']['total']['grand_total'];?></span></strong>
     </td>
 </tr>
         </tfoot>
@@ -156,25 +156,25 @@ else :?>
     <td style="" class="a-left" colspan="1">
         Subtotal    </td>
     <td style="" class="a-right">
-        <span class="price">LKR<?php echo $return['result']['total']['sub_total'];?></span>    </td>
+        <span class="price">LKR<?php echo ' '.$return['result']['total']['sub_total'];?></span>    </td>
 </tr>
 <tr>
     <td style="" class="a-left" colspan="1">
         Tax    </td>
     <td style="" class="a-right">
-        <span class="price">LKR<?php echo $return['result']['total']['tax'];?></span>    </td>
+        <span class="price">LKR<?php echo ' '.$return['result']['total']['tax'];?></span>    </td>
 </tr>
 <tr>
     <td style="" class="a-left" colspan="1">
         Discount    </td>
     <td style="" class="a-right">
-        <span class="price">LKR<?php echo $return['result']['total']['discount'];?></span>    </td>
+        <span class="price">LKR<?php echo ' '.$return['result']['total']['discount'];?></span>    </td>
 </tr>
 <tr>
     <td style="" class="a-left" colspan="1">
         Counpon Value    </td>
     <td style="" class="a-right">
-        <span class="price">LKR<?php echo $return['result']['total']['counpon_value'];?></span>    </td>
+        <span class="price">LKR<?php echo ' '.$return['result']['total']['counpon_value'];?></span>    </td>
 </tr>
         </tbody>
     </table>
@@ -209,7 +209,7 @@ else :?>
         <li>
           <div class="feature-box free-shipping">
             <div class="icon-truck"></div>
-            <div class="content">FREE SHIPPING on order over LKR99</div>
+            <div class="content">FREE SHIPPING on order over LKR 99</div>
           </div>
         </li>
         <li>

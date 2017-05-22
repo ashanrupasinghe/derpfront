@@ -12201,3 +12201,14 @@ padding: 9px 10px;
 .fl-cart-contain.first-icon{
 border-right: 1px solid #ffffff;
 }
+.add-to-cart-grid{
+	margin-bottom: 10px;
+	float: none !important;
+}
+.add-to-cart-grid input.qty{
+height: 40px;
+width: 40px;
+}
+.custom.add-to-cart-grid button.items-count{
+padding: 13px 13px 10px 13px;
+}

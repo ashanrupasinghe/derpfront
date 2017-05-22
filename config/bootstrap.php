@@ -223,6 +223,7 @@ if (Configure::read('debug')) {
 }
 
 Configure::write(array(
-'admin_email'=>'sudharshan.ars@gmail.com',
-'from_email'=>'sudharshan.ars@gmail.com'
+'admin_email'=>'info@direct2door.lk',
+'from_email'=>'info@direct2door.lk',
+'add_order_email_subject'=>'Your Direct 2 door order confirmation'
 ));

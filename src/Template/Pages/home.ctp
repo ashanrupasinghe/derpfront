@@ -131,11 +131,19 @@
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR <?php echo $latest_product['price']; ?>.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price">LKR<?php echo ' '.$latest_product['price']; ?>.00</span> </span> </div>
                                         </div>
                                         <div class="add_cart">
+                                        <?php /*?>
 											<input name="qty" id="qty" maxlength="12" value="1" title="Quantity" class="input-text qty" type="hidden" class="add_to_cart_product_qty">
                                             <input name="product_id" id="product_id" value="<?php echo $latest_product->id?>" type="hidden" class="add_to_cart_product_id">
+                                        <?php */?>
+                                        <div class="custom pull-left add-to-cart add-to-cart-grid">
+                         <button onClick="var result = document.getElementById('<?php echo 'qty-'.$latest_product->id; ?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                          <input type="text" name="qty" id="<?php echo 'qty-'.$latest_product->id; ?>" size="1" maxlength="12" value="1" title="Quantity:" class="input-text qty add_to_cart_product_qty">
+                          <input type="hidden" name="product_id" id="product_id" value="<?php echo $latest_product->id; ?>" class="add_to_cart_product_qty">
+                           <button onClick="var result = document.getElementById('<?php echo 'qty-'.$latest_product->id; ?>'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                        </div>    
                                             <button class="button btn-cart add-to-cart-jq-function" type="button"><span>Add to Cart</span></button>
                                         </div>
                                     </div>

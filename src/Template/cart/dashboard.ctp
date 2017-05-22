@@ -53,7 +53,7 @@
                         <td><?php echo $order['id'];?></td>
                         <td><span class="nobr"><?php echo $order['created'];?></span></td>
                         
-                        <td><span class="price">LKR <?php echo $order['total'];?></span></td>
+                        <td><span class="price">LKR<?php echo ' '.$order['total'];?></span></td>
                         <td><em><?php echo $payment_status[$order['status']];?></em></td>
                         <td class="a-center last">
                         	<span class="nobr"> 

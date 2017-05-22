@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>D2D</title>
+        <title>Direct2door.lk | Online grocery store in Sri Lanka | Fresh Vegetables | Groceries | Free Delivery</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Default Description">
-        <meta name="keywords" content="fashion, store, E-commerce">
-        <meta name="robots" content="*">
-        <link rel="icon" href="#" type="image/x-icon">
-        <link rel="shortcut icon" href="#" type="image/x-icon">
+        <meta name="description" content="Welcome to Direct2door.lk the best online grocery store for fresh vegetables. We provide free delivery to your doorstep. Exclusive offers and discounts are available at our store."/>
+        <meta name="keywords" content="Online grocery Sri Lanka, Online shopping Sri Lanka, Buy groceries online Sri Lanka, Online groceries, Online grocery shop, Online grocery store, Online shopping in Sri Lanka, Direc2door.lk,Sri Lanka,Online supermarket,Online supermarkets,Fresh vegetables,Online shopping,Free delivery,Cheap delivery,Cheap vegetable,Cheap grocery,Farm fresh,Grocery shipping and delivery,Health food,Healthy food,Groceries,Delivery,Vegetables,Grocery,Grocery store,Vegetable,Supermarket,Super market,Colombo market,Colombo pola,Organic vegetables,Cheap Organic vegetables,Organic vegetable,Cheap Organic fruits,Farmers market,Farmer’s market,High quality vegetable,High quality vegetables,Discount on delivery,Ontime delivery,Direct2door,Direct 2 door,Directtodoor,Cheapest supermarket in Sri Lanka,Cheapest supermarket in Colombo,Cheapest vegetables in Sri Lanka,Cheapest vegetables in Colombo,Cheapest delivery in Sri Lanka,Cheapest delivery in Colombo,Fresh Vegetables, Fruits, Delivery, Door delivery, Sri Lanka, Colombo, Order online, Buy online, Free delivery,Online Shopping, Home Delivery, Sri Lankan, Grocery, Groceries, Online Supermarket, food, food city, supermarket, house hold, foods, baby items, goods, meat, fish, gifts, Retail in Sri Lanka, online stores, online stores shopping, shop online,super,supr,super market,products,items,promotions,deals,savings,offers,discounts,quality,fresh,vegetable,vegetables,produce,meat,fresh meat, office delivery, free office delivery,delivery,convinience, pick up,pickup"/>
+        <meta name="robots" content="INDEX,FOLLOW"/>
+        <link rel="icon" href="/images/D2D_logo_32p.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/images/D2D_logo_32p.png" type="image/x-icon">
 
         <!-- CSS Style -->
         <?= $this->Html->css('bootstrap.min.css') ?>
@@ -55,10 +55,10 @@
                     <div class="assetBlock">
                         <div style="height: 20px; overflow: hidden;" id="slideshow">
                             <p style="display: block;">
-                                HOT DAYS! - <span>50%</span> GET READY FOR SUMMER! &gt;
+                                To make an order over the phone or whatsapp - <span>011 7 55 66 00</span>
                             </p>
                             <p style="display: none;">
-                                SALE UP TO <span>40%</span> HURRY LIMITED OFFER! &gt;
+                                To make an order via email - <span>info@direct2door.lk</span>
                             </p>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                                                             <ul class="currencies_list">
                                                                 <li><a href="#" title="EGP"> £</a></li>
                                                                 <li><a href="#" title="EUR"> €</a></li>
-                                                                <li><a href="#" title="USD"> LKR</a></li>
+                                                                <li><a href="#" title="USD"> LKR </a></li>
                                                             </ul>
                                                         </div>
                                                         fl-currency
@@ -139,7 +139,7 @@
                                             <div class="fl-mini-cart-content" id="fl-mini-cart-content" style="display: none;">
                                                 <div class="block-subtitle">
                                                     <div class="top-subtotal" id="top-sub-total">
-                                                        <?php echo $cart_size; ?> items, <span class="price">LKR<?php echo $total['grand_total']; ?>.00</span>
+                                                        <?php echo $cart_size; ?> items, <span class="price">LKR<?php echo ' '.$total['grand_total']; ?>.00</span>
                                                     </div>
                                                     <!--top-subtotal-->
                                                     <!--pull-right-->
@@ -726,7 +726,7 @@
                                     list += '<div class="fl-mini-cart-content" style="display: none;">';
                                     list += '<div class="block-subtitle">';
                                     list += '<div class="top-subtotal" id="top-sub-total">';
-                                    list += response.result.cart_size + ' items, <span class="price">LKR' + response.result.total.grand_total + '</span>';
+                                    list += response.result.cart_size + ' items, <span class="price">LKR ' + response.result.total.grand_total + '</span>';
                                     list += '</div>';
                                     list += '</div>';
                                     list += '<ul class="mini-products-list" id="cart-sidebar">';
@@ -761,7 +761,7 @@
 
                                     list += '</ul>';
                                     list += '<div class="actions">';
-                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + '/order/checkout\'">';
+                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + 'order/checkout\'">';
                                     list += '<span>Checkout</span>';
                                     list += '</button>';
                                     list += '</div>';
@@ -805,7 +805,7 @@
                                         table += '</td>';
                                         table += '<td class="a-right hidden-table">';
                                         table += '<span class="cart-price">';
-                                        table += '<span class="price">LKR' + value.price + '</span>';
+                                        table += '<span class="price">LKR ' + value.price + '</span>';
                                         table += '</span>';
                                         table += '</td>';
                                         table += '<td class="a-center movewishlist">';
@@ -813,7 +813,7 @@
                                         table += '</td>';
                                         table += '<td class="a-right movewishlist">';
                                         table += '<span class="cart-price">';
-                                        table += '<span class="price">LKR' + value.total + '</span>';
+                                        table += '<span class="price">LKR ' + value.total + '</span>';
                                         table += '</span>';
                                         table += '</td>';
                                         table += '<td class="a-center last">';
@@ -830,25 +830,25 @@
                                     Totaltable += '</colgroup><tfoot>';
                                     Totaltable += '<tr>';
                                     Totaltable += '<td style="" class="a-left" colspan="1"><strong>Grand Total</strong></td>';
-                                    Totaltable += '<td style="" class="a-right"><strong><span class="price">LKR' + response.result.total.grand_total + '</span></strong></td>';
+                                    Totaltable += '<td style="" class="a-right"><strong><span class="price">LKR ' + response.result.total.grand_total + '</span></strong></td>';
                                     Totaltable += '</tr>';
                                     Totaltable += '</tfoot>';
                                     Totaltable += '<tbody>';
                                     Totaltable += '<tr>';
                                     Totaltable += '<td style="" class="a-left" colspan="1"> Subtotal</td>';
-                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR' + response.result.total.sub_total + '</span></td>';
+                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR ' + response.result.total.sub_total + '</span></td>';
                                     Totaltable += '</tr>';
                                     Totaltable += '<tr>';
                                     Totaltable += '<td style="" class="a-left" colspan="1">  Tax    </td>';
-                                    Totaltable += '<td style="" class="a-right"> <span class="price">LKR' + response.result.total.tax + '</span></td>';
+                                    Totaltable += '<td style="" class="a-right"> <span class="price">LKR ' + response.result.total.tax + '</span></td>';
                                     Totaltable += '</tr>';
                                     Totaltable += '<tr>';
                                     Totaltable += '<td style="" class="a-left" colspan="1">     Discount    </td>';
-                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR' + response.result.total.discount + '</span>    </td>';
+                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR ' + response.result.total.discount + '</span>    </td>';
                                     Totaltable += '</tr>';
                                     Totaltable += '<tr>';
                                     Totaltable += '<td style="" class="a-left" colspan="1">        Counpon Value    </td>';
-                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR' + response.result.total.counpon_value + '</span>    </td>';
+                                    Totaltable += '<td style="" class="a-right"><span class="price">LKR ' + response.result.total.counpon_value + '</span>    </td>';
                                     Totaltable += '</tr>';
                                     Totaltable += '</tbody>';
                                     document.getElementById("get-checkot-table-form").innerHTML = table;
@@ -894,7 +894,7 @@
                                         wishlist_table += '</td>';
                                         wishlist_table += '<td class="a-right hidden-table">';
                                         wishlist_table += '<span class="cart-price">';
-                                        wishlist_table += '<span class="price">LKR' + value.price + '</span>';
+                                        wishlist_table += '<span class="price">LKR ' + value.price + '</span>';
                                         wishlist_table += '</span>';
                                         wishlist_table += '</td>';
                                         wishlist_table += '<td class="a-center movewishlist">';
@@ -902,7 +902,7 @@
                                         wishlist_table += '</td>';
                                         wishlist_table += '<td class="a-right movewishlist">';
                                         wishlist_table += '<span class="cart-price">';
-                                        wishlist_table += '<span class="price">LKR' + value.total + '</span>';
+                                        wishlist_table += '<span class="price">LKR ' + value.total + '</span>';
                                         wishlist_table += '</span>';
                                         wishlist_table += '</td>';
                                         wishlist_table += '<td class="a-center last">';

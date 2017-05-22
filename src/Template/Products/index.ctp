@@ -728,8 +728,8 @@
               <dt class="last odd">Price</dt>
               <dd class="last odd">
                 <ol>
-                  <li> <a href="#"> <span class="price">LKR0.00</span> - <span class="price">LKR99.99</span> <span class="count">(26)</span> </a> </li>
-                  <li> <a href="#"> <span class="price">LKR100.00</span> and above <span class="count">(3)</span> </a> </li>
+                  <li> <a href="#"> <span class="price">LKR 0.00</span> - <span class="price">LKR99.99</span> <span class="count">(26)</span> </a> </li>
+                  <li> <a href="#"> <span class="price">LKR 100.00</span> and above <span class="count">(3)</span> </a> </li>
                 </ol>
               </dd>
             </dl>
@@ -772,7 +772,7 @@
           <div class="block-content">
             <div class="summary">
               <p class="amount">There is <a href="#">1 item</a> in your cart.</p>
-              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">LKR299.00</span> </p>
+              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">LKR 299.00</span> </p>
             </div>
             <div class="ajax-checkout">
               <button type="button" title="Checkout" class="button button-checkout" onClick="#"> <span>Checkout</span> </button>
@@ -787,7 +787,7 @@
                     <i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                     <!--access--> 
                     
-                    <strong>1</strong> x <span class="price">LKR299.00</span>
+                    <strong>1</strong> x <span class="price">LKR 299.00</span>
                     <p class="product-name"><a href="#">RETIS LAPEN CASEN</a></p>
                   </div>
                   <!--product-details-bottoms--> 
@@ -801,7 +801,7 @@
                     <i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                     <!--access--> 
                     
-                    <strong>1</strong> x <span class="price">LKR299.00</span>
+                    <strong>1</strong> x <span class="price">LKR 299.00</span>
                     <p class="product-name"><a href="#">RETIS LAPEN CASEN</a></p>
                   </div>
                   <!--product-details-bottoms--> 
@@ -887,7 +887,7 @@
       <li>
         <div class="feature-box free-shipping">
           <div class="icon-truck"></div>
-          <div class="content">FREE SHIPPING on order over LKR99</div>
+          <div class="content">FREE SHIPPING on order over LKR 99</div>
         </div>
       </li>
       <li>

@@ -56,7 +56,7 @@
 <?php $count=0;?>                
 <?php foreach ($return['result']['product_list'] as $product):?>                                    
 <tr class="<?php if ($count==0){echo 'first last ';}?>odd <?php if ($count==sizeof($return['result']['product_list'])-1){echo ' last';}?>">
-    <td class="image hidden-table"><a href="product-detail.html" title="<?php echo $product['name'];?>" class="product-image"><img src="<?php echo $product['image'];?>" width="75" alt="<?php echo $product['name'];?>"></a></td>
+    <td class="image hidden-table"><a href="product-detail.html" title="<?php echo $product['name'];?>" class="product-image"><img style="width: 75px;" src="<?php echo $product['image'];?>" width="75px" alt="<?php echo $product['name'];?>"></a></td>
     <td>
         <h2 class="product-name">
                     <a href="product-detail.html"><?php echo $product['name']?></a>
@@ -70,7 +70,7 @@
     
                 <td class="a-right hidden-table">
                             <span class="cart-price">
-                                                <span class="price">LKR<?php echo $product['price'];?></span>                
+                                                <span class="price">LKR<?php echo ' '.$product['price'];?></span>                
             </span>
 
 
@@ -81,7 +81,7 @@
         <td class="a-right movewishlist">
                     <span class="cart-price">
         
-                                                <span class="price">LKR<?php echo $product['total'];?></span>                            
+                                                <span class="price">LKR<?php echo ' '.$product['total'];?></span>                            
         </span>
             </td>
             <td class="a-center last">
@@ -121,36 +121,4 @@
           
           </div> <!--col1-layout-->
           
-
- <div class="our-features-box wow bounceInUp animated animated">
-    <div class="container">
-      <ul>
-        <li>
-          <div class="feature-box free-shipping">
-            <div class="icon-truck"></div>
-            <div class="content">FREE SHIPPING on order over LKR99</div>
-          </div>
-        </li>
-        <li>
-          <div class="feature-box need-help">
-            <div class="icon-support"></div>
-            <div class="content">Need Help +1 800 123 1234</div>
-          </div>
-        </li>
-        <li>
-          <div class="feature-box money-back">
-            <div class="icon-money"></div>
-            <div class="content">Money Back Guarantee</div>
-          </div>
-        </li>
-        <li class="last">
-          <div class="feature-box return-policy">
-            <div class="icon-return"></div>
-            <div class="content">30 days return Service</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!-- For version 1,2,3,4,6 -->
   

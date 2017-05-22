@@ -451,7 +451,7 @@ class OrdersController extends AppController {
 						$dilivery_notification = [ 
 								'deliveryId' => $order->deliveryId,
 								'notificationText' => 'del nofify',
-								'sentFrom' => 1,
+								'sentFrom' => 2,
 								'orderId' => $order->id 
 						];
 						// create array for order_pruducts table
@@ -484,7 +484,7 @@ class OrdersController extends AppController {
 							$supplier_notification [$j] = [ 
 									'supplierId' => $supplerids [$j],
 									'notificationText' => 'notify',
-									'sentFrom' => 1,
+									'sentFrom' => 2,
 									'orderId' => $order->id 
 							];
 						}
@@ -684,7 +684,7 @@ class OrdersController extends AppController {
 						$supplier_notification [$i] = [ 
 								'supplierId' => $order_data ['product_supplier'] [$i],
 								'notificationText' => 'notify',
-								'sentFrom' => 1,
+								'sentFrom' => 2,
 								'orderId' => $order->id 
 						];
 					}
