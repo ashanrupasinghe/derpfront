@@ -36,17 +36,6 @@
                   <div class="new-label new-top-left"> New </div>
                   <div class="product-image">
                     <div class="large-image"> <a href="#" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="<?php echo $product->image; ?>"> </a> </div>
-<!--                    <div class="flexslider flexslider-thumb">
-                      <ul class="previews-list slides">
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                        <li><a href='products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: 'products-images/product-img.jpg' "><img src="products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                      </ul>-->
-                    <!--</div>-->
                   </div>
                   <!-- end: more-images -->
                 </div>
@@ -69,10 +58,11 @@
                   </div>
                   </span>
                   <div class="price-block">
-                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price">LKR <?php echo $product->price; ?>.00</span> (<?php echo $package_type[$product->package]; ?>)</span> </div>
+                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price"><?php if($product->is_deal == '1'){ ?><del>LKR<?php echo ' '.$product->old_price; ?>.00</del><?php } ?> LKR <?php echo $product->price; ?>.00</span> (<?php echo $package_type[$product->package]; ?>)</span> </div>
                     <p class="availability in-stock">
                       <link itemprop="availability" href="http://schema.org/InStock">
                       <span>In stock</span></p>
+					  <?php //print_r($product); ?>
                   </div>
                   <!--price-block-->
                   <div class="short-description">
@@ -83,11 +73,13 @@
                     <div class="add-to-cart">
                       <div class="pull-left">
                         <div class="custom pull-left">
-                         <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                            <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                        
                           <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty add_to_cart_product_qty">
                           <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id; ?>" class="add_to_cart_product_qty">
-                           <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
-                        </div>
+                           <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                         
+                          </div>
                         <!--custom pull-left-->
                       </div>
                       <!--pull-left-->
@@ -95,17 +87,14 @@
                       <?php if ($authUser): ?>
                       <button type="button" title="Add to Wishlist" class="button btn-cart btn-wishlist fuck add-to-wishlist-jq-function" onClick=""><span><i class="icon-basket"></i>Wishlist</span></button>
                       <?php endif;?>
+                      <span>
+                      <i class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom single-product-add-loading product-add-loading" style="display: none;"></i>
+                      <i class="fa fa-check fa-2x fa-fw margin-bottom single-product-add-loading product-add-success" style="display: none;"></i>
+                      <i class="fa fa-times fa-2x fa-fw margin-bottom single-product-add-loading product-add-err" style="display: none;"></i>
+                      </span>
                     </div>
                     <!--add-to-cart-->
-<!--                    <div class="email-addto-box">
-                      <p class="email-friend"><a href="#" title="Email to a Friend"><span>Email to a Friend</span></a></p>
-                      <ul class="add-to-links">
-                        <li> <a class="link-wishlist" href="wishlist.html" onClick="" title="Add To Wishlist"><span>Add To Wishlist</span></a> </li>
-                        <li> <span class="separator">|</span> <a class="link-compare" href="Compare.html" title="Add To Compare"><span>Add To Compare</span></a> </li>
-                      </ul>
-                      add-to-links
-                    </div>-->
-                    <!--email-addto-box-->
+
                   </div>
                   <!--add-to-box-->
                   <!-- thm-mart Social Share-->

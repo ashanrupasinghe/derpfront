@@ -18,8 +18,7 @@
         <?= $this->Html->css('owl.theme.css') ?>
         <?= $this->Html->css('jquery.bxslider.css') ?>
         <?= $this->Html->css('jquery.mobile-menu.css') ?>
-        <?= $this->Html->css('datepicker/datepicker3.css') ?>
-        <?= $this->Html->css('timepicker/bootstrap-timepicker.min.css') ?>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <?= $this->Html->css('jquery-confirm.min.css') ?>
         <?= $this->Html->css('style.css') ?>
         <?= $this->Html->css('responsive.css') ?>
@@ -418,6 +417,9 @@
                 ?>
             </ul>
         </div>
+        
+        <?php if($page && $page == "home"){ ?>
+        
         <div class="popup1" style="display: none;">
 
             <div class="newsletter-sign-box">
@@ -461,7 +463,7 @@
             </div>
             <!--newsletter-sign-box-->
         </div>
-
+        <?php } ?>
         <!-- quick view start -->	
         <div id="popup-quick-view-edit" class="popup1" style="display: none;">
 
@@ -476,27 +478,17 @@
                         <form action="" method="post" id="product_addtocart_form">
                             <!--End For version 1, 2, 6 -->
                             <!-- For version 3 -->
-                            <div class="product-img-box col-sm-6 col-xs-12">
+                            <div class="product-img-box col-sm-5 col-xs-12">
                                 <div class="new-label new-top-left"> New </div>
                                 <div class="product-image">
                                     <div class="large-image"> <a href="/products-images/product-img.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="/products-images/product-img.jpg" id="quick_view_img"> </a> </div>
-                                    <!-- <div class="flexslider flexslider-thumb">
-                                      <ul class="previews-list slides">
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 1"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                                        <li><a href='/products-images/product-img.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/products-images/product-img.jpg' "><img src="/products-images/product-img.jpg" alt = "Thumbnail 2"/></a></li>
-                                      </ul>
-                                    </div> -->
+                                   
                                 </div>
                                 <!-- end: more-images -->
                             </div>
                             <!--End For version 1,2,6-->
                             <!-- For version 3 -->
-                            <div class="product-shop col-sm-6 col-xs-12">
+                            <div class="product-shop col-sm-7 col-xs-12">
 
                                 <div class="product-name">
                                     <h1 itemprop="name" id="quick_edit_h1">RETIS LAPEN CASEN</h1>
@@ -521,42 +513,37 @@
                                 <!--price-block-->
                                 <div class="short-description">
                                     <h2>Quick Overview</h2>
-                                    <p id="quick_edit_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor.  </p>
+                                    <p id="quick_edit_description"></p>
                                 </div>
                                 <div class="add-to-box">
                                     <div class="add-to-cart">
                                         <div class="pull-left">
                                             <div class="custom pull-left">
+                                                <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if (!isNaN(qty) && qty > 0) result.value--; return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                                                
+                                                <input type="text" name="qty" id="quick_edit_qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                                <input name="product_id" id="product_id" value="" class="add_to_cart_product_qty" type="hidden">
                                                 <button onclick="var result = document.getElementById('quick_edit_qty');
                                                         var qty = result.value;
                                                         if (!isNaN(qty))
                                                             result.value++;
                                                         return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
 
-                                                <input type="text" name="qty" id="quick_edit_qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                                <input name="product_id" id="product_id" value="" class="add_to_cart_product_qty" type="hidden">
-                                                <button onclick="var result = document.getElementById('quick_edit_qty'); var qty = result.value; if (!isNaN(qty) && qty > 0) result.value--; return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                                             </div>
                                             <!--custom pull-left-->
                                         </div>
                                         <!--pull-left-->
                                         <button type="button" title="update Cart" class="button btn-cart add-to-cart-jq-function" onClick=""><span><i class="icon-basket"></i>Add to Cart</span></button>
+                                        <span>
+                      						<i class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom single-product-add-loading product-add-loading" style="display: none;"></i>
+                      						<i class="fa fa-check fa-2x fa-fw margin-bottom single-product-add-loading product-add-success" style="display: none;"></i>
+                      						<i class="fa fa-times fa-2x fa-fw margin-bottom single-product-add-loading product-add-err" style="display: none;"></i>
+                      					</span>
                                     </div>
 
                                 </div>
                                 <!--add-to-box-->
-                                <!-- thm-mart Social Share-->
-                                <div class="social">
-                                    <ul class="link">
-                                        <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                                        <li class="fb"> <a href="http://www.facebook.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-
-
-                                        <!-- <li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                                        <li class="pintrest"> <a href="http://pinterest.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
-                                        <li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>-->
-                                    </ul>
-                                </div>
+                               
                                 <!-- thm-mart Social Share Close-->
                             </div>
                             <!--product-shop-->
@@ -589,8 +576,10 @@
         <script type="text/javascript"
         src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-        <?= $this->Html->script('datepicker/bootstrap-datepicker.js'); ?>
-        <?= $this->Html->script('timepicker/bootstrap-timepicker.min.js'); ?>
+        
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://use.fontawesome.com/aeb0ff1754.js"></script>
+        
         <?= $this->Html->script('jquery-confirm.min.js'); ?>
         <?= $this->Html->script('custom.js'); ?>
 
@@ -686,6 +675,8 @@
                     /*  var $product_id = jQuery(this).closest('div').find('input.add_to_cart_product_id').val();
                      var $qty = jQuery(this).closest('div').find('input.add_to_cart_product_qty').val(); */
                     //alert($product_id+" "+$qty);
+                     closediv=jQuery(this).closest('div');
+                     addProductResponse(closediv,1)
                     jQuery.ajax({
                         type: 'post',
                         url: '<?php echo $this->Url->build('/', true); ?>cart/addproduct',
@@ -918,23 +909,24 @@
                                     	document.getElementById("get-wishlist-table-form").innerHTML = wishlist_table;
         	                            }else{
         	                            	document.getElementById("get-wishlist-table-form").innerHTML = "<p class='nothing-found'>Your Wishlist Is Empty</p>";
-        	                            }
-    	                            
-                                    
-                                    
-                                    
+        	                            }    	                            
 
                                 }
-                            }
+                                addProductResponse(closediv,2)
+                                
+                            }else{
+                            	addProductResponse(closediv,3)
+                                }
 
 
 
-                            jQuery.alert(response.message);
+                            //jQuery.alert(response.message);
 
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                        	jQuery.alert(xhr.status);
-                        	jQuery.alert(thrownError);
+                        	/* jQuery.alert(xhr.status);
+                        	jQuery.alert(thrownError); */
+                        	addProductResponse(closediv,3)
                         }
                     });
                 });
@@ -1004,6 +996,16 @@
                 });
             });
         </script>
+		<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?4G6TLSz9UV2vHzokPzLDCsSG5uEW70Pa";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zopim Live Chat Script-->
+
         <!-- end quick view page js -->        
     </body>
 </html>

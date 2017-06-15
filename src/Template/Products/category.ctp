@@ -78,7 +78,7 @@
                                 foreach ($products AS $product) {
                                    
                                     ?>
-                                    <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
                                         <div class="item-inner">
                                             <div class="item-img">
                                                 <div class="item-img-info"><a href="/product/<?php echo $product->slug; ?>" title="<?php echo $product->name; ?>" class="product-image"><img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"></a>
@@ -105,7 +105,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="item-price">
-                                                            <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">LKR<?php echo ' '.$product->price; ?>.00</span> </span> </div>
+                                                            <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price"><?php if($product->is_deal == '1'){ ?><del>LKR<?php echo ' '.$product->old_price; ?>.00</del><?php } ?> LKR<?php echo ' '.$product->price; ?>.00</span> </span> </div>
                                                         </div>
                                                         <div class="add_cart">
                                                         	<?php /*?>
@@ -113,10 +113,11 @@
                                                         	<input name="product_id" id="product_id" value="<?php echo $product->id?>" type="hidden" class="add_to_cart_product_id">
                                                         	<?php */?>
                                                         	<div class="custom pull-left add-to-cart add-to-cart-grid">
-                         <button onClick="var result = document.getElementById('<?php echo 'qty-'.$product->id; ?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
+                          <button onClick="var result = document.getElementById('<?php echo 'qty-'.$product->id; ?>'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                           <input type="text" name="qty" id="<?php echo 'qty-'.$product->id; ?>" size="1" maxlength="12" value="1" title="Quantity:" class="input-text qty add_to_cart_product_qty">
                           <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id; ?>" class="add_to_cart_product_qty">
-                           <button onClick="var result = document.getElementById('<?php echo 'qty-'.$product->id; ?>'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                          <button onClick="var result = document.getElementById('<?php echo 'qty-'.$product->id; ?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button> 
+                          
                         </div>
                                                             <button class="button btn-cart add-to-cart-jq-function" type="button"><span>Add to Cart</span></button>
                                                         </div>
