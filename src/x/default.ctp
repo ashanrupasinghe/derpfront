@@ -250,63 +250,7 @@
 
 
             <!-- For version 1,2,3,4,6 -->
-			<!-- mini cart footer  -->
-<!-- 
-https://codyhouse.co/gem/add-to-cart-interaction/
--->
-	<!-- <a href="#0" class="cd-add-to-cart" data-price="25.99">Add To Cart</a> -->
 
-
-<div class="cd-cart-container <?php echo  $cart_size ? '':'empty';?>">
-	<a href="#0" class="cd-cart-trigger">
-		Cart
-		<ul class="count" id="cd-cart-count"> <!-- cart items count -->
-			<li><?php echo $cart_size;?></li>
-			<li>0</li>
-		</ul> <!-- .count -->
-	</a>
-
-	<div class="cd-cart">
-		<div class="wrapper">
-			<header>
-				<h2>Cart</h2>				
-			</header>
-			
-			<div class="body" id="footer_mini_card_body">
-				<ul>
-				
-                                                    <?php $count = 0; ?>
-                                                    <?php foreach ($cart_products as $product): ?>
-                                                        <li class="product">
-	<div class="product-image">
-		<a href="#0"><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>"></a>
-	</div>
-	<div class="product-details">
-		<h3><a href="/product/<?php echo $product['slug']; ?>"><?php echo $product['name']; ?></a></h3>
-		<strong><?php echo $product['quantity'] ?></strong> x <span class="price">LKR <?php echo $product['price']; ?>.00</span>
-		<div class="actions">
-			<div class="access"><input value="<?php echo $product['id']; ?>" name="product_id" class="" type="hidden">			
-			<a class="remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>&nbsp;&nbsp;
-			<a class="edit-product-jq-function" title="Edit item" href="#">Edit</a>
-		</div>
-	</div>
-</li>
- 
-                                                        <?php $count++; ?>
-                                                    <?php endforeach; ?>
-
-                                                
-					<!-- products added to the cart will be inserted here using JavaScript -->
-				</ul>
-			</div>
-
-			<div class="cd-footer">
-				<a href="#0" class="checkout btn"><em>Checkout - LKR<span><?php echo ' '.$total['grand_total']; ?>.00</span></em></a>
-			</div>
-		</div>
-	</div> <!-- .cd-cart -->
-</div> <!-- cd-cart-container -->
-<!-- /..mini cart footer -->
             <footer>
                 <!-- BEGIN INFORMATIVE FOOTER -->
                 <div class="footer-inner">
@@ -745,11 +689,9 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                         	
                             if (response.status == 0) {
                                 list = "";
-                                list_ul="";
                                 table = "";
                                 Totaltable = "";
-                                cd_cart_count="";
-                                footer_mini_cart="";
+
                                 wishlist_list="";
                                 wishlist_table="";
                                 // alert(JSON.stringify(response));
@@ -760,8 +702,6 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                     list += '<div class="basket">';
                                     list += '<a href="' + myBaseUrl + 'user/cart' + '"><span id="total_items"> ' + response.result.cart_size + ' </span></a>';
                                     list += '</div>';
-
-                                    cd_cart_count='<li>'+response.result.cart_size+'</li><li>0</li>';
                                 }
                                 if (response.result.wishlist_size>=0) {
                                     //document.getElementById("total_items").innerHTML = response.result.cart_size;
@@ -780,47 +720,28 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                     list += response.result.cart_size + ' items, <span class="price">LKR ' + response.result.total.grand_total + '.00</span>';
                                     list += '</div>';
                                     list += '</div>';
-                                    list_ul += '<ul class="mini-products-list" id="cart-sidebar">';
-                                    footer_mini_cart+='<ul>';
+                                    list += '<ul class="mini-products-list" id="cart-sidebar">';
                                     jQuery.each(response.result.product_list, function (index, value) {
 
-                                    	list_ul += '<li class="item first last">';
-                                    	list_ul += '<div class="item-inner">';
-                                    	list_ul += '<a class="product-image" title="' + value.name + '" href="#">';
-                                    	list_ul += '<img alt="' + value.name + '" src="' + value.image + '"></a>';
-                                    	list_ul += '<div class="product-details">';
-                                    	list_ul += '<div class="access">';
-                                    	list_ul += '<input type="hidden" value="' + value.id + '" name="product_id" class="">';
-                                    	list_ul += '<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
-                                    	list_ul += '<a class="btn-edit edit-product-jq-function" title="Edit item" href="#">';
-                                    	list_ul += '<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
-                                    	list_ul += '</div>';
+                                        list += '<li class="item first last">';
+                                        list += '<div class="item-inner">';
+                                        list += '<a class="product-image" title="' + value.name + '" href="#">';
+                                        list += '<img alt="' + value.name + '" src="' + value.image + '"></a>';
+                                        list += '<div class="product-details">';
+                                        list += '<div class="access">';
+                                        list += '<input type="hidden" value="' + value.id + '" name="product_id" class="">';
+                                        list += '<a class="btn-remove1 remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';
+                                        list += '<a class="btn-edit edit-product-jq-function" title="Edit item" href="#">';
+                                        list += '<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
+                                        list += '</div>';
 
-                                    	list_ul += '<strong>' + value.quantity + '</strong> x <span class="price">LKR ' + value.price + '.00</span>';
-                                    	list_ul += '<p class="product-name">';
-                                    	list_ul += '<a href="product-detail.html">' + value.name + '</a>';
-                                    	list_ul += '</p>';
-                                    	list_ul += '</div>';
-                                    	list_ul += '</div>';
-                                    	list_ul += '</li>';
-
-
-
-                                    	footer_mini_cart+='<li class="product">';
-                                    	footer_mini_cart+='<div class="product-image">';
-                                    	footer_mini_cart+='<a href="#0" title="' + value.name + '"><img src="' + value.image + '" alt="placeholder"></a>';
-                                    	footer_mini_cart+='</div>';
-                                    	footer_mini_cart+='<div class="product-details">';
-                                    	footer_mini_cart+='<h3><a href="#0">' + value.name + '</a></h3>';
-                                    	footer_mini_cart+='<strong>'+ value.quantity +'</strong> x <span class="price">LKR ' + value.price + '.00</span>';
-                                    	footer_mini_cart+='<div class="actions">';
-                                    	footer_mini_cart+='<div class="access"><input value="'+ value.id +'" name="product_id" class="" type="hidden">';
-                                    	footer_mini_cart+='<a class="remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';                                    	
-                                    	footer_mini_cart+='&nbsp;&nbsp;<a class="edit-product-jq-function" title="Edit item" href="#">Edit</a>';
-                                    	footer_mini_cart+='</div>';
-                                    	footer_mini_cart+='</div>';
-                                    	footer_mini_cart+='</div>';
-                                    	footer_mini_cart+='</li>';
+                                        list += '<strong>' + value.quantity + '</strong> x <span class="price">LKR ' + value.price + '.00</span>';
+                                        list += '<p class="product-name">';
+                                        list += '<a href="product-detail.html">' + value.name + '</a>';
+                                        list += '</p>';
+                                        list += '</div>';
+                                        list += '</div>';
+                                        list += '</li>';
 
                                         count++;
                                     });
@@ -829,9 +750,8 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                     //document.getElementById("top-sub-total").innerHTML=response.result.cart_size+' items, <span class="price">$'+response.result.total.grand_total+'</span>';
 
 
-                                    list_ul += '</ul>';
-                                    footer_mini_cart+='</ul>';
-                                    list += list_ul+'<div class="actions">';
+                                    list += '</ul>';
+                                    list += '<div class="actions">';
                                     list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + 'order/checkout\'">';
                                     list += '<span>Checkout</span>';
                                     list += '</button>';
@@ -842,8 +762,6 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                 //alert(list);
                                 document.getElementById("mini-wishlist-head").innerHTML = wishlist_list;
                                 document.getElementById("mini-cart-head").innerHTML = list;
-                                document.getElementById("footer_mini_card_body").innerHTML = footer_mini_cart;
-                                document.getElementById("cd-cart-count").innerHTML = cd_cart_count;
                                 
                                 //if in cart page,
                                 if (jQuery("#shopping-cart-table").length) {
