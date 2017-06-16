@@ -257,7 +257,11 @@ https://codyhouse.co/gem/add-to-cart-interaction/
 	<!-- <a href="#0" class="cd-add-to-cart" data-price="25.99">Add To Cart</a> -->
 
 
-<div class="cd-cart-container <?php echo  $cart_size ? '':'empty';?>">
+<div id="cd-cart-container-footer-cart" class="cd-cart-container <?php echo  $cart_size ? '':'empty';?>">
+<!-- call footer min cart style only for this dive -->
+	<style scoped>
+        @import "css/footer-min-cart.css";        
+    </style>
 	<a href="#0" class="cd-cart-trigger">
 		Cart
 		<ul class="count" id="cd-cart-count"> <!-- cart items count -->
