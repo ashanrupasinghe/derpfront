@@ -117,8 +117,13 @@
                           <input type="text" name="qty" id="<?php echo 'qty-'.$product->id; ?>" size="1" maxlength="12" value="1" title="Quantity:" class="input-text qty add_to_cart_product_qty">
                           <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id; ?>" class="add_to_cart_product_qty">
                           <button onClick="var result = document.getElementById('<?php echo 'qty-'.$product->id; ?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button> 
-                          
+                          <span>
+                      						<i class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom single-product-add-loading single-product-add-loading-grid product-add-loading" style="display: none;"></i>
+                      						<i class="fa fa-check fa-2x fa-fw margin-bottom single-product-add-loading single-product-add-loading-grid product-add-success" style="display: none;"></i>
+                      						<i class="fa fa-times fa-2x fa-fw margin-bottom single-product-add-loading single-product-add-loading-grid product-add-err" style="display: none;"></i>
+                      					</span>
                         </div>
+                                                            
                                                             <button class="button btn-cart add-to-cart-jq-function" type="button"><span>Add to Cart</span></button>
                                                         </div>
                                                     </div>

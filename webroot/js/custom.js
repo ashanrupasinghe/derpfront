@@ -317,7 +317,7 @@ jQuery(document).ready(function () {
                                     list += '<div class="fl-mini-cart-content" style="display: none;">';
                                     list += '<div class="block-subtitle">';
                                     list += '<div class="top-subtotal" id="top-sub-total">';
-                                    list += response.result.result.cart_size + ' items, <span class="price">LKR ' + response.result.result.total.grand_total + '</span>';
+                                    list += response.result.result.cart_size + ' items, <span class="price">LKR ' + response.result.result.total.grand_total + '.00</span>';
                                     list += '</div>';
                                     list += '</div>';
                                     list += '<ul class="mini-products-list" id="cart-sidebar">';
@@ -335,7 +335,7 @@ jQuery(document).ready(function () {
                                         list += '<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
                                         list += '</div>';
 
-                                        list += '<strong>' + value.quantity + '</strong> x <span class="price">' + value.price + '</span>';
+                                        list += '<strong>' + value.quantity + '</strong> x <span class="price">LKR ' + value.price + '.00</span>';
                                         list += '<p class="product-name">';
                                         list += '<a href="product-detail.html">' + value.name + '</a>';
                                         list += '</p>';
@@ -467,13 +467,6 @@ jQuery(document).ready(function () {
                 }
             }
         });
-
-
-
-
-
-
-
     });
 
 
@@ -555,7 +548,7 @@ jQuery(document).ready(function () {
                                     list += '<div class="fl-mini-cart-content" style="display: none;">';
                                     list += '<div class="block-subtitle">';
                                     list += '<div class="top-subtotal" id="top-sub-total">';
-                                    list += response.result.cart_size + ' items, <span class="price">LKR ' + response.result.total.grand_total + '</span>';
+                                    list += response.result.cart_size + ' items, <span class="price">LKR ' + response.result.total.grand_total + '.00</span>';
                                     list += '</div>';
                                     list += '</div>';
                                     list += '<ul class="mini-products-list" id="cart-sidebar">';
@@ -573,7 +566,7 @@ jQuery(document).ready(function () {
                                         list += '<i class="icon-pencil"></i><span class="hidden">Edit item</span></a>';
                                         list += '</div>';
 
-                                        list += '<strong>' + value.quantity + '</strong> x <span class="price">' + value.price + '</span>';
+                                        list += '<strong>' + value.quantity + '</strong> x <span class="price">LKR ' + value.price + '.00</span>';
                                         list += '<p class="product-name">';
                                         list += '<a href="product-detail.html">' + value.name + '</a>';
                                         list += '</p>';

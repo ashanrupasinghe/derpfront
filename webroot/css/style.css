@@ -12225,3 +12225,11 @@ margin-left: 4px !important;
 .product-add-loading{
 	color:#88be4c !important;
 }
+.single-product-add-loading-grid{
+	margin-top: 0px !important;
+	margin-left: 0px !important;
+}
+
+.single-product-add-loading-grid.fa{
+	font-size: 14px;
+}
