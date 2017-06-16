@@ -305,6 +305,7 @@ jQuery(document).ready(function () {
                                 Totaltable = "";
                                 cd_cart_count="";
                                 footer_mini_cart="";
+                                cd_mincart_footer_total=response.result.result.total.grand_total;
                                 list_ul="";
 
                                 if (response.result.result.cart_size >= 0) {
@@ -314,7 +315,7 @@ jQuery(document).ready(function () {
                                     list += '<a href="' + myBaseUrl + 'user/cart' + '"><span id="total_items"> ' + response.result.result.cart_size + ' </span></a>';
                                     list += '</div>';
                                     
-                                    cd_cart_count='<li>'+response.result.cart_size+'</li><li>0</li>';
+                                    cd_cart_count='<li>'+response.result.result.cart_size+'</li><li>0</li>';
                                 }
                                 if (Object.keys(response.result.result.product_list).length > 0) {
                                     //alert(JSON.stringify(response.result.product_list));
@@ -326,7 +327,7 @@ jQuery(document).ready(function () {
                                     list += '</div>';
                                     list += '</div>';
                                     list_ul += '<ul class="mini-products-list" id="cart-sidebar">';
-                                    footer_mini_cart+='</ul>';
+                                    footer_mini_cart+='<ul>';
                                     jQuery.each(response.result.result.product_list, function (index, value) {
 
                                     	list_ul += '<li class="item first last">';
@@ -356,7 +357,7 @@ jQuery(document).ready(function () {
                                     	footer_mini_cart+='</div>';
                                     	footer_mini_cart+='<div class="product-details">';
                                     	footer_mini_cart+='<h3><a href="#0">' + value.name + '</a></h3>';
-                                    	footer_mini_cart+='<strong>'+ value.quantity +'</strong> x <span class="price">LKR ' + value.price + '.00</span>';
+                                    	footer_mini_cart+='<span class="price"><strong class="str-qty">'+ value.quantity +' x</strong> LKR ' + value.price + '.00</span>';
                                     	footer_mini_cart+='<div class="actions">';
                                     	footer_mini_cart+='<div class="access"><input value="'+ value.id +'" name="product_id" class="" type="hidden">';
                                     	footer_mini_cart+='<a class="remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';                                    	
@@ -378,7 +379,7 @@ jQuery(document).ready(function () {
                                     list_ul += '</ul>';
                                     footer_mini_cart+='</ul>';
                                     list += list_ul+'<div class="actions">';
-                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + '/order/checkout\'">';
+                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + 'order/checkout\'">';
                                     list += '<span>Checkout</span>';
                                     list += '</button>';
                                     list += '</div>';
@@ -386,6 +387,7 @@ jQuery(document).ready(function () {
                                 }
                                 document.getElementById("mini-cart-head").innerHTML = list;
                                 document.getElementById("footer_mini_card_body").innerHTML = footer_mini_cart;
+                                document.getElementById("cd-mincart-footer-total").innerHTML = cd_mincart_footer_total+'.00';
                                 document.getElementById("cd-cart-count").innerHTML = cd_cart_count;
                                 if (jQuery("#shopping-cart-table").length) {
                                     //cart table
@@ -604,7 +606,7 @@ jQuery(document).ready(function () {
                                     });
                                     list += '</ul>';
                                     list += '<div class="actions">';
-                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + '/order/checkout\'">';
+                                    list += '<button class="btn-checkout" title="Checkout" type="button" onClick="location.href=\'' + myBaseUrl + 'order/checkout\'">';
                                     list += '<span>Checkout</span>';
                                     list += '</button>';
                                     list += '</div>';
@@ -949,8 +951,8 @@ jQuery(document).ready(function($){
 		var cartCount = cartTrigger.children('.count')
 		/*var addToCartBtn = $('.cd-add-to-cart');*/
 		var addToCartBtn = $('.add-to-cart-jq-function');
-		var undo = cartWrapper.find('.undo');
-		var undoTimeoutId;
+		//var undo = cartWrapper.find('.undo');
+		//var undoTimeoutId;
 
 		//add product to cart
 		addToCartBtn.on('click', function(event){
@@ -969,28 +971,7 @@ jQuery(document).ready(function($){
 		cartWrapper.on('click', function(event){
 			if( $(event.target).is($(this)) ) toggleCart(true);
 		});
-
-		//delete an item from the cart
-		cartList.on('click', '.delete-item', function(event){
-			event.preventDefault();
-			removeProduct($(event.target).parents('.product'));
-		});
-
-		//update item quantity
-		cartList.on('change', 'select', function(event){
-			quickUpdateCart();
-		});
-
-		//reinsert item deleted from the cart
-		undo.on('click', 'a', function(event){
-			clearInterval(undoTimeoutId);
-			event.preventDefault();
-			cartList.find('.deleted').addClass('undo-deleted').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
-				$(this).off('webkitAnimationEnd oanimationend msAnimationEnd animationend').removeClass('deleted undo-deleted').removeAttr('style');
-				quickUpdateCart();
-			});
-			undo.removeClass('visible');
-		});
+		
 	}
 
 	function toggleCart(bool) {
@@ -1025,85 +1006,4 @@ jQuery(document).ready(function($){
 		cartWrapper.removeClass('empty');
 	}
 
-	function addProduct() {
-		//this is just a product placeholder
-		//you should insert an item with the selected product info
-		//replace productId, productName, price and url with your real product info
-		productId = productId + 1;
-		var productAdded = $('<li class="product"><div class="product-image"><a href="#0"><img src="img/product-preview.png" alt="placeholder"></a></div><div class="product-details"><h3><a href="#0">Product Name</a></h3><span class="price">$25.99</span><div class="actions"><a href="#0" class="delete-item">Delete</a><div class="quantity"><label for="cd-product-'+ productId +'">Qty</label><span class="select"><select id="cd-product-'+ productId +'" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></span></div></div></div></li>');
-		cartList.prepend(productAdded);
-	}
-
-	function removeProduct(product) {
-		clearInterval(undoTimeoutId);
-		cartList.find('.deleted').remove();
-		
-		var topPosition = product.offset().top - cartBody.children('ul').offset().top ,
-			productQuantity = Number(product.find('.quantity').find('select').val()),
-			productTotPrice = Number(product.find('.price').text().replace('$', '')) * productQuantity;
-		
-		product.css('top', topPosition+'px').addClass('deleted');
-
-		//update items count + total price
-		updateCartTotal(productTotPrice, false);
-		updateCartCount(true, -productQuantity);
-		undo.addClass('visible');
-
-		//wait 8sec before completely remove the item
-		undoTimeoutId = setTimeout(function(){
-			undo.removeClass('visible');
-			cartList.find('.deleted').remove();
-		}, 8000);
-	}
-
-	function quickUpdateCart() {
-		var quantity = 0;
-		var price = 0;
-		
-		cartList.children('li:not(.deleted)').each(function(){
-			var singleQuantity = Number($(this).find('select').val());
-			quantity = quantity + singleQuantity;
-			price = price + singleQuantity*Number($(this).find('.price').text().replace('$', ''));
-		});
-
-		cartTotal.text(price.toFixed(2));
-		cartCount.find('li').eq(0).text(quantity);
-		cartCount.find('li').eq(1).text(quantity+1);
-	}
-
-	function updateCartCount(emptyCart, quantity) {
-		if( typeof quantity === 'undefined' ) {
-			var actual = Number(cartCount.find('li').eq(0).text()) + 1;
-			var next = actual + 1;
-			
-			if( emptyCart ) {
-				cartCount.find('li').eq(0).text(actual);
-				cartCount.find('li').eq(1).text(next);
-			} else {
-				cartCount.addClass('update-count');
-
-				setTimeout(function() {
-					cartCount.find('li').eq(0).text(actual);
-				}, 150);
-
-				setTimeout(function() {
-					cartCount.removeClass('update-count');
-				}, 200);
-
-				setTimeout(function() {
-					cartCount.find('li').eq(1).text(next);
-				}, 230);
-			}
-		} else {
-			var actual = Number(cartCount.find('li').eq(0).text()) + quantity;
-			var next = actual + 1;
-			
-			cartCount.find('li').eq(0).text(actual);
-			cartCount.find('li').eq(1).text(next);
-		}
-	}
-
-	function updateCartTotal(price, bool) {
-		bool ? cartTotal.text( (Number(cartTotal.text()) + Number(price)).toFixed(2) )  : cartTotal.text( (Number(cartTotal.text()) - Number(price)).toFixed(2) );
-	}
 });

@@ -12234,7 +12234,7 @@ margin-left: 4px !important;
 .single-product-add-loading-grid.fa{
 	font-size: 14px;
 }
-/*mini cart footer*/
+/*-----------------------------------mini cart footer------------------------------------------*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -12609,7 +12609,7 @@ Main Components
   line-height: 72px;
   /* margin-right: 72px; */
   margin-left: 72px;
-  background: #2c97de;
+  background: #75a93a;;
   color: rgba(255, 255, 255, 0);
   text-align: center;
   font-size: 1.8rem;
@@ -12618,7 +12618,7 @@ Main Components
   transition: all .2s 0s;
 }
 .cd-cart .checkout:hover {
-  background: #399ee0;
+  background: #b0d235;
 }
 .cd-cart .checkout em {
   position: relative;
@@ -12898,11 +12898,12 @@ Main Components
     width: 90px;
   }
   .cd-cart .product-details {
-    padding: 1.4em 0 0 1em;
+    padding: 1.4em 1em 0 1em;
     width: calc( 100% - 90px);
   }
   .cd-cart h3, .cd-cart .price {
-    font-size: 1.8rem;
+    /* font-size: 1.8rem; */
+    font-size:1.4rem
   }
 }
 
@@ -13080,7 +13081,7 @@ color: #ffffff;
 background-color: #b0d235;
 border: 1px solid #2b3e51;
 /* border-radius: 10px; */
-   outline: 0;
+   outline-style: none;
 
 	
 }

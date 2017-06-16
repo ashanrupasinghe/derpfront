@@ -283,7 +283,7 @@ https://codyhouse.co/gem/add-to-cart-interaction/
 	</div>
 	<div class="product-details">
 		<h3><a href="/product/<?php echo $product['slug']; ?>"><?php echo $product['name']; ?></a></h3>
-		<strong><?php echo $product['quantity'] ?></strong> x <span class="price">LKR <?php echo $product['price']; ?>.00</span>
+		 <span class="price"><strong class="str-qty"><?php echo $product['quantity'] ?> x</strong> LKR <?php echo $product['price']; ?>.00</span>
 		<div class="actions">
 			<div class="access"><input value="<?php echo $product['id']; ?>" name="product_id" class="" type="hidden">			
 			<a class="remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>&nbsp;&nbsp;
@@ -301,7 +301,7 @@ https://codyhouse.co/gem/add-to-cart-interaction/
 			</div>
 
 			<div class="cd-footer">
-				<a href="#0" class="checkout btn"><em>Checkout - LKR<span><?php echo ' '.$total['grand_total']; ?>.00</span></em></a>
+				<a onClick="location.href = '<?php echo $this->Url->build('/order/checkout'); ?>'" class="checkout btn"><em>Checkout - LKR&nbsp;<span id="cd-mincart-footer-total"><?php echo ' '.$total['grand_total']; ?>.00</span></em></a>
 			</div>
 		</div>
 	</div> <!-- .cd-cart -->
@@ -750,8 +750,10 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                 Totaltable = "";
                                 cd_cart_count="";
                                 footer_mini_cart="";
+                                cd_mincart_footer_total=response.result.total.grand_total;
                                 wishlist_list="";
                                 wishlist_table="";
+                                
                                 // alert(JSON.stringify(response));
 
                                 if (response.result.cart_size>=0) {
@@ -812,7 +814,7 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                     	footer_mini_cart+='</div>';
                                     	footer_mini_cart+='<div class="product-details">';
                                     	footer_mini_cart+='<h3><a href="#0">' + value.name + '</a></h3>';
-                                    	footer_mini_cart+='<strong>'+ value.quantity +'</strong> x <span class="price">LKR ' + value.price + '.00</span>';
+                                    	footer_mini_cart+='<span class="price"><strong class="str-qty">'+ value.quantity +' x</strong> LKR ' + value.price + '.00</span>';
                                     	footer_mini_cart+='<div class="actions">';
                                     	footer_mini_cart+='<div class="access"><input value="'+ value.id +'" name="product_id" class="" type="hidden">';
                                     	footer_mini_cart+='<a class="remove-from-cart-jq-function" title="Remove This Item" href="#">Remove</a>';                                    	
@@ -843,7 +845,9 @@ https://codyhouse.co/gem/add-to-cart-interaction/
                                 document.getElementById("mini-wishlist-head").innerHTML = wishlist_list;
                                 document.getElementById("mini-cart-head").innerHTML = list;
                                 document.getElementById("footer_mini_card_body").innerHTML = footer_mini_cart;
+                                document.getElementById("cd-mincart-footer-total").innerHTML = cd_mincart_footer_total+'.00';
                                 document.getElementById("cd-cart-count").innerHTML = cd_cart_count;
+                                
                                 
                                 //if in cart page,
                                 if (jQuery("#shopping-cart-table").length) {

@@ -1312,7 +1312,7 @@ class CartController extends AppController {
 
         if ($cart_id) {
 
-            $total = $this->__getTotal($cart_id, 0);
+            $total = $this->__getTotal($cart_id, 1);
             $cart_products = CartProductsTable::getCart($cart_id, $type);
             // $cart_products = $this->__getProductList ( $cart_id, 1 );
 
