@@ -20,6 +20,7 @@
         <?= $this->Html->css('jquery.mobile-menu.css') ?>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <?= $this->Html->css('jquery-confirm.min.css') ?>
+        <?= $this->Html->css('footer-min-cart.css') ?>
         <?= $this->Html->css('style.css') ?>
         <?= $this->Html->css('responsive.css') ?>
 
@@ -258,10 +259,10 @@ https://codyhouse.co/gem/add-to-cart-interaction/
 
 
 <div id="cd-cart-container-footer-cart" class="cd-cart-container <?php echo  $cart_size ? '':'empty';?>">
-<!-- call footer min cart style only for this dive -->
+<!-- call footer min cart style only for this dive
 	<style scoped>
-        @import "css/footer-min-cart.css";        
-    </style>
+        @import "/css/footer-min-cart.css";        
+    </style> -->
 	<a href="#0" class="cd-cart-trigger">
 		Cart
 		<ul class="count" id="cd-cart-count"> <!-- cart items count -->
